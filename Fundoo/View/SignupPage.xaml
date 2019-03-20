@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fundoo.View.SignupPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Entry x:Name="txtFirstName"  Placeholder="First Name"></Entry>
+            <Entry x:Name="txtLastName" Placeholder="Last Name"></Entry>
+            <Entry x:Name="txtEmail" Placeholder="Email"></Entry>
+            <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Password"></Entry>
+            <Entry x:Name="txtRepeatPassword" IsPassword="True" Placeholder="RepeatPassword"></Entry>
+            <StackLayout HorizontalOptions="CenterAndExpand"  Orientation="Horizontal">
+                <Button x:Name="btnSignup" CornerRadius="30" WidthRequest="140" BackgroundColor="RoyalBlue" Text="SignUp" Clicked="BtnSignup_Clicked" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
