@@ -9,6 +9,7 @@ namespace Fundoo.View
     using System;
     using Fundoo.Firebase;
     using Fundoo.Interface;
+    using Fundoo.View.HomePage;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -48,7 +49,7 @@ namespace Fundoo.View
                 if (validate)
                 {
                     //// Navigates to the homepage
-                    await Navigation.PushModalAsync(new HomePage());
+                    await Navigation.PushModalAsync(new Master());
                 }
                 else
                 {

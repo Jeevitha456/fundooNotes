@@ -36,5 +36,7 @@ namespace Fundoo.Interface
         /// <param name="email">The email.</param>
         /// <returns>returns boolean</returns>
         Task ResetPass(string email);
+
+        string SignOut();
     }
 }

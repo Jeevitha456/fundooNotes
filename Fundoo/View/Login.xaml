@@ -6,19 +6,15 @@
         <StackLayout>
             <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Start">
                 <Image x:Name="imgBanner" Source="login.png" HeightRequest="100" WidthRequest="70"></Image>
-
-                <Label Margin="0,0,0,10" Text="Email" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" ></Label>
                 <Entry x:Name="txtEmail"  Placeholder="Enter Email"  />
-              
-                <Label Margin="0,0,0,10" Text="Password" FontAttributes="Bold" FontSize="Medium" TextColor="Black" HorizontalTextAlignment="Start" ></Label>
                 <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Enter Password"  />
                 <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                    <Button x:Name="btnLogin" CornerRadius="30" WidthRequest="120" BackgroundColor="DeepSkyBlue" Text="Login" 
+                    <Button x:Name="btnLogin" CornerRadius="30" WidthRequest="100" BackgroundColor="DeepSkyBlue" Text="Login" 
                             Clicked="BtnLogin_Clicked"   />
-                    <Button x:Name="btnSignup" CornerRadius="30" WidthRequest="120" BackgroundColor="RoyalBlue" Text="SignUp" Clicked="BtnSignup_Clicked"/>
+                    <Button x:Name="btnSignup" CornerRadius="30" WidthRequest="100" BackgroundColor="RoyalBlue" Text="SignUp" Clicked="BtnSignup_Clicked"/>
                 </StackLayout>
-                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
-                    <Button x:Name="btnForgotPassword" CornerRadius="20" WidthRequest="70" HeightRequest="30" Text="Forgot Password" Clicked="BtnForgotPassword_Clicked"/>
+                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                    <Button x:Name="btnForgotPassword" CornerRadius="30" WidthRequest="100" Text="Forgot Password" Clicked="BtnForgotPassword_Clicked"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

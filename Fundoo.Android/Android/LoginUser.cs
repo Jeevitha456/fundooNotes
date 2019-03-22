@@ -106,6 +106,7 @@ namespace Fundoo.Droid.Android
                 return authResult.User.Uid;
             }
             catch (Exception ex)
+
             {
                 Console.WriteLine(ex.Message);
                 return null;
@@ -123,6 +124,16 @@ namespace Fundoo.Droid.Android
             {
                 await FirebaseAuth.Instance.SendPasswordResetEmailAsync(email);
             }            
+        }
+        public string  SignOut()
+        {
+           
+            
+                FirebaseAuth.Instance.SignOut();
+              var  status = FirebaseAuth.Instance.CurrentUser.Uid;
+            
+           
+            return status;
         }
     }
 }
