@@ -10,16 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Fundoo.View.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DashBoard : ContentPage
+	public partial class TakeANote : ContentPage
 	{
-		public DashBoard ()
+		public TakeANote ()
 		{
 			InitializeComponent ();
 		}
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new TakeANote());
-        }
-    }
+	}
 }

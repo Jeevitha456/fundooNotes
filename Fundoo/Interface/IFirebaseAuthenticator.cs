@@ -38,5 +38,7 @@ namespace Fundoo.Interface
         Task ResetPass(string email);
 
         string SignOut();
+
+        bool IsUserLoggedIn();
     }
 }

@@ -127,13 +127,31 @@ namespace Fundoo.Droid.Android
         }
         public string  SignOut()
         {
-           
-            
+            string status = null;
+            try
+            {
                 FirebaseAuth.Instance.SignOut();
-              var  status = FirebaseAuth.Instance.CurrentUser.Uid;
-            
-           
+                status = FirebaseAuth.Instance.CurrentUser.Uid;
+            }
+            catch (Exception ex)
+
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
             return status;
+        }
+
+        public bool IsUserLoggedIn()
+        {
+            if (FirebaseAuth.Instance.CurrentUser!= null)
+            {
+                return true;
+            }
+            else
+                return false;
+
         }
     }
 }

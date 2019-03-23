@@ -10,7 +10,9 @@ using Xamarin.Forms.Xaml;
 
 namespace Fundoo
 {
+    using Fundoo.Interface;
     using Fundoo.View;
+    using Fundoo.View.HomePage;
     using Xamarin.Forms;
 
     /// <summary>
@@ -25,7 +27,10 @@ namespace Fundoo
         public App()
         {
             this.InitializeComponent();
-            this.MainPage = new NavigationPage(new Login());
+            if (DependencyService.Get<IFirebaseAuthenticator>().IsUserLoggedIn())
+                MainPage = new Master();
+            else
+                MainPage = new Login();
         }
 
         /// <summary>

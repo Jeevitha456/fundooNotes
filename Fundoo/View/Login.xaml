@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Start">
-                <Image x:Name="imgBanner" Source="login.png" HeightRequest="100" WidthRequest="70"></Image>
+                <Image x:Name="imgBanner" Source="GoogleKeeps.png" HeightRequest="80" WidthRequest="50"></Image>
                 <Entry x:Name="txtEmail"  Placeholder="Enter Email"  />
                 <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Enter Password"  />
                 <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">

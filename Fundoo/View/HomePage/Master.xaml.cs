@@ -18,7 +18,7 @@ namespace Fundoo.View.HomePage
 		{
 			InitializeComponent ();
             this.MenuList = new List<MasterItems>();
-            this.MenuList.Add(new MasterItems() { Title = "Notes", Icon = "Notes2.png", TargetType = typeof(NotesPage) });
+            this.MenuList.Add(new MasterItems() { Title = "Notes", Icon = "Notes2.png", TargetType = typeof(DashBoard)});
             this.MenuList.Add(new MasterItems() { Title = "Reminders", Icon = "Reminders.png", TargetType = typeof(RemindersPage) });
             this.MenuList.Add(new MasterItems() { Title = "Create new label", Icon = "CreateLabel.png", TargetType = typeof(CreatePage) });
             this.MenuList.Add(new MasterItems() { Title = "Archive", Icon = "Archieve.png", TargetType = typeof(ArchievePage) });
