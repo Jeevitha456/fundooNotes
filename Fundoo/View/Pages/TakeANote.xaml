@@ -5,10 +5,13 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="txtPin" Order="Primary" Icon="pin.png"/>
         <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bell.png"/>
-        <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="Archieve.png"/>
+        <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="Archieve.png" Clicked="TxtArchieve_Clicked"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
         <Entry x:Name="txtTitle"  Placeholder="Title"/>
         <Entry x:Name="txtNotes" Placeholder="Notes"/>
+        <StackLayout HorizontalOptions="CenterAndExpand"  Orientation="Horizontal">
+            <Button x:Name="btnAdd" CornerRadius="30" WidthRequest="140" BackgroundColor="RoyalBlue" Text="Add" Clicked="BtnAdd_Clicked" />
+        </StackLayout>
     </StackLayout>
 </ContentPage>

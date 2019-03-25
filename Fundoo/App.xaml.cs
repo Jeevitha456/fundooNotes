@@ -26,6 +26,7 @@ namespace Fundoo
         /// </summary>
         public App()
         {
+          
             this.InitializeComponent();
             if (DependencyService.Get<IFirebaseAuthenticator>().IsUserLoggedIn())
                 MainPage = new Master();

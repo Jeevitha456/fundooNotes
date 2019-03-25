@@ -5,7 +5,8 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Start">
-                <Image x:Name="imgBanner" Source="GoogleKeeps.png" HeightRequest="80" WidthRequest="50"></Image>
+                <Image x:Name="imgBanner" Source="GoogleKeeps.png" HeightRequest="60" WidthRequest="30"></Image>
+                <Label Text="FUNDOO NOTES" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" TextColor="SaddleBrown" FontAttributes="Bold"/>
                 <Entry x:Name="txtEmail"  Placeholder="Enter Email"  />
                 <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Enter Password"  />
                 <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
@@ -13,8 +14,9 @@
                             Clicked="BtnLogin_Clicked"   />
                     <Button x:Name="btnSignup" CornerRadius="30" WidthRequest="100" BackgroundColor="RoyalBlue" Text="SignUp" Clicked="BtnSignup_Clicked"/>
                 </StackLayout>
-                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
-                    <Button x:Name="btnForgotPassword" CornerRadius="30" WidthRequest="100" Text="Forgot Password" Clicked="BtnForgotPassword_Clicked"/>
+                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                    <Button x:Name="btnForgotPassword"  WidthRequest="180" HeightRequest="50" Text="Forgot Password" Clicked="BtnForgotPassword_Clicked" BackgroundColor="White" FontSize="Micro"/>
+                    <Button x:Name="btnResetPassword"  WidthRequest="180" HeightRequest="50" Text="Reset Password" Clicked="BtnForgotPassword_Clicked" BackgroundColor="White" FontSize="Micro"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

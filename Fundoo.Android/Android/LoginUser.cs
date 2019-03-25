@@ -65,8 +65,8 @@ namespace Fundoo.Droid.Android
             try
             {
                 //// Gets the current user from the firebase
-                var user1 = FirebaseAuth.Instance.CurrentUser;
-                if (user1 != null)
+                var user = FirebaseAuth.Instance.CurrentUser;
+                if (user != null)
                 {
                     return true;
                 }
@@ -152,6 +152,21 @@ namespace Fundoo.Droid.Android
             else
                 return false;
 
+        }
+       public string UserId()
+        {
+            string uid = null;
+            try
+            {
+                uid = FirebaseAuth.Instance.CurrentUser.Uid;
+            }
+            catch (Exception ex)
+
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            return uid;
         }
     }
 }

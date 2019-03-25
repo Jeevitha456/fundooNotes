@@ -15,6 +15,7 @@ namespace Fundoo.Firebase
     using Fundoo.Interface;
     using Fundoo.Model;
     using Xamarin.Forms;
+    using System.Linq;
 
     /// <summary>
     /// FireBase Class
@@ -25,7 +26,7 @@ namespace Fundoo.Firebase
         /// The firebase
         /// </summary>
         public FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
-
+ 
         /// <summary>
         /// Adds the user.
         /// </summary>
@@ -49,6 +50,22 @@ namespace Fundoo.Firebase
             {
                 Console.WriteLine(ex.Message);
             }                                     
-        }       
+        }
+        public async Task AddNote(string title,string note)
+        {
+            try
+            {
+                var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+                await this.firebase.Child("Persons").Child(userid).Child("userinfo").PostAsync(new NotesData() { Title = title, Notes = note });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
+       
+        
     }
 }

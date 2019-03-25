@@ -25,8 +25,7 @@ namespace Fundoo.View.HomePage
             this.MenuList.Add(new MasterItems() { Title = "Trash", Icon = "Trash.png", TargetType = typeof(TrashPage) });
             this.MenuList.Add(new MasterItems() { Title = "Logout", TargetType = typeof(SignOut) });
             this.navigationDrawerList.ItemsSource = this.MenuList;
-            this.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(DashBoard)));
-            
+            this.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(DashBoard)));          
 		}
        
         /// <summary>

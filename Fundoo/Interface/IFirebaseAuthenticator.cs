@@ -40,5 +40,6 @@ namespace Fundoo.Interface
         string SignOut();
 
         bool IsUserLoggedIn();
+        string UserId();
     }
 }
