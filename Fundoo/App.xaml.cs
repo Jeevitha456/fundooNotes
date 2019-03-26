@@ -15,23 +15,23 @@ namespace Fundoo
     using Fundoo.View.HomePage;
     using Xamarin.Forms;
 
-    /// <summary>
-    /// Application 
-    /// </summary>
-    /// <seealso cref="Xamarin.Forms.Application" />
+    
     public partial class App : Application
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
         public App()
-        {
-          
+        {       
             this.InitializeComponent();
             if (DependencyService.Get<IFirebaseAuthenticator>().IsUserLoggedIn())
-                MainPage = new Master();
+            {
+                this.MainPage = new Master();
+            }
             else
-                MainPage = new Login();
+            {
+                this.MainPage = new Login();
+            }
         }
 
         /// <summary>

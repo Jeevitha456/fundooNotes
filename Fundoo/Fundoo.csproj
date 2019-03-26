@@ -17,13 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Validations\ValidationHelper.cs">
-      <ExcludeFromSourceAnalysis>False</ExcludeFromSourceAnalysis>
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Update="View\ForgotPassword.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

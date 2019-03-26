@@ -18,7 +18,7 @@ namespace Fundoo.Droid.Android
     using Fundoo.Interface;
 
     /// <summary>
-    /// LoginUser
+    /// Login User
     /// </summary>
     /// <seealso cref="Fundoo.Interface.IFirebaseAuthenticator" />
     public class LoginUser : IFirebaseAuthenticator
@@ -98,7 +98,7 @@ namespace Fundoo.Droid.Android
                 using (var user1 = authResult.User)
 
                 //// Sending the email verification after sign up
-                using (var actionCode = ActionCodeSettings.NewBuilder().SetAndroidPackageName(PackageName, true, "0").Build ())
+                using (var actionCode = ActionCodeSettings.NewBuilder().SetAndroidPackageName(PackageName, true, "0").Build())
                 {
                     await user1.SendEmailVerificationAsync(actionCode);
                 }
@@ -106,7 +106,6 @@ namespace Fundoo.Droid.Android
                 return authResult.User.Uid;
             }
             catch (Exception ex)
-
             {
                 Console.WriteLine(ex.Message);
                 return null;
@@ -117,7 +116,7 @@ namespace Fundoo.Droid.Android
         /// Resets the pass.
         /// </summary>
         /// <param name="email">The email.</param>
-        /// <returns></returns>
+        /// <returns>returns task</returns>
         public async Task ResetPass(string email)
         {
             using (var actioncode = ActionCodeSettings.NewBuilder().SetAndroidPackageName(PackageName, true, "0").Build())
@@ -125,7 +124,14 @@ namespace Fundoo.Droid.Android
                 await FirebaseAuth.Instance.SendPasswordResetEmailAsync(email);
             }            
         }
-        public string  SignOut()
+
+        /// <summary>
+        /// Represents an event that is raised when the sign-out operation is complete.
+        /// </summary>
+        /// <returns>
+        /// returns string
+        /// </returns>
+        public string SignOut()
         {
             string status = null;
             try
@@ -134,7 +140,6 @@ namespace Fundoo.Droid.Android
                 status = FirebaseAuth.Instance.CurrentUser.Uid;
             }
             catch (Exception ex)
-
             {
                 Console.WriteLine(ex.Message);
                 return null;
@@ -143,17 +148,31 @@ namespace Fundoo.Droid.Android
             return status;
         }
 
+        /// <summary>
+        /// Determines whether [is user logged in].
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if [is user logged in]; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsUserLoggedIn()
         {
-            if (FirebaseAuth.Instance.CurrentUser!= null)
+            if (FirebaseAuth.Instance.CurrentUser != null)
             {
                 return true;
             }
             else
+            {
                 return false;
-
+            }             
         }
-       public string UserId()
+
+        /// <summary>
+        /// Users the identifier.
+        /// </summary>
+        /// <returns>
+        /// returns string
+        /// </returns>
+        public string UserId()
         {
             string uid = null;
             try
@@ -161,11 +180,11 @@ namespace Fundoo.Droid.Android
                 uid = FirebaseAuth.Instance.CurrentUser.Uid;
             }
             catch (Exception ex)
-
             {
                 Console.WriteLine(ex.Message);
                 return null;
             }
+
             return uid;
         }
     }

@@ -1,32 +1,41 @@
-﻿using Fundoo.Model;
-using Fundoo.View.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Master.xaml.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Jeevitha C"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.View.HomePage
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Master : MasterDetailPage
-	{
-		public Master ()
-		{
-			InitializeComponent ();
-            this.MenuList = new List<MasterItems>();
-            this.MenuList.Add(new MasterItems() { Title = "Notes", Icon = "Notes2.png", TargetType = typeof(DashBoard)});
-            this.MenuList.Add(new MasterItems() { Title = "Reminders", Icon = "Reminders.png", TargetType = typeof(RemindersPage) });
-            this.MenuList.Add(new MasterItems() { Title = "Create new label", Icon = "CreateLabel.png", TargetType = typeof(CreatePage) });
-            this.MenuList.Add(new MasterItems() { Title = "Archive", Icon = "Archieve.png", TargetType = typeof(ArchievePage) });
-            this.MenuList.Add(new MasterItems() { Title = "Trash", Icon = "Trash.png", TargetType = typeof(TrashPage) });
-            this.MenuList.Add(new MasterItems() { Title = "Logout", TargetType = typeof(SignOut) });
-            this.navigationDrawerList.ItemsSource = this.MenuList;
-            this.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(DashBoard)));          
-		}
+    using System;
+    using System.Collections.Generic;
+    using Fundoo.Model;
+    using Fundoo.View.Pages;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+
+    /// <summary>
+    /// Master class
+    /// </summary>
+    public partial class Master : MasterDetailPage
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Master"/> class.
+        /// </summary>
+        public Master()
+        {
+            this.InitializeComponent();
+            this.MasterList = new List<MasterItems>();
+            this.MasterList.Add(new MasterItems() { Title = "Notes", Icon = "Note.png", TargetType = typeof(DashBoard) });
+            this.MasterList.Add(new MasterItems() { Title = "Reminders", Icon = "Reminders.png", TargetType = typeof(RemindersPage) });
+            this.MasterList.Add(new MasterItems() { Title = "Create new label", Icon = "CreateLabel.png", TargetType = typeof(CreatePage) });
+            this.MasterList.Add(new MasterItems() { Title = "Archive", Icon = "Archieve.png", TargetType = typeof(ArchievePage) });
+            this.MasterList.Add(new MasterItems() { Title = "Trash", Icon = "Trash.png", TargetType = typeof(TrashPage) });
+            this.MasterList.Add(new MasterItems() { Title = "Logout", TargetType = typeof(SignOut) });
+            this.navigationDrawerList.ItemsSource = this.MasterList;
+            this.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(DashBoard)));
+        } 
        
         /// <summary>
         /// Gets or sets the menu list.
@@ -34,7 +43,7 @@ namespace Fundoo.View.HomePage
         /// <value>
         /// The menu list.
         /// </value>
-        public IList<MasterItems> MenuList{ get; set; }
+        public IList<MasterItems> MasterList { get; set; }
 
         /// <summary>
         /// Called when [item selected].
@@ -48,6 +57,5 @@ namespace Fundoo.View.HomePage
             this.Detail = new NavigationPage((Page)Activator.CreateInstance(page));
             this.IsPresented = false;
         }
-
     }
 }

@@ -7,16 +7,13 @@
 namespace Fundoo.Firebase
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
     using global::Firebase.Database;
     using global::Firebase.Database.Query;
     using Fundoo.Interface;
     using Fundoo.Model;
     using Xamarin.Forms;
-    using System.Linq;
-
+  
     /// <summary>
     /// FireBase Class
     /// </summary>
@@ -51,21 +48,27 @@ namespace Fundoo.Firebase
                 Console.WriteLine(ex.Message);
             }                                     
         }
-        public async Task AddNote(string title,string note)
+
+        /// <summary>
+        /// Adds the note.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="note">The note.</param>
+        /// <returns>returns task</returns>
+        public async Task AddNote(string title, string note)
         {
             try
             {
+                //// Getting the user id
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                //// Adding notes given id
                 await this.firebase.Child("Persons").Child(userid).Child("userinfo").PostAsync(new NotesData() { Title = title, Notes = note });
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-        }
-
-       
-        
+        }       
     }
 }

@@ -37,9 +37,24 @@ namespace Fundoo.Interface
         /// <returns>returns boolean</returns>
         Task ResetPass(string email);
 
+        /// <summary>
+        /// Represents an event that is raised when the sign-out operation is complete.
+        /// </summary>
+        /// <returns>returns string</returns>
         string SignOut();
 
+        /// <summary>
+        /// Determines whether [is user logged in].
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [is user logged in]; otherwise, <c>false</c>.
+        /// </returns>
         bool IsUserLoggedIn();
+
+        /// <summary>
+        /// Users the identifier.
+        /// </summary>
+        /// <returns>returns string</returns>
         string UserId();
     }
 }
