@@ -2,4 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fundoo.View.Pages.TakeANote">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="txtPin" Order="Primary" Icon="pin.png"/>
+        <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bell.png"/>
+        <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="Archieve.png" Clicked="TxtArchieve_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <Entry x:Name="txtTitle"  Placeholder="Title"/>
+        <Entry x:Name="txtNotes" Placeholder="Notes"/>
+    </StackLayout>
 </ContentPage>

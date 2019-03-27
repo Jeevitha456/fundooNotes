@@ -24,7 +24,7 @@ namespace Fundoo.View.Pages
         /// <summary>
         /// The firebase helper
         /// </summary>
-        private FirebaseHelper irebaseHelper = new FirebaseHelper();
+        private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TakeANote"/> class.
@@ -32,6 +32,25 @@ namespace Fundoo.View.Pages
         public TakeANote()
         {
             this.InitializeComponent();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+            this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text);
+            //// Empty all user input after the data
+            txtTitle.Text = string.Empty;
+            txtNotes.Text = string.Empty;
+
+            //// If it is successfull displays mesaage
+            this.DisplayAlert("Success", "Notes added successfully", "ok");
+            base.OnBackButtonPressed();
+            return false;
+        }
+
+        private void TxtArchieve_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ArchievePage());
         }
     }
 }

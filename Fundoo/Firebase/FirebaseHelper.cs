@@ -55,7 +55,7 @@ namespace Fundoo.Firebase
         /// <param name="title">The title.</param>
         /// <param name="note">The note.</param>
         /// <returns>returns task</returns>
-        public async Task AddNote(string title, string note)
+        public void  AddNote(string title, string note)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                await this.firebase.Child("Persons").Child(userid).Child("userinfo").PostAsync(new NotesData() { Title = title, Notes = note });
+                 this.firebase.Child("Persons").Child(userid).Child("userinfo").PostAsync(new NotesData() { Title = title, Notes = note });
             }
             catch (Exception ex)
             {
