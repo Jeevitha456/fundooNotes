@@ -9,12 +9,13 @@ namespace Fundoo.View.Pages
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
-
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
     /// <summary>
-    ///  Page Class
+    /// Page Class
     /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
     public partial class ArchievePage : ContentPage
     {
         /// <summary>

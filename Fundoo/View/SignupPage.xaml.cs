@@ -22,7 +22,7 @@ namespace Fundoo.View
         /// <summary>
         /// Firebase Helper
         /// </summary>
-        public FirebaseHelper firebase = new FirebaseHelper();
+        private FirebaseHelper firebase = new FirebaseHelper();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SignupPage"/> class.

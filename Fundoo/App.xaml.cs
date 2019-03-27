@@ -15,7 +15,10 @@ namespace Fundoo
     using Fundoo.View.HomePage;
     using Xamarin.Forms;
 
-    
+    /// <summary>
+    /// Application class
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.Application" />
     public partial class App : Application
     {
         /// <summary>

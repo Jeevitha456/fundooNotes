@@ -136,6 +136,7 @@ namespace Fundoo.Droid.Android
             string status = null;
             try
             {
+                //// Sign out the current user
                 FirebaseAuth.Instance.SignOut();
                 status = FirebaseAuth.Instance.CurrentUser.Uid;
             }
@@ -156,6 +157,7 @@ namespace Fundoo.Droid.Android
         /// </returns>
         public bool IsUserLoggedIn()
         {
+            //// Checks if user is logged in or not
             if (FirebaseAuth.Instance.CurrentUser != null)
             {
                 return true;

@@ -12,18 +12,19 @@ namespace Fundoo.View
     using Fundoo.View.HomePage;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
-
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
     /// <summary>
     /// Login class
     /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
     public partial class Login : ContentPage
     {
         /// <summary>
         /// The firebase helper
         /// </summary>
-         FirebaseHelper firebaseHelper = new FirebaseHelper();
+        private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Login"/> class.

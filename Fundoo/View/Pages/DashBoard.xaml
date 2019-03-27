@@ -7,26 +7,6 @@
    
     <ContentPage.Content>
         
-        <Grid x:Name="controlGrid" RowSpacing="0" ColumnSpacing="2">
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="445" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Text ="Take a Note..." Grid.Row="1" Grid.ColumnSpan="3" WidthRequest="70" BackgroundColor="White" Clicked="Button_Clicked" />
-            <ImageButton Source="CheckBox.png" Grid.Row="1" Grid.Column="3" WidthRequest="10" HeightRequest="5" BackgroundColor="White" Padding="5,5,10,5"/>
-            <ImageButton Source="brush.png" Grid.Row="1" Grid.Column="4" BackgroundColor="White" WidthRequest="25" HeightRequest="15"/>
-            <ImageButton Source = "recorder.png" Grid.Row="1" Grid.Column="5" BackgroundColor="White" Padding="5,5,10,5"/>
-            <ImageButton Source="Gallery.png" Grid.Row="1" Grid.Column="6" BackgroundColor="White"/>
-        </Grid>
         
     </ContentPage.Content>
 </ContentPage>
