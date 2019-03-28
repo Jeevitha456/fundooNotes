@@ -30,6 +30,11 @@ namespace Fundoo.View.Pages
            this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Button control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Button_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new TakeANote());

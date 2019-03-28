@@ -54,8 +54,7 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="note">The note.</param>
-        /// <returns>returns task</returns>
-        public void  AddNote(string title, string note)
+        public void AddNote(string title, string note)
         {
             try
             {

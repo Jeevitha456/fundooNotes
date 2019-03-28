@@ -34,20 +34,42 @@ namespace Fundoo.View.Pages
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Application developers can override this method to provide behavior when the back button is pressed.
+        /// </summary>
+        /// <returns>
+        /// To be added.
+        /// </returns>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected override bool OnBackButtonPressed()
         {
-            FirebaseHelper firebaseHelper = new FirebaseHelper();
-            this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text);
-            //// Empty all user input after the data
-            txtTitle.Text = string.Empty;
-            txtNotes.Text = string.Empty;
+            try
+            {
+                FirebaseHelper firebaseHelper = new FirebaseHelper();
+                this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text);
+                //// Empty all user input after the data
+                txtTitle.Text = string.Empty;
+                txtNotes.Text = string.Empty;
 
-            //// If it is successfull displays mesaage
-            this.DisplayAlert("Success", "Notes added successfully", "ok");
-            base.OnBackButtonPressed();
+                //// If it is successfull displays mesaage
+                this.DisplayAlert("Success", "Notes added successfully", "ok");
+                base.OnBackButtonPressed();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+          
             return false;
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Text control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TxtArchieve_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ArchievePage());
