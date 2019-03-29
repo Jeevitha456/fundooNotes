@@ -21,7 +21,8 @@
             </Grid.ColumnDefinitions>
             <ScrollView Grid.Row="0" Grid.ColumnSpan="6" Orientation="Vertical" WidthRequest="150">
                 <StackLayout>
-
+                <Grid>
+                </Grid>
                 </StackLayout>
             </ScrollView>
             <Button Text ="Take  a  Note..." Grid.Row="1" Grid.ColumnSpan="3" WidthRequest="70" BackgroundColor="White" Clicked="Button_Clicked" FontSize="Micro" />

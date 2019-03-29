@@ -7,6 +7,7 @@
 
 namespace Fundoo.View.Pages
 {
+    using Fundoo.Model;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -38,6 +39,14 @@ namespace Fundoo.View.Pages
         private void Button_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new TakeANote());
+        }
+
+        private void Grid()
+        {
+            IList<NotesData> list = new List<NotesData>();
+
+
+
         }
     }
 }

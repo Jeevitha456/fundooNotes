@@ -13,7 +13,9 @@ namespace Fundoo.Firebase
     using Fundoo.Interface;
     using Fundoo.Model;
     using Xamarin.Forms;
-  
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// FireBase Class
     /// </summary>
@@ -68,6 +70,23 @@ namespace Fundoo.Firebase
             {
                 Console.WriteLine(ex.Message);
             }
-        }       
+        }    
+        
+        public async Task CreateLabel(string label)
+        {
+            await firebase.Child("Label").PostAsync(new CreateNewLabel {Label=label });
+        }
+
+        public async Task<List<CreateNewLabel>> GetAllLabels()
+        {
+            //// returns all the person contained in the list
+            return (await firebase
+              .Child("Label").OnceAsync<CreateNewLabel>()).Select(item => new CreateNewLabel
+              {
+                  Label = item.Object.Label
+                  
+              }).ToList();
+        }
     }
+
 }
