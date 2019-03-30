@@ -26,5 +26,7 @@ namespace Fundoo.Model
         /// The notes.
         /// </value>
         public string Notes { get; set; }
+
+        public string Key { get; set; }
     }
 }

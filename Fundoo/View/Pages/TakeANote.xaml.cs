@@ -10,6 +10,9 @@ namespace Fundoo.View.Pages
     using System;
     using Fundoo.Firebase;
     using Fundoo.Interface;
+    using Fundoo.Model;
+    using global::Firebase.Database;
+    using global::Firebase.Database.Query;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -33,7 +36,7 @@ namespace Fundoo.View.Pages
         {
             this.InitializeComponent();
         }
-
+        private FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
         /// <summary>
         /// Application developers can override this method to provide behavior when the back button is pressed.
         /// </summary>
@@ -45,17 +48,16 @@ namespace Fundoo.View.Pages
         /// </remarks>
         protected override bool OnBackButtonPressed()
         {
+            
             try
             {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
                 this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text);
-                //// Empty all user input after the data
-                txtTitle.Text = string.Empty;
-                txtNotes.Text = string.Empty;
-
+               
                 //// If it is successfull displays mesaage
                 this.DisplayAlert("Success", "Notes added successfully", "ok");
                 base.OnBackButtonPressed();
+              
             }
             catch (Exception e)
             {
@@ -63,7 +65,12 @@ namespace Fundoo.View.Pages
             }
           
             return false;
+            
+
+           
         }
+
+
 
         /// <summary>
         /// Handles the Clicked event of the Text control.

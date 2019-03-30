@@ -51,11 +51,7 @@ namespace Fundoo.Firebase
             }                                     
         }
 
-        /// <summary>
-        /// Adds the note.
-        /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="note">The note.</param>
+         
         public void AddNote(string title, string note)
         {
             try
@@ -70,18 +66,20 @@ namespace Fundoo.Firebase
             {
                 Console.WriteLine(ex.Message);
             }
-        }    
+        }  
         
         public async Task CreateLabel(string label)
         {
-            await firebase.Child("Label").PostAsync(new CreateNewLabel {Label=label });
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            await firebase.Child("Persons").Child(userid).Child("Label").PostAsync(new CreateNewLabel {Label=label });
         }
 
         public async Task<List<CreateNewLabel>> GetAllLabels()
         {
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             //// returns all the person contained in the list
             return (await firebase
-              .Child("Label").OnceAsync<CreateNewLabel>()).Select(item => new CreateNewLabel
+              .Child("Persons").Child(userid).Child("Label").OnceAsync<CreateNewLabel>()).Select(item => new CreateNewLabel
               {
                   Label = item.Object.Label
                   
