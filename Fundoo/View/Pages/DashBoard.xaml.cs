@@ -7,15 +7,12 @@
 
 namespace Fundoo.View.Pages
 {
+    using System;
+    using System.Collections.Generic;
     using Fundoo.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -27,38 +24,28 @@ namespace Fundoo.View.Pages
     public partial class DashBoard : ContentPage
     {
         /// <summary>
+        /// The notes database
+        /// </summary>
+       private NotesDatabase notesDatabase = new NotesDatabase();
+
+        /// <summary>
+        /// The firebase helper
+        /// </summary>
+       private FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="DashBoard"/> class.
         /// </summary>
         public DashBoard()
         {
-           this.InitializeComponent();
-        }
-        NotesDatabase notesDatabase = new NotesDatabase();
-        FirebaseHelper firebaseHelper = new FirebaseHelper();
-        protected async override void OnAppearing()
-        {
-           
-            var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-            var notes = await this.notesDatabase.GetNotesAsync(uid);
-            if (notes != null)
-            {
-                this.NoteGridView(notes);
-            }
+            this.InitializeComponent();
         }
 
         /// <summary>
-        /// Handles the Clicked event of the Button control.
+        /// Notes the grid view.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private  void Button_Clicked(object sender, EventArgs e)
-        {
-         Navigation.PushAsync(new TakeANote());
-
-        }
-
-       
-        public void NoteGridView(IList<NotesData> list)
+        /// <param name="list">The list.</param>
+        public void GridView(IList<NotesData> list)
         {
             try
             {
@@ -75,28 +62,20 @@ namespace Fundoo.View.Pages
                     }
                 }
 
-
-
-                var productIndex = 0;
-                var indexe = -1;
+                var index = -1;
 
                 for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
                 {
                     for (int columnIndex = 0; columnIndex < 2; columnIndex++)
                     {
                         NotesData data = null;
-                        indexe++;
-                        if (indexe < list.Count)
+
+                        index++;
+                        if (index < list.Count)
                         {
-                            data = list[indexe];
+                            data = list[index];
                         }
 
-                        if (productIndex >= list.Count)
-                        {
-                            break;
-                        }
-
-                        productIndex += 1;
                         var label = new Xamarin.Forms.Label
                         {
                             Text = data.Title,
@@ -104,6 +83,7 @@ namespace Fundoo.View.Pages
                             FontAttributes = FontAttributes.Bold,
                             VerticalOptions = LayoutOptions.Center,
                             HorizontalOptions = LayoutOptions.Start,
+                        
                         };
 
                         var labelKey = new Xamarin.Forms.Label
@@ -125,6 +105,7 @@ namespace Fundoo.View.Pages
                             Margin = 2,
                             BackgroundColor = Color.White
                         };
+
                         var tapGestureRecognizer = new TapGestureRecognizer();
                         layout.Children.Add(labelKey);
                         layout.Children.Add(label);
@@ -133,7 +114,6 @@ namespace Fundoo.View.Pages
                         layout.Spacing = 2;
                         layout.Margin = 2;
                         layout.BackgroundColor = Color.White;
-
                         var frame = new Frame();
                         frame.BorderColor = Color.Black;
                         frame.Content = layout;
@@ -143,9 +123,8 @@ namespace Fundoo.View.Pages
                             IList<View> item = layout123.Children;
                             Xamarin.Forms.Label KeyValue = (Xamarin.Forms.Label)item[0];
                             var Keyval = KeyValue.Text;
-                          //  Navigation.PushAsync(new UpdateNote(Keyval));
+                            Navigation.PushAsync(new UpdateNote(Keyval));
                         };
-
                         GridLayout.Children.Add(frame, columnIndex, rowIndex);
                     }
                 }
@@ -154,6 +133,39 @@ namespace Fundoo.View.Pages
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+        protected async override void OnAppearing()
+        {
+            try
+            {
+                var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+                var notes = await this.notesDatabase.GetNotesAsync(uid);
+                if (notes != null)
+                {
+                    this.GridView(notes);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Clicked event of the Button control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new TakeANote());
         }
     }
 }

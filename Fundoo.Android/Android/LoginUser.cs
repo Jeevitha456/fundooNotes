@@ -56,6 +56,7 @@ namespace Fundoo.Droid.Android
             }
         }
 
+
         /// <summary>
         /// Statuses this instance.
         /// </summary>

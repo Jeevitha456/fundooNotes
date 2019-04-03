@@ -27,6 +27,12 @@ namespace Fundoo.Model
         /// </value>
         public string Notes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        /// <value>
+        /// The key.
+        /// </value>
         public string Key { get; set; }
     }
 }

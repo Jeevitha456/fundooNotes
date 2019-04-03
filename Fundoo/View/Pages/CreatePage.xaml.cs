@@ -7,14 +7,8 @@
 
 namespace Fundoo.View.Pages
 {
-    using Fundoo.Firebase;
-    using Fundoo.Model;
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Fundoo.Firebase;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -24,19 +18,26 @@ namespace Fundoo.View.Pages
     ///  Create Page Class
     /// </summary>
     public partial class CreatePage : ContentPage
-    {
-      
+    {    
+        /// <summary>
+        /// The firebase helper
+        /// </summary>
+        private FirebaseHelper firebaseHelper = new FirebaseHelper();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatePage"/> class.
         /// </summary>
         public CreatePage()
         {
-            this.InitializeComponent();         
-            
+            this.InitializeComponent();
         }
-       
-        FirebaseHelper firebaseHelper = new FirebaseHelper();
 
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected async override void OnAppearing()
         {
             try
@@ -45,7 +46,7 @@ namespace Fundoo.View.Pages
                 base.OnAppearing();
 
                 //// Listing all the person in the list
-                var allLabels = await firebaseHelper.GetAllLabels();
+                var allLabels = await this.firebaseHelper.GetAllLabels();
                 lstLabels.ItemsSource = allLabels;
             }
             catch (Exception exception)
@@ -53,22 +54,27 @@ namespace Fundoo.View.Pages
                 Console.WriteLine(exception.Message);
             }
         }
+
+        /// <summary>
+        /// Handles the Clicked event of the ImageButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void ImageButton_Clicked(object sender, EventArgs e)
         {
             try
             {
-                await firebaseHelper.CreateLabel(txtLabel.Text);
+                await this.firebaseHelper.CreateLabel(txtLabel.Text);
 
                 //// Empty the placeholder
                 txtLabel.Text = string.Empty;
-                var allLabels = await firebaseHelper.GetAllLabels();
+                var allLabels = await this.firebaseHelper.GetAllLabels();
                 lstLabels.ItemsSource = allLabels;
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
             }
-
         }
     }
 }
