@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fundoo.View.Login">
     <ContentPage.Content>
+
         <StackLayout>
-            <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Start">
+            <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
                 <Image x:Name="imgBanner" Source="GoogleKeeps.png" HeightRequest="60" WidthRequest="30"></Image>
                 <Label Text="FUNDOO NOTES" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" TextColor="SaddleBrown" FontAttributes="Bold"/>
                 <Entry x:Name="txtEmail"  Placeholder="Enter Email"  />

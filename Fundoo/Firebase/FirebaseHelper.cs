@@ -64,7 +64,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                 this.firebase.Child("Persons").Child(userid).Child("userinfo").PostAsync(new NotesData() { Title = title, Notes = note });
+                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = title, Notes = note });
             }
             catch (Exception ex)
             {
@@ -96,6 +96,35 @@ namespace Fundoo.Firebase
               {
                   Label = item.Object.Label                 
               }).ToList();
+        }
+
+        public async Task<List<NotesData>> GetAllNotes()
+        {
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            return (await this.firebase
+              .Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
+              {
+                  Title=item.Object.Title,
+                  Notes=item.Object.Notes,
+                  Key=item.Key
+              }).ToList();
+        }
+        public async Task<NotesData> GetNotesData(string key,string uid)
+        {
+            NotesData notes = await firebase.Child("Persons").Child(uid).Child("Notes").Child(key).OnceSingleAsync<NotesData>();
+           return notes;
+        }
+        public void UpdateNotes(NotesData notes,string key,string uid)
+        {
+            try
+            {
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
     }
 }

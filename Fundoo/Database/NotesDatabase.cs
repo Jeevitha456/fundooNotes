@@ -32,7 +32,7 @@ namespace Fundoo.Database
         /// <returns>returns task</returns>
         public async Task<IList<NotesData>> GetNotesAsync(string uid)
         {
-            IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(uid).Child("userinfo").OnceAsync<NotesData>()).Select(item => new NotesData
+            IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(uid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
             {
                 Title = item.Object.Title,
                 Notes = item.Object.Notes,
