@@ -9,6 +9,7 @@ namespace Fundoo.View.Pages
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Fundoo.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
@@ -146,9 +147,10 @@ namespace Fundoo.View.Pages
             try
             {
                 var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-                var notes = await this.notesDatabase.GetNotesAsync(uid);
+                var notes = await this.notesDatabase.GetNotesAsync();
                 if (notes != null)
                 {
+                    notes = notes.Where(a => a.IsDeleted == false && a.IsArchive==false).ToList();
                     this.GridView(notes);
                 }
             }

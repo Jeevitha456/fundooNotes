@@ -34,5 +34,9 @@ namespace Fundoo.Model
         /// The key.
         /// </value>
         public string Key { get; set; }
+
+        public bool IsDeleted { get; set; }
+        public bool IsArchive { get; set; }
+        
     }
 }

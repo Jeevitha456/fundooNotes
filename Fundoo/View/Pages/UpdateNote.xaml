@@ -5,11 +5,29 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="txtPin" Order="Primary" Icon="pin.png"/>
         <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bell.png"/>
-        <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="Archieve.png"/>
+        <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="Archieve.png" Clicked="TxtArchieve_Clicked"/>
+        <ToolbarItem x:Name="Delete" Text="Delete" Order="Secondary" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
-    <StackLayout>
-        <Entry x:Name="txtTitle"  Placeholder="Title"/>
-        <Entry x:Name="txtNotes" Placeholder="Notes"/>
-        <Button Text="clickme" Clicked="Button_Clicked"/>
-    </StackLayout>
+    <RelativeLayout>
+        <StackLayout>
+        <Entry x:Name="txtTitle"  Placeholder="Title" WidthRequest="300"/>
+        <Entry x:Name="txtNotes" Placeholder="Notes" WidthRequest="300"/>
+        </StackLayout>
+
+
+            <StackLayout VerticalOptions="End"  BackgroundColor="White"
+                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                         RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.90}"
+                         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}">
+
+                <StackLayout Orientation="Horizontal" >
+
+                    <ImageButton  Source="checking.png" HeightRequest="15" WidthRequest="50" BackgroundColor="White"  Padding="5,10,5,10"/>
+                <Button Text="                          edited                            " BackgroundColor="White"/>
+                <ImageButton Source="option.png" HeightRequest="15" WidthRequest="50" BackgroundColor="White" Padding="5,10,5,10" Clicked="ImageButton_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+      
+   
+    </RelativeLayout>
 </ContentPage>

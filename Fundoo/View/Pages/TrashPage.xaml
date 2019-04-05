@@ -4,9 +4,9 @@
              x:Class="Fundoo.View.Pages.TrashPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+            <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand" HeightRequest="460">
+                <Grid x:Name="GridLayout"></Grid>
+            </ScrollView>
+            </StackLayout>
     </ContentPage.Content>
 </ContentPage>

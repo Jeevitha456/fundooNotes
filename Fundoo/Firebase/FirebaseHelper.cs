@@ -126,5 +126,20 @@ namespace Fundoo.Firebase
             }
 
         }
+
+        public void DeleteForever(NotesData notes, string key, string uid)
+        {
+            firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
+        }
+        public void DeleteNotes(NotesData notes, string key, string uid)
+        {
+           
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes,IsDeleted=true});
+        }
+        public void ArchiveNotes(NotesData notes, string key, string uid)
+        {
+
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true });
+        }
     }
 }

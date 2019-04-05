@@ -42,7 +42,7 @@ namespace Fundoo.View.Pages
             }
                    
         }
-
+        
         protected override bool OnBackButtonPressed()
         {
 
@@ -66,10 +66,39 @@ namespace Fundoo.View.Pages
 
             return base.OnBackButtonPressed(); 
         }
+        
+        
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void ImageButton_Clicked(object sender, EventArgs e)
         {
             PopupNavigation.Instance.PushAsync(new PopTaskView());
+        }
+
+        private void Delete_Clicked(object sender, EventArgs e)
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            NotesData notes = new NotesData()
+            {
+                Title = txtTitle.Text,
+                Notes = txtNotes.Text,
+                IsDeleted = true
+            };
+            firebaseHelper.DeleteNotes(notes, this.val, userid);
+
+        }
+
+        private void TxtArchieve_Clicked(object sender, EventArgs e)
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            NotesData notes = new NotesData()
+            {
+                Title = txtTitle.Text,
+                Notes = txtNotes.Text,
+                IsArchive = true
+            };
+            firebaseHelper.ArchiveNotes(notes, this.val, userid);
         }
     }
 }

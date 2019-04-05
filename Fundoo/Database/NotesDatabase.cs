@@ -14,6 +14,8 @@ namespace Fundoo.Database
     using global::Firebase.Database;
     using global::Firebase.Database.Query;
     using Fundoo.Model;
+    using Xamarin.Forms;
+    using Fundoo.Interface;
 
     /// <summary>
     /// Notes Data base
@@ -30,10 +32,13 @@ namespace Fundoo.Database
         /// </summary>
         /// <param name="uid">The id.</param>
         /// <returns>returns task</returns>
-        public async Task<IList<NotesData>> GetNotesAsync(string uid)
+        public async Task<IList<NotesData>> GetNotesAsync()
         {
+            var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(uid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
             {
+                IsArchive=item.Object.IsArchive,
+                IsDeleted=item.Object.IsDeleted,
                 Title = item.Object.Title,
                 Notes = item.Object.Notes,
                 Key = item.Key
