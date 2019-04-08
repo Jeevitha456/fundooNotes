@@ -9,7 +9,7 @@ namespace Fundoo.View.Pages
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Linq; 
     using Fundoo.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
@@ -83,8 +83,7 @@ namespace Fundoo.View.Pages
                             TextColor = Color.Black,
                             FontAttributes = FontAttributes.Bold,
                             VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.Start,
-                        
+                            HorizontalOptions = LayoutOptions.Start,                    
                         };
 
                         var labelKey = new Xamarin.Forms.Label
@@ -150,7 +149,6 @@ namespace Fundoo.View.Pages
                 var notes = await this.notesDatabase.GetNotesAsync();
                 if (notes != null)
                 {
-                    notes = notes.Where(a => a.IsDeleted == false && a.IsArchive==false).ToList();
                     this.GridView(notes);
                 }
             }

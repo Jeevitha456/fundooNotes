@@ -4,16 +4,15 @@
 // </copyright>
 // <creator name="Jeevitha C"/>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Fundoo.View.Pages
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Fundoo.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     
@@ -26,12 +25,8 @@ namespace Fundoo.View.Pages
     public partial class ArchievePage : ContentPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArchievePage"/> class.
+        /// The notes database
         /// </summary>
-        public ArchievePage()
-        {
-          this.InitializeComponent();
-        }
         private NotesDatabase notesDatabase = new NotesDatabase();
 
         /// <summary>
@@ -39,6 +34,18 @@ namespace Fundoo.View.Pages
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArchievePage"/> class.
+        /// </summary>
+        public ArchievePage()
+        {
+            this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// Grids the view.
+        /// </summary>
+        /// <param name="list">The list.</param>
         public void GridView(IList<NotesData> list)
         {
             try
@@ -77,7 +84,6 @@ namespace Fundoo.View.Pages
                             FontAttributes = FontAttributes.Bold,
                             VerticalOptions = LayoutOptions.Center,
                             HorizontalOptions = LayoutOptions.Start,
-
                         };
 
                         var labelKey = new Xamarin.Forms.Label
@@ -129,6 +135,12 @@ namespace Fundoo.View.Pages
             }
         }
 
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected async override void OnAppearing()
         {
             try
@@ -147,5 +159,4 @@ namespace Fundoo.View.Pages
             }
         }
     }
-
 }

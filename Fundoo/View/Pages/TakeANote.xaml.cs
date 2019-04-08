@@ -29,7 +29,7 @@ namespace Fundoo.View.Pages
 
         /// <summary>
         /// Firebase Client
-        /// 
+        /// firebase
         /// </summary>
         private FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
 

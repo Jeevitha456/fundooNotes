@@ -98,23 +98,41 @@ namespace Fundoo.Firebase
               }).ToList();
         }
 
+        /// <summary>
+        /// Gets all notes.
+        /// </summary>
+        /// <returns>returns Task</returns>
         public async Task<List<NotesData>> GetAllNotes()
         {
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             return (await this.firebase
               .Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
               {
-                  Title=item.Object.Title,
-                  Notes=item.Object.Notes,
-                  Key=item.Key
+                  Title = item.Object.Title,
+                  Notes = item.Object.Notes,
+                  Key = item.Key
               }).ToList();
         }
-        public async Task<NotesData> GetNotesData(string key,string uid)
+
+        /// <summary>
+        /// Gets the notes data.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
+        /// <returns>returns Task</returns>
+        public async Task<NotesData> GetNotesData(string key, string uid)
         {
-            NotesData notes = await firebase.Child("Persons").Child(uid).Child("Notes").Child(key).OnceSingleAsync<NotesData>();
+            NotesData notes = await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).OnceSingleAsync<NotesData>();
            return notes;
         }
-        public void UpdateNotes(NotesData notes,string key,string uid)
+
+        /// <summary>
+        /// Updates the notes.
+        /// </summary>
+        /// <param name="notes">The notes.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
+        public void UpdateNotes(NotesData notes, string key, string uid)
         {
             try
             {
@@ -124,21 +142,38 @@ namespace Fundoo.Firebase
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
+        /// <summary>
+        /// Deletes the forever.
+        /// </summary>
+        /// <param name="notes">The notes.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
         public void DeleteForever(NotesData notes, string key, string uid)
         {
-            firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
         }
+
+        /// <summary>
+        /// Deletes the notes.
+        /// </summary>
+        /// <param name="notes">The notes.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
         public void DeleteNotes(NotesData notes, string key, string uid)
-        {
-           
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes,IsDeleted=true});
+        {         
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true });
         }
+
+        /// <summary>
+        /// Archives the notes.
+        /// </summary>
+        /// <param name="notes">The notes.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
         public void ArchiveNotes(NotesData notes, string key, string uid)
         {
-
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true });
         }
     }

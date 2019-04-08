@@ -35,8 +35,20 @@ namespace Fundoo.Model
         /// </value>
         public string Key { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is deleted.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is deleted; otherwise, <c>false</c>.
+        /// </value>
         public bool IsDeleted { get; set; }
-        public bool IsArchive { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is archive.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is archive; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsArchive { get; set; }      
     }
 }

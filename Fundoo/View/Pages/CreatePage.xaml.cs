@@ -4,19 +4,19 @@
 // </copyright>
 // <creator name="Jeevitha C"/>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Fundoo.View.Pages
 {
     using System;
     using Fundoo.Firebase;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
-
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
     /// <summary>
-    ///  Create Page Class
+    /// Create Page Class
     /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
     public partial class CreatePage : ContentPage
     {    
         /// <summary>
@@ -25,6 +25,7 @@ namespace Fundoo.View.Pages
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
+        /// 
         /// Initializes a new instance of the <see cref="CreatePage"/> class.
         /// </summary>
         public CreatePage()
