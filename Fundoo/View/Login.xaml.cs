@@ -91,6 +91,7 @@ namespace Fundoo.View
         {
             try
             {
+                //// Navigates to forgot password
                 Navigation.PushModalAsync(new ForgotPassword());
             }
             catch (Exception exception)

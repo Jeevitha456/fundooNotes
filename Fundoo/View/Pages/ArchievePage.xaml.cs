@@ -50,12 +50,16 @@ namespace Fundoo.View.Pages
         {
             try
             {
+                ///// Creates column defination of width 170
                 GridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(170) });
                 GridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(170) });
                 GridLayout.Margin = 5;
                 int rowCount = 0;
+
+                //// Creates number of columns as lables are added
                 for (int row = 0; row < list.Count; row++)
                 {
+                    //// Adds new row after 2 labels
                     if (row % 2 == 0)
                     {
                         GridLayout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Auto) });
@@ -65,6 +69,7 @@ namespace Fundoo.View.Pages
 
                 var index = -1;
 
+                //// Adds label to row and columns
                 for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
                 {
                     for (int columnIndex = 0; columnIndex < 2; columnIndex++)
@@ -77,6 +82,7 @@ namespace Fundoo.View.Pages
                             data = list[index];
                         }
 
+                        //// Creates Labels
                         var label = new Xamarin.Forms.Label
                         {
                             Text = data.Title,
@@ -86,12 +92,14 @@ namespace Fundoo.View.Pages
                             HorizontalOptions = LayoutOptions.Start,
                         };
 
+                        //// Created label key
                         var labelKey = new Xamarin.Forms.Label
                         {
                             Text = data.Key,
                             IsVisible = false
                         };
 
+                        //// Content view
                         var content = new Xamarin.Forms.Label
                         {
                             Text = data.Notes,
@@ -99,6 +107,7 @@ namespace Fundoo.View.Pages
                             HorizontalOptions = LayoutOptions.Start,
                         };
 
+                        //// Creates stack layout for each label
                         StackLayout layout = new StackLayout()
                         {
                             Spacing = 2,
@@ -106,6 +115,7 @@ namespace Fundoo.View.Pages
                             BackgroundColor = Color.White
                         };
 
+                        //// Tapgesture is created
                         var tapGestureRecognizer = new TapGestureRecognizer();
                         layout.Children.Add(labelKey);
                         layout.Children.Add(label);
@@ -123,7 +133,6 @@ namespace Fundoo.View.Pages
                             IList<View> item = layout123.Children;
                             Xamarin.Forms.Label KeyValue = (Xamarin.Forms.Label)item[0];
                             var Keyval = KeyValue.Text;
-                          //  Navigation.PushAsync(new Delete(Keyval));
                         };
                         GridLayout.Children.Add(frame, columnIndex, rowIndex);
                     }
@@ -145,10 +154,14 @@ namespace Fundoo.View.Pages
         {
             try
             {
+                //// Gets current user id
                 var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                //// Gets all the notes
                 var notes = await this.notesDatabase.GetNotesAsync();
                 if (notes != null)
                 {
+                    //// Displays notes on dashboard
                     notes = notes.Where(a => a.IsArchive == true).ToList();
                     this.GridView(notes);
                 }

@@ -48,7 +48,11 @@ namespace Fundoo.View.Pages
             try
             {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+                //// Gets the current user id
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                //// Gets all notes data from firebase
                 NotesData notesData = await firebaseHelper.GetNotesData(this.val, userid);
                 
                 txtTitle.Text = notesData.Title;
@@ -70,7 +74,9 @@ namespace Fundoo.View.Pages
             try
             {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
+                //// Gets the current user id
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+                //// Delets the data from trash and from database
                 NotesData notes = new NotesData()
                 {
                     Title = txtTitle.Text,

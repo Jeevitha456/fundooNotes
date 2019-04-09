@@ -55,6 +55,8 @@ namespace Fundoo.View.Pages
             try
             {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+                //// Adds notes to the firebase
                 this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text);
                
                 //// If it is successfull displays mesaage

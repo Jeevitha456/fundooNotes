@@ -7,11 +7,6 @@
 namespace Fundoo.View.Pages
 { 
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Xamarin.Forms;
     using Rg.Plugins.Popup.Pages;
     using Xamarin.Forms.Xaml;
 
@@ -28,6 +23,15 @@ namespace Fundoo.View.Pages
         public PopTaskView()
         {
           this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// Handles the Clicked event of the Button control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void Button_Clicked(object sender, EventArgs e)
+        {
         }
     }
 }

@@ -25,7 +25,6 @@ namespace Fundoo.View.Pages
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
-        /// 
         /// Initializes a new instance of the <see cref="CreatePage"/> class.
         /// </summary>
         public CreatePage()
@@ -65,6 +64,7 @@ namespace Fundoo.View.Pages
         {
             try
             {
+                //// Creats labels in firebase
                 await this.firebaseHelper.CreateLabel(txtLabel.Text);
 
                 //// Empty the placeholder

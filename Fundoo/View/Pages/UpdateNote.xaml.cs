@@ -45,7 +45,11 @@ namespace Fundoo.View.Pages
             try
             {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+                //// Gets current user id
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+               
+                ////Gets all the notes data
                 NotesData notesData = await firebaseHelper.GetNotesData(this.val, userid);
 
                 txtTitle.Text = notesData.Title;
@@ -71,7 +75,11 @@ namespace Fundoo.View.Pages
             try
             {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+                //// Gets current user id
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                //// Updates the notes whenUpdateNotes method is called
                 NotesData notes = new NotesData()
                 {
                     Title = txtTitle.Text,
@@ -105,7 +113,11 @@ namespace Fundoo.View.Pages
         private void Delete_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notes when DeleteNotes method is called
             NotesData notes = new NotesData()
             {
                 Title = txtTitle.Text,
@@ -123,7 +135,11 @@ namespace Fundoo.View.Pages
         private void TxtArchieve_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notes when ArchiveNotes method is called
             NotesData notes = new NotesData()
             {
                 Title = txtTitle.Text,

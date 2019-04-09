@@ -38,7 +38,10 @@ namespace Fundoo.View.Pages
         /// </remarks>
         protected override void OnAppearing()
         {
+            //// Picks method sign out
             DependencyService.Get<IFirebaseAuthenticator>().SignOut();
+
+            //// Navigates to login page
              Navigation.PushModalAsync(new Login());
         }
     }

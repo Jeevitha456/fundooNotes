@@ -79,7 +79,10 @@ namespace Fundoo.Firebase
         /// <returns>returns task</returns>
         public async Task CreateLabel(string label)
         {
+            //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// creates the label
             await this.firebase.Child("Persons").Child(userid).Child("Label").PostAsync(new CreateNewLabel { Label = label });
         }
 
@@ -105,6 +108,8 @@ namespace Fundoo.Firebase
         public async Task<List<NotesData>> GetAllNotes()
         {
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Returns all the data from the firebase
             return (await this.firebase
               .Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
               {
@@ -122,6 +127,7 @@ namespace Fundoo.Firebase
         /// <returns>returns Task</returns>
         public async Task<NotesData> GetNotesData(string key, string uid)
         {
+            //// Returns the notes from the firebase
             NotesData notes = await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).OnceSingleAsync<NotesData>();
            return notes;
         }
@@ -136,6 +142,7 @@ namespace Fundoo.Firebase
         {
             try
             {
+                //// Updates yhe notes in the firebase
                 this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes });
             }
             catch (Exception ex)
@@ -152,6 +159,7 @@ namespace Fundoo.Firebase
         /// <param name="uid">The id.</param>
         public void DeleteForever(NotesData notes, string key, string uid)
         {
+            //// Deletes the notes from the firebase
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
         }
 
@@ -163,6 +171,7 @@ namespace Fundoo.Firebase
         /// <param name="uid">The id.</param>
         public void DeleteNotes(NotesData notes, string key, string uid)
         {         
+            //// Deletes the notes from the dashboard
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true });
         }
 
@@ -174,6 +183,7 @@ namespace Fundoo.Firebase
         /// <param name="uid">The id.</param>
         public void ArchiveNotes(NotesData notes, string key, string uid)
         {
+            //// Archives the notes 
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true });
         }
     }

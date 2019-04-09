@@ -52,7 +52,7 @@
             <Button Text ="Send" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White"  />
 
             <ImageButton Source="coll.png" Grid.Row="3" Grid.Column="0"  BackgroundColor="White"/>
-            <Button Text ="Collaborator" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White"/>
+            <Button Text ="Collaborator" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White" Clicked="Button_Clicked"/>
 
             <ImageButton Source="labelss.png" Grid.Row="4" Grid.Column="0"  BackgroundColor="White"/>
             <Button Text ="Labels" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White"/>

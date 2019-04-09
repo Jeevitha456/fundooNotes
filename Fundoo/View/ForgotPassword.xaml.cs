@@ -34,7 +34,10 @@ namespace Fundoo.View
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtnSubmit_Clicked(object sender, EventArgs e)
         {     
+            //// picks ResetPass method 
             await DependencyService.Get<IFirebaseAuthenticator>().ResetPass(txtEmail.Text);
+
+            //// navigates to login page
             await Navigation.PushModalAsync(new Login());
         }
     }
