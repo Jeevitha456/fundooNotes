@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fundoo.View.Pages.Delete">
-  
-        <ContentPage.ToolbarItems>
-            <ToolbarItem x:Name="Delete1" Text="Delete" Order="Secondary" Clicked="Delete_Clicked"/>
-        <ToolbarItem x:Name="Restore1" Text="Restore" Order="Secondary" Clicked="Restore1_Clicked"/>
+             x:Class="Fundoo.View.Pages.UnArchive">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="UnArchive1" Icon="unarchive.png" Order="Primary" Clicked="UnArchive1_Clicked" />
     </ContentPage.ToolbarItems>
     <StackLayout>
         <StackLayout>

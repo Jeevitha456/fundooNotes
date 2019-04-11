@@ -30,7 +30,7 @@ namespace Fundoo.View.HomePage
             this.MasterList.Add(new MasterItems() { Title = "Notes", Icon = "Note.png", TargetType = typeof(DashBoard) });
             this.MasterList.Add(new MasterItems() { Title = "Reminders", Icon = "Reminders.png", TargetType = typeof(RemindersPage) });
             this.MasterList.Add(new MasterItems() { Title = "Create new label", Icon = "CreateLabel.png", TargetType = typeof(CreatePage) });
-            this.MasterList.Add(new MasterItems() { Title = "Archive", Icon = "Archieve.png", TargetType = typeof(ArchievePage) });
+            this.MasterList.Add(new MasterItems() { Title = "Archive", Icon = "archiveicon.png", TargetType = typeof(ArchievePage) });
             this.MasterList.Add(new MasterItems() { Title = "Trash", Icon = "Trash.png", TargetType = typeof(TrashPage) });
             this.MasterList.Add(new MasterItems() { Title = "Logout", TargetType = typeof(SignOut) });
             this.navigationDrawerList.ItemsSource = this.MasterList;

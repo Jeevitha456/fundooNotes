@@ -128,11 +128,11 @@ namespace Fundoo.View.Pages
                         frame.Content = layout;
                         tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {
-                            StackLayout layout123 = (StackLayout)sender;
-                            IList<View> item = layout123.Children;
+                            StackLayout stacklayout = (StackLayout)sender;
+                            IList<View> item = stacklayout.Children;
                             Xamarin.Forms.Label KeyValue = (Xamarin.Forms.Label)item[0];
-                            var Keyval = KeyValue.Text;
-                            Navigation.PushAsync(new Delete(Keyval));
+                            var Keyvalue = KeyValue.Text;
+                            Navigation.PushAsync(new Delete(Keyvalue));
                         };
                         GridLayout.Children.Add(frame, columnIndex, rowIndex);
                     }

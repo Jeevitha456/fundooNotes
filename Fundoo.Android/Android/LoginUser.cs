@@ -96,12 +96,12 @@ namespace Fundoo.Droid.Android
             {
                 //// Allows the user to create and sign up with user inputs using firebase
                  var authResult = await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
-                using (var user1 = authResult.User)
+                using (var user = authResult.User)
 
                 //// Sending the email verification after sign up
                 using (var actionCode = ActionCodeSettings.NewBuilder().SetAndroidPackageName(PackageName, true, "0").Build())
                 {
-                    await user1.SendEmailVerificationAsync(actionCode);
+                    await user.SendEmailVerificationAsync(actionCode);
                 }
 
                 return authResult.User.Uid;

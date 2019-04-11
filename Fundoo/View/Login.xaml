@@ -16,8 +16,8 @@
                     <Button x:Name="btnSignup" CornerRadius="30" WidthRequest="100" BackgroundColor="RoyalBlue" Text="SignUp" Clicked="BtnSignup_Clicked"/>
                 </StackLayout>
                 <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
-                    <Button x:Name="btnForgotPassword"  WidthRequest="180" HeightRequest="50" Text="Forgot Password" Clicked="BtnForgotPassword_Clicked" BackgroundColor="White" FontSize="Micro"/>
-                    <Button x:Name="btnResetPassword"  WidthRequest="180" HeightRequest="50" Text="Reset Password" Clicked="BtnForgotPassword_Clicked" BackgroundColor="White" FontSize="Micro"/>
+                    <Button x:Name="btnForgotPassword"  WidthRequest="160" HeightRequest="50" Text="Forgot Password" Clicked="BtnForgotPassword_Clicked" BackgroundColor="White" FontSize="Micro"/>
+                    <Button x:Name="btnResetPassword"  WidthRequest="160" HeightRequest="50" Text="Reset Password" Clicked="BtnForgotPassword_Clicked" BackgroundColor="White" FontSize="Micro"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

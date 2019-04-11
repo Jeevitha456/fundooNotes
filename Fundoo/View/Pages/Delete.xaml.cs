@@ -89,5 +89,27 @@ namespace Fundoo.View.Pages
                 Console.WriteLine(err.Message);
             }
         }
+
+        /// <summary>
+        /// Handles the Clicked event of the Restore control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void Restore1_Clicked(object sender, EventArgs e)
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notes when ArchiveNotes method is called
+            NotesData notes = new NotesData()
+            {
+                Title = txtTitle.Text,
+                Notes = txtNotes.Text,
+                IsDeleted = false
+            };
+            firebaseHelper.RestoreNotes(notes, this.val, userid);
+        }
     }
 }

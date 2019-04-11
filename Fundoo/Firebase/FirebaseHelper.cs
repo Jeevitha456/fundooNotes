@@ -186,5 +186,29 @@ namespace Fundoo.Firebase
             //// Archives the notes 
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true });
         }
+
+        /// <summary>
+        ///  Unarchive notes.
+        /// </summary>
+        /// <param name="notes">The notes.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
+        public void UnArchiveNotes(NotesData notes, string key, string uid)
+        {
+            //// UnArchives the notes 
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false });
+        }
+
+        /// <summary>
+        /// Restores the notes.
+        /// </summary>
+        /// <param name="notes">The notes.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
+        public void RestoreNotes(NotesData notes, string key, string uid)
+        {
+            //// Restores the notes 
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false });
+        }
     }
 }

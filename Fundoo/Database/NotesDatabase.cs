@@ -10,12 +10,12 @@ namespace Fundoo.Database
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Xamarin.Forms;
-    using Fundoo.Model;
-    using Fundoo.Interface;
     using global::Firebase.Database;
     using global::Firebase.Database.Query;
-  
+    using Fundoo.Interface;
+    using Fundoo.Model;
+    using Xamarin.Forms;
+
     /// <summary>
     /// Notes Data base
     /// </summary>

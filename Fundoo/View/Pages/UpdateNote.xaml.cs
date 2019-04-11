@@ -21,7 +21,8 @@ namespace Fundoo.View.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdateNote : ContentPage
     {
-        /// <summary>
+        /// <summary
+        /// >
         /// The value
         /// </summary>
         private string val = null;
@@ -49,7 +50,7 @@ namespace Fundoo.View.Pages
                 //// Gets current user id
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
                
-                ////Gets all the notes data
+                ////Gets the notes data
                 NotesData notesData = await firebaseHelper.GetNotesData(this.val, userid);
 
                 txtTitle.Text = notesData.Title;

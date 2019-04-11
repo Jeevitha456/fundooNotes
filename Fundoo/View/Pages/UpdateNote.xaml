@@ -5,7 +5,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="txtPin" Order="Primary" Icon="pin.png"/>
         <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bell.png"/>
-        <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="Archieve.png" Clicked="TxtArchieve_Clicked"/>
+        <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="archiveicon.png" Clicked="TxtArchieve_Clicked"/>
         <ToolbarItem x:Name="Delete" Text="Delete" Order="Secondary" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
     <RelativeLayout>

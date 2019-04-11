@@ -132,7 +132,8 @@ namespace Fundoo.View.Pages
                             StackLayout layout123 = (StackLayout)sender;
                             IList<View> item = layout123.Children;
                             Xamarin.Forms.Label KeyValue = (Xamarin.Forms.Label)item[0];
-                            var Keyval = KeyValue.Text;
+                            var Keyvalue = KeyValue.Text;
+                            Navigation.PushAsync(new UnArchive(Keyvalue));
                         };
                         GridLayout.Children.Add(frame, columnIndex, rowIndex);
                     }
