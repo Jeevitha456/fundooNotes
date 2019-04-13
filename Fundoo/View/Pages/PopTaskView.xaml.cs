@@ -32,6 +32,12 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Button_Clicked(object sender, EventArgs e)
         {
+            Navigation.PushModalAsync(new Labels());
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new Labels());
         }
     }
 }

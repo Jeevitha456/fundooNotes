@@ -113,6 +113,8 @@ namespace Fundoo.Firebase
             return (await this.firebase
               .Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
               {
+                  IsArchive=item.Object.IsArchive,
+                  IsDeleted=item.Object.IsDeleted,
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
                   Key = item.Key

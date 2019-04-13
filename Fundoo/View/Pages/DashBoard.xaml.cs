@@ -9,11 +9,14 @@ namespace Fundoo.View.Pages
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq; 
+    using System.Linq;
+    using System.Threading.Tasks;
     using Fundoo.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
+    using global::Firebase.Database;
+    using global::Firebase.Database.Query;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -24,15 +27,17 @@ namespace Fundoo.View.Pages
     /// </summary>
     public partial class DashBoard : ContentPage
     {
+     
         /// <summary>
         /// The notes database
         /// </summary>
-       private NotesDatabase notesDatabase = new NotesDatabase();
+        private NotesDatabase notesDatabase = new NotesDatabase();
 
+        
         /// <summary>
         /// The firebase helper
         /// </summary>
-       private FirebaseHelper firebaseHelper = new FirebaseHelper();
+        private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DashBoard"/> class.
@@ -40,7 +45,10 @@ namespace Fundoo.View.Pages
         public DashBoard()
         {
             this.InitializeComponent();
+           
         }
+       
+    
 
         /// <summary>
         /// Notes the grid view.
@@ -88,7 +96,7 @@ namespace Fundoo.View.Pages
                             TextColor = Color.Black,
                             FontAttributes = FontAttributes.Bold,
                             VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.Start,                    
+                            HorizontalOptions = LayoutOptions.Start,  
                         };
 
                         //// Created label key
@@ -180,6 +188,11 @@ namespace Fundoo.View.Pages
         private void Button_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new TakeANote());
+        }
+
+        private void Search_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new SearchNotes());
         }
     }
 }

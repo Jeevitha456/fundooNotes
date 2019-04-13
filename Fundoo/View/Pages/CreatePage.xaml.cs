@@ -77,5 +77,10 @@ namespace Fundoo.View.Pages
                 Console.WriteLine(exception.Message);
             }
         }
+
+        private void ImageButton_Clicked_1(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
