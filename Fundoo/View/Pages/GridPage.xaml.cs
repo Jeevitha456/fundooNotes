@@ -1,77 +1,52 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DashBoard.xaml.cs" company="Bridgelabz">
-//   Copyright © 2018 Company
-// </copyright>
-// <creator name="Jeevitha C"/>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using Fundoo.Database;
+using Fundoo.Firebase;
+using Fundoo.Interface;
+using Fundoo.Model;
+using Fundoo.View.HomePage;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Fundoo.View.Pages
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Fundoo.Database;
-    using Fundoo.Firebase;
-    using Fundoo.Interface;
-    using Fundoo.Model;
-    using global::Firebase.Database;
-    using global::Firebase.Database.Query;
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class GridPage : ContentPage
+	{
+		public GridPage ()
+		{
+			InitializeComponent ();
+		}
 
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-
-    /// <summary>
-    ///  Dash Board Class
-    /// </summary>
-    public partial class DashBoard : ContentPage
-    {
-     
-        /// <summary>
-        /// The notes database
-        /// </summary>
         private NotesDatabase notesDatabase = new NotesDatabase();
 
-        
+
         /// <summary>
         /// The firebase helper
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DashBoard"/> class.
-        /// </summary>
-        public DashBoard()
-        {
-            this.InitializeComponent();
-           
-        }
-       
-    
-
-        /// <summary>
-        /// Notes the grid view.
-        /// </summary>
-        /// <param name="list">The list.</param>
         public void GridView(IList<NotesData> list)
         {
             try
             {
                 ///// Creates column defination of width 170
-                GridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(170) });
-                GridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(170) });
+               
+                GridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(340) });
                 GridLayout.Margin = 5;
                 int rowCount = 0;
                 //// Creates number of columns as lables are added
                 for (int row = 0; row < list.Count; row++)
                 {
                     //// Adds new row after 2 labelss
-                    if (row % 2 == 0)
-                    {
+                  
+                    
                         GridLayout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Auto) });
                         rowCount++;
-                    }
+                    
                 }
 
                 var index = -1;
@@ -79,7 +54,7 @@ namespace Fundoo.View.Pages
                 //// Adds label to row and columns
                 for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
                 {
-                    for (int columnIndex = 0; columnIndex < 2; columnIndex++)
+                    for (int columnIndex = 0; columnIndex < 1; columnIndex++)
                     {
                         NotesData data = null;
 
@@ -96,7 +71,7 @@ namespace Fundoo.View.Pages
                             TextColor = Color.Black,
                             FontAttributes = FontAttributes.Bold,
                             VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.Start,  
+                            HorizontalOptions = LayoutOptions.Start,
                         };
 
                         //// Created label key
@@ -136,7 +111,7 @@ namespace Fundoo.View.Pages
                         tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {
                             StackLayout stacklayout = (StackLayout)sender;
-                            IList<View> item = stacklayout.Children;
+                            IList<Xamarin.Forms.View> item = stacklayout.Children;
                             Xamarin.Forms.Label KeyValue = (Xamarin.Forms.Label)item[0];
                             var Keyval = KeyValue.Text;
                             Navigation.PushAsync(new UpdateNote(Keyval));
@@ -166,7 +141,7 @@ namespace Fundoo.View.Pages
 
                 //// Gets all the notes
                 var notes = await this.notesDatabase.GetNotesAsync();
-                
+
                 if (notes != null)
                 {
                     //// Displays notes on dashboard
@@ -180,24 +155,10 @@ namespace Fundoo.View.Pages
             }
         }
 
-        /// <summary>
-        /// Handles the Clicked event of the Button control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new TakeANote());
-        }
-
-        private void Search_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushModalAsync(new SearchNotes());
-        }
-
         private void Gridvertical_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new GridPage());
+            Navigation.PushModalAsync(new Master());
         }
     }
+
 }

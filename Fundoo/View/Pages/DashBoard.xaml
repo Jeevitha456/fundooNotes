@@ -5,6 +5,7 @@
              Title="Dash Board">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="Search" Text="Search notes" Order="Primary"  Clicked="Search_Clicked"/>
+        <ToolbarItem x:Name="gridvertical" Icon="grid.png" Order="Primary" Clicked="Gridvertical_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         
