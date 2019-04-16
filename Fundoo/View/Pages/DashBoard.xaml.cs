@@ -105,7 +105,7 @@ namespace Fundoo.View.Pages
                             Text = data.Key,
                             IsVisible = false
                         };
-
+                       
                         //// Content view
                         var content = new Xamarin.Forms.Label
                         {

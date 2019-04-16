@@ -35,14 +35,22 @@ namespace Fundoo.View.Pages
                 Console.WriteLine(exception.Message);
             }
         }
+        List<string> list;
         private void CheckBox_CheckChanged(object sender, EventArgs e)
         {
             var checkbox = (CheckBox)sender;
            // List<string> list = new List<string>();
             if(checkbox.IsChecked)
             {
+              
                 checkbox.Color = Color.Black;
             }
+        }
+
+
+        private void OnClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

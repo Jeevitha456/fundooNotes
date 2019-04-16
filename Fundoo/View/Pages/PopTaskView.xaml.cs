@@ -7,7 +7,13 @@
 namespace Fundoo.View.Pages
 { 
     using System;
+    using Fundoo.Firebase;
+    using Fundoo.Interface;
+    using Fundoo.Model;
     using Rg.Plugins.Popup.Pages;
+    using Rg.Plugins.Popup.Services;
+    using Xamarin.Essentials;
+    using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     /// <summary>
@@ -17,27 +23,42 @@ namespace Fundoo.View.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PopTaskView : PopupPage
     {
+        public string notesColour = "White";
+        string value = null;
         /// <summary>
         /// Initializes a new instance of the <see cref="PopTaskView"/> class.
         /// </summary>
-        public PopTaskView()
+        public PopTaskView(string key)
         {
+            this.value = key;
           this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Handles the Clicked event of the Button control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushModalAsync(new Labels());
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new Labels());
+            // PopupPageNavigation.PushAsync
+            PopupNavigation.Instance.PopAsync(true);
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            NotesData notesData = await firebaseHelper.GetNotesData(this.value, userid);
+            await Share.RequestAsync(new ShareTextRequest
+            {              
+               Text=notesData.Notes,
+               Title = "Share Text"
+            });
+          await  PopupNavigation.Instance.PopAsync(true);
+
+        }
+
+        private void RedButton(object sender, EventArgs e)
+        {
+            BackgroundColor = Color.Red;
+            this.notesColour = "Red";
         }
     }
 }

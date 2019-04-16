@@ -103,7 +103,7 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
-            PopupNavigation.Instance.PushAsync(new PopTaskView());
+            PopupNavigation.Instance.PushAsync(new PopTaskView(this.val));
         }
 
         /// <summary>

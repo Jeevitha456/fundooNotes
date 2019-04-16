@@ -22,5 +22,6 @@ namespace Fundoo.Model
         /// The label.
         /// </value>
         public string Label { get; set; }
+        public string Key { get; set; }
     }
 }

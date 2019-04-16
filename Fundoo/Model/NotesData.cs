@@ -50,5 +50,7 @@ namespace Fundoo.Model
         ///   <c>true</c> if this instance is archive; otherwise, <c>false</c>.
         /// </value>
         public bool IsArchive { get; set; }      
+
+       
     }
 }

@@ -8,33 +8,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Fundoo.View.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class GridPage : ContentPage
-	{
-		public GridPage ()
-		{
-			InitializeComponent ();
-		}
+    
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class GridPage : ContentPage
+    {
+        /// <summary>
+        /// Grid Page class
+        /// </summary>
+        public GridPage()
+        {
+            this.InitializeComponent();
+        }
 
+        /// <summary>
+        /// notes Database
+        /// </summary>
         private NotesDatabase notesDatabase = new NotesDatabase();
-
 
         /// <summary>
         /// The firebase helper
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+        /// <summary>
+        /// Grid View 
+        /// </summary>
+        /// <param name="list"></param>
         public void GridView(IList<NotesData> list)
         {
             try
             {
                 ///// Creates column defination of width 170
-               
+
                 GridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(340) });
                 GridLayout.Margin = 5;
                 int rowCount = 0;
@@ -42,11 +52,8 @@ namespace Fundoo.View.Pages
                 for (int row = 0; row < list.Count; row++)
                 {
                     //// Adds new row after 2 labelss
-                  
-                    
-                        GridLayout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Auto) });
-                        rowCount++;
-                    
+                    GridLayout.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Auto) });
+                    rowCount++;
                 }
 
                 var index = -1;
@@ -155,10 +162,14 @@ namespace Fundoo.View.Pages
             }
         }
 
+        /// <summary>
+        /// Grid vertical
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Gridvertical_Clicked(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new Master());
         }
     }
-
 }
