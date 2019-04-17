@@ -1,30 +1,29 @@
-﻿using Fundoo.Database;
-using Fundoo.Firebase;
-using Fundoo.Interface;
-using Fundoo.Model;
-using Fundoo.View.HomePage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GridPage.xaml.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Jeevitha C"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.View.Pages
 {
-    
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Fundoo.Database;
+    using Fundoo.Firebase;
+    using Fundoo.Interface;
+    using Fundoo.Model;
+    using Fundoo.View.HomePage;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
+    /// <summary>
+    /// Grid Page Class
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GridPage : ContentPage
     {
-        /// <summary>
-        /// Grid Page class
-        /// </summary>
-        public GridPage()
-        {
-            this.InitializeComponent();
-        }
-
         /// <summary>
         /// notes Database
         /// </summary>
@@ -36,9 +35,17 @@ namespace Fundoo.View.Pages
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="GridPage"/> class.
+        /// </summary>
+        public GridPage()
+        {
+            this.InitializeComponent();
+        }
+
+        /// <summary>
         /// Grid View 
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="list">list of notes.</param>
         public void GridView(IList<NotesData> list)
         {
             try
@@ -165,8 +172,8 @@ namespace Fundoo.View.Pages
         /// <summary>
         /// Grid vertical
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">name.</param>
+        /// <param name="e">event name</param>
         private void Gridvertical_Clicked(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new Master());

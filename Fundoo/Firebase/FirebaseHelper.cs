@@ -113,8 +113,8 @@ namespace Fundoo.Firebase
             return (await this.firebase
               .Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
               {
-                  IsArchive=item.Object.IsArchive,
-                  IsDeleted=item.Object.IsDeleted,
+                  IsArchive = item.Object.IsArchive,
+                  IsDeleted = item.Object.IsDeleted,
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
                   Key = item.Key
@@ -211,6 +211,17 @@ namespace Fundoo.Firebase
         {
             //// Restores the notes 
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false });
+        }
+
+        public void PinnedNotes(NotesData notes, string key, string uid)
+        {
+            //// Restores the notes 
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true });
+        }
+        public void UnPinnedNotes(NotesData notes, string key, string uid)
+        {
+            //// Restores the notes 
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false });
         }
     }
 }

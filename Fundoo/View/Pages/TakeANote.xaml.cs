@@ -8,9 +8,8 @@
 namespace Fundoo.View.Pages
 {
     using System;
-    using Fundoo.Firebase;
     using global::Firebase.Database;
-    using global::Firebase.Database.Query;
+    using Fundoo.Firebase;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 

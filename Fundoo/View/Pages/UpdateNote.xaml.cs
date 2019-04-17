@@ -10,6 +10,7 @@ namespace Fundoo.View.Pages
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
+    using Fundoo.View.HomePage;
     using Rg.Plugins.Popup.Services;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -148,6 +149,25 @@ namespace Fundoo.View.Pages
                 IsArchive = true
             };
             firebaseHelper.ArchiveNotes(notes, this.val, userid);
+          //  Navigation.PushAsync(new Master());
+        }
+
+        private void TxtPin_Clicked(object sender, EventArgs e)
+        {
+
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notes when ArchiveNotes method is called
+            NotesData notes = new NotesData()
+            {
+                Title = txtTitle.Text,
+                Notes = txtNotes.Text,
+               IsPinned=true
+            };
+            firebaseHelper.PinnedNotes(notes, this.val, userid);
         }
     }
 }

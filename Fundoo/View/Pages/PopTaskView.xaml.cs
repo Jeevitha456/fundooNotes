@@ -23,24 +23,42 @@ namespace Fundoo.View.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PopTaskView : PopupPage
     {
+        /// <summary>
+        /// The notes 
+        /// </summary>
         public string notesColour = "White";
-        string value = null;
+
+        /// <summary>
+        /// The value
+        /// </summary>
+        private string value = null;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PopTaskView"/> class.
         /// </summary>
+        /// <param name="key">The key.</param>
         public PopTaskView(string key)
         {
             this.value = key;
           this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the 1 event of the Button_Clicked control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new Labels());
-            // PopupPageNavigation.PushAsync
             PopupNavigation.Instance.PopAsync(true);
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Button control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void Button_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
@@ -48,16 +66,20 @@ namespace Fundoo.View.Pages
             NotesData notesData = await firebaseHelper.GetNotesData(this.value, userid);
             await Share.RequestAsync(new ShareTextRequest
             {              
-               Text=notesData.Notes,
+               Text = notesData.Notes,
                Title = "Share Text"
             });
-          await  PopupNavigation.Instance.PopAsync(true);
-
+          await PopupNavigation.Instance.PopAsync(true);
         }
 
+        /// <summary>
+        /// Reds the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RedButton(object sender, EventArgs e)
         {
-            BackgroundColor = Color.Red;
+            this.BackgroundColor = Color.Red;
             this.notesColour = "Red";
         }
     }

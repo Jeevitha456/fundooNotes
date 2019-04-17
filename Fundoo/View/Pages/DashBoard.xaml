@@ -10,8 +10,20 @@
     <ContentPage.Content>
         
         <RelativeLayout>
+            
             <ScrollView Orientation="Vertical" VerticalOptions="StartAndExpand" HeightRequest="480">
-                <Grid x:Name="GridLayout"></Grid>
+                <StackLayout>
+                   
+                    <StackLayout>
+                        <Label Text="Pinned"/>
+                        <Grid x:Name="GridLayout1"></Grid>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="Others"/>
+                        <Grid x:Name="GridLayout"></Grid>
+                    </StackLayout>
+                   
+                </StackLayout>
             </ScrollView>
             <StackLayout VerticalOptions="End"  BackgroundColor="White"
                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"

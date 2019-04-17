@@ -51,6 +51,6 @@ namespace Fundoo.Model
         /// </value>
         public bool IsArchive { get; set; }      
 
-       
+        public bool IsPinned { get; set; }
     }
 }

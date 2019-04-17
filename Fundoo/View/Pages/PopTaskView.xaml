@@ -59,7 +59,7 @@
 
             <ScrollView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="9"  Orientation="Horizontal" BackgroundColor="White" >
                 <StackLayout Orientation="Horizontal">
-                    <Button CornerRadius="25" BackgroundColor="Red" HeightRequest="40 " WidthRequest="50"Clicked="RedButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Red" HeightRequest="40 " WidthRequest="50" Clicked="RedButton"/>
                     <Button CornerRadius="25" BackgroundColor="Orange" HeightRequest="40" WidthRequest="50"/>
                     <Button CornerRadius="25" BackgroundColor="Yellow" HeightRequest="40" WidthRequest="50"/>
                     <Button CornerRadius="25" BackgroundColor="Green" HeightRequest="40" WidthRequest="50"/>

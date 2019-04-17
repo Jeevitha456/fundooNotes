@@ -1,20 +1,26 @@
-﻿using Fundoo.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Fundoo.Firebase;
-using Fundoo.Interface;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SearchNotes.xaml.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Jeevitha C"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.View.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SearchNotes : ContentPage
-	{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Fundoo.Firebase;
+    using Fundoo.Model;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
+    /// <summary>
+    /// Search Notes Class
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SearchNotes : ContentPage
+    {
         /// <summary>
         /// The notes data
         /// </summary>
@@ -23,22 +29,22 @@ namespace Fundoo.View.Pages
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchNotes"/> class.
         /// </summary>
-        public SearchNotes ()
-		{
-			InitializeComponent ();
-            Data();
-            list.ItemsSource = notesData;
+        public SearchNotes()
+        {
+            this.InitializeComponent();
+            this.Data();
+            list.ItemsSource = this.notesData;
         }
 
         /// <summary>
-        /// Datas this instance.
+        /// Data this instance.
         /// </summary>
         public async void Data()
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
-            List<NotesData> notes=await firebaseHelper.GetAllNotes();
-            notes = notes.Where(a=> a.IsDeleted==false && a.IsArchive==false).ToList();
-            notesData = notes;
+            List<NotesData> notes = await firebaseHelper.GetAllNotes();
+            notes = notes.Where(a => a.IsDeleted == false && a.IsArchive == false).ToList();
+            this.notesData = notes;
         }
 
         /// <summary>
@@ -50,13 +56,11 @@ namespace Fundoo.View.Pages
         {
             if (string.IsNullOrEmpty(e.NewTextValue))
             {
-                list.ItemsSource = notesData;
+                list.ItemsSource = this.notesData;
             }
-
             else
             {
-                list.ItemsSource = notesData.Where(x => x.Title.ToLower().Contains(e.NewTextValue.ToLower()) 
-                
+                list.ItemsSource = this.notesData.Where(x => x.Title.ToLower().Contains(e.NewTextValue.ToLower())                 
                 && x.Notes.ToLower().Contains(e.NewTextValue.ToLower()));
             }
         }

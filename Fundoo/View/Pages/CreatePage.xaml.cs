@@ -78,9 +78,13 @@ namespace Fundoo.View.Pages
             }
         }
 
+        /// <summary>
+        /// Handles the 1 event of the ImageButton_Clicked control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ImageButton_Clicked_1(object sender, EventArgs e)
-        {
-           
+        {          
         }
     }
 }
