@@ -1,27 +1,45 @@
-﻿using Fundoo.Firebase;
-using Fundoo.Interface;
-using Fundoo.Model;
-using Rg.Plugins.Popup.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UpdatePinNotes.xaml.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Jeevitha C"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.View.Pages
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class UpdatePinNotes : ContentPage
+    using System;
+    using Fundoo.Firebase;
+    using Fundoo.Interface;
+    using Fundoo.Model;
+    using Rg.Plugins.Popup.Services;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
+    /// <summary>
+    /// Update Pin Notes
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class UpdatePinNotes : ContentPage
     {
+        /// <summary>
+        /// The value
+        /// </summary>
         private string val = null;
-        public UpdatePinNotes (string key)
-		{
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdatePinNotes"/> class.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        public UpdatePinNotes(string key)
+        {
             this.val = key;
-			InitializeComponent ();
+            this.InitializeComponent();
             this.UpdatePinData();
         }
+
+        /// <summary>
+        /// Updates the pin data.
+        /// </summary>
         public async void UpdatePinData()
         {
             try
@@ -43,6 +61,15 @@ namespace Fundoo.View.Pages
             }
         }
 
+        /// <summary>
+        /// Application developers can override this method to provide behavior when the back button is pressed.
+        /// </summary>
+        /// <returns>
+        /// To be added.
+        /// </returns>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
         protected override bool OnBackButtonPressed()
         {
             try
@@ -67,6 +94,12 @@ namespace Fundoo.View.Pages
 
             return base.OnBackButtonPressed();
         }
+
+        /// <summary>
+        /// Handles the Clicked event of the TxtPin control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TxtPin_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
@@ -84,6 +117,11 @@ namespace Fundoo.View.Pages
             firebaseHelper.UnPinnedNotes(notes, this.val, userid);
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TxtArchieve_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
@@ -101,6 +139,11 @@ namespace Fundoo.View.Pages
             firebaseHelper.ArchiveNotes(notes, this.val, userid);
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the Delete control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Delete_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
@@ -118,6 +161,11 @@ namespace Fundoo.View.Pages
             firebaseHelper.DeleteNotes(notes, this.val, userid);
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ImageButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
             PopupNavigation.Instance.PushAsync(new PopTaskView(this.val));

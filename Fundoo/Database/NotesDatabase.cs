@@ -38,7 +38,7 @@ namespace Fundoo.Database
             //// Returns all the data
             IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(uid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
             {
-                IsPinned=item.Object.IsPinned,
+                IsPinned = item.Object.IsPinned,
                 IsArchive = item.Object.IsArchive,
                 IsDeleted = item.Object.IsDeleted,
                 Title = item.Object.Title,

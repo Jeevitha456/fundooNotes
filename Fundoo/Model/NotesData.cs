@@ -49,8 +49,14 @@ namespace Fundoo.Model
         /// <value>
         ///   <c>true</c> if this instance is archive; otherwise, <c>false</c>.
         /// </value>
-        public bool IsArchive { get; set; }      
+        public bool IsArchive { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is pinned.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is pinned; otherwise, <c>false</c>.
+        /// </value>
         public bool IsPinned { get; set; }
     }
 }

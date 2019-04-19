@@ -213,11 +213,24 @@ namespace Fundoo.Firebase
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false });
         }
 
+        /// <summary>
+        /// Pinned Notes
+        /// </summary>
+        /// <param name="notes">the notes.</param>
+        /// <param name="key">key notes.</param>
+        /// <param name="uid">id.</param>
         public void PinnedNotes(NotesData notes, string key, string uid)
         {
             //// Restores the notes 
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true });
         }
+
+        /// <summary>
+        /// UnPinnedNotes
+        /// </summary>
+        /// <param name="notes">the notes.</param>
+        /// <param name="key">key notes.</param>
+        /// <param name="uid">id.</param>
         public void UnPinnedNotes(NotesData notes, string key, string uid)
         {
             //// Restores the notes 

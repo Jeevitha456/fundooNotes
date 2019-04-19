@@ -24,11 +24,6 @@ namespace Fundoo.View.Pages
     public partial class PopTaskView : PopupPage
     {
         /// <summary>
-        /// The notes 
-        /// </summary>
-        public string notesColour = "White";
-
-        /// <summary>
         /// The value
         /// </summary>
         private string value = null;
@@ -79,8 +74,6 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RedButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Red;
-            this.notesColour = "Red";
         }
     }
 }

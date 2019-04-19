@@ -13,7 +13,8 @@ namespace Fundoo.View.Pages
     using Fundoo.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
-    using Fundoo.Model; 
+    using Fundoo.Model;
+    using Rg.Plugins.Popup.Services;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -39,11 +40,15 @@ namespace Fundoo.View.Pages
         /// </summary>
         public DashBoard()
         {
-            this.InitializeComponent();      
+           this.InitializeComponent();      
         }
-       public void GridViewPin(IList<NotesData> pinlist)
-        {
 
+        /// <summary>
+        /// Grids the view pin.
+        /// </summary>
+        /// <param name="pinlist">The pin list.</param>
+        public void GridViewPin(IList<NotesData> pinlist)
+        {
             try
             {
                 ///// Creates column defination of width 170
@@ -138,6 +143,7 @@ namespace Fundoo.View.Pages
                 Console.WriteLine(ex.Message);
             }
         }
+
         /// <summary>
         /// Notes the grid view.
         /// </summary>
@@ -238,8 +244,7 @@ namespace Fundoo.View.Pages
                 Console.WriteLine(ex.Message);
             }
         }
-
-      
+     
         /// <summary>
         /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
         /// </summary>
@@ -256,15 +261,13 @@ namespace Fundoo.View.Pages
                 //// Gets all the notes
                 var notes = await this.notesDatabase.GetNotesAsync();
                 
-                if(notes!=null)
+                if (notes != null)
                 {
                     var notesPin = notes.Where(a => a.IsDeleted == false && a.IsArchive == false && a.IsPinned == true).ToList();
                     this.GridViewPin(notesPin);
-                    var notesUnpin=notes.Where(a => a.IsDeleted == false && a.IsArchive == false && a.IsPinned == false).ToList();
+                    var notesUnpin = notes.Where(a => a.IsDeleted == false && a.IsArchive == false && a.IsPinned == false).ToList();
                     this.GridView(notesUnpin);
-
-                }
-                              
+                }                             
             }
             catch (Exception ex)
             {
@@ -300,6 +303,16 @@ namespace Fundoo.View.Pages
         private void Gridvertical_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new GridPage());     
+        }
+
+        /// <summary>
+        /// Handles the 1 event of the ImageButton_Clicked control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void ImageButton_Clicked_1(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new PopUpCamera());
         }
     }
 }

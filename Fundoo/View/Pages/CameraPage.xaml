@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fundoo.View.Pages.Pinned">
+             x:Class="Fundoo.View.Pages.CameraPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Button Text="TakePhoto" Clicked="Button_Clicked" />
+            <Image x:Name="MyImage" HeightRequest="300" WidthRequest="300"/>
+            <Button x:Name="btnStore" Text="Store" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

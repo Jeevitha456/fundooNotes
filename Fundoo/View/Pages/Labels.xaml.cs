@@ -47,6 +47,7 @@ namespace Fundoo.View.Pages
 
                 //// Listing all the person in the list
                 var allLabels = await this.firebaseHelper.GetAllLabels();
+                
                 lstLabels.ItemsSource = allLabels;
             }
             catch (Exception exception)

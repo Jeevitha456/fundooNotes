@@ -149,12 +149,15 @@ namespace Fundoo.View.Pages
                 IsArchive = true
             };
             firebaseHelper.ArchiveNotes(notes, this.val, userid);
-          //  Navigation.PushAsync(new Master());
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the TxtPin control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TxtPin_Clicked(object sender, EventArgs e)
         {
-
             FirebaseHelper firebaseHelper = new FirebaseHelper();
 
             //// Gets current user id
@@ -165,7 +168,7 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-               IsPinned=true
+               IsPinned = true
             };
             firebaseHelper.PinnedNotes(notes, this.val, userid);
         }

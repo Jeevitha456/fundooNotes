@@ -24,7 +24,7 @@ namespace Fundoo.View.Pages
         /// <summary>
         /// The notes data
         /// </summary>
-        public List<NotesData> notesData;
+        private List<NotesData> notesData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchNotes"/> class.

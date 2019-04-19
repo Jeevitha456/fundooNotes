@@ -55,6 +55,6 @@ namespace Fundoo.Interface
         /// Users the identifier.
         /// </summary>
         /// <returns>returns string</returns>
-        string UserId();
+        string UserId();      
     }
 }
