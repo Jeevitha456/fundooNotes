@@ -8,6 +8,7 @@
 namespace Fundoo.View
 {
     using System;
+    using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using Fundoo.Firebase;
     using Xamarin.Forms;
@@ -108,7 +109,7 @@ namespace Fundoo.View
 
             return true;
         }
-
+        public List<string> listEmail = new List<string>();
         /// <summary>
         /// Button sign up
         /// </summary>
@@ -124,7 +125,7 @@ namespace Fundoo.View
                 {
                     //// Callls the AddUser method with user inputs for signup
                     await this.firebase.AddUser(txtFirstName.Text, txtLastName.Text, txtEmail.Text, txtPassword.Text, txtRepeatPassword.Text);
-
+                    listEmail.Add(txtEmail.Text);
                     //// Empty all user input after the data
                     txtFirstName.Text = string.Empty;
                     txtLastName.Text = string.Empty;

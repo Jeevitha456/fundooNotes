@@ -58,5 +58,7 @@ namespace Fundoo.Model
         ///   <c>true</c> if this instance is pinned; otherwise, <c>false</c>.
         /// </value>
         public bool IsPinned { get; set; }
+
+        public string ColorNote { get; set; }
     }
 }

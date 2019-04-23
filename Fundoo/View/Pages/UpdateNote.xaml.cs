@@ -85,7 +85,8 @@ namespace Fundoo.View.Pages
                 NotesData notes = new NotesData()
                 {
                     Title = txtTitle.Text,
-                    Notes = txtNotes.Text
+                    Notes = txtNotes.Text,
+                    ColorNote=this.noteColor
                 };
                 firebaseHelper.UpdateNotes(notes, this.val, userid);
             }
@@ -146,16 +147,14 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-                IsArchive = true
+                IsArchive = true,
+               
+                
             };
             firebaseHelper.ArchiveNotes(notes, this.val, userid);
         }
 
-        /// <summary>
-        /// Handles the Clicked event of the TxtPin control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        //
         private void TxtPin_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
@@ -171,6 +170,74 @@ namespace Fundoo.View.Pages
                IsPinned = true
             };
             firebaseHelper.PinnedNotes(notes, this.val, userid);
+        }
+
+        public Color ColorNotes { get; set; }
+        private string noteColor = "White";
+        private void RedButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Red;
+            this.noteColor = "Red";
+        }
+
+        private void OrangeButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Orange;
+            this.noteColor = "Orange";
+        }
+
+        private void YellowButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Yellow;
+            this.noteColor = "Yellow";
+        }
+
+        private void GreenButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Green;
+            this.noteColor = "Green";
+        }
+
+        private void BlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Blue;
+            this.noteColor = "Blue";
+        }
+
+        private void TealButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Teal;
+            this.noteColor = "Teal";
+        }
+
+        private void DarkBlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.DarkBlue;
+            this.noteColor = "DarkBlue";
+        }
+
+        private void PurpleButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Purple;
+            this.noteColor = "Purple";
+        }
+
+        private void PinkButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Pink;
+            this.noteColor = "Pink";
+        }
+
+        private void BrownButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Red;
+            this.noteColor = "Red";
+        }
+
+        private void GrayButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Gray;
+            this.noteColor = "Gray";
         }
     }
 }

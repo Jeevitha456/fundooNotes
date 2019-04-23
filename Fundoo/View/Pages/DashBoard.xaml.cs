@@ -199,7 +199,11 @@ namespace Fundoo.View.Pages
                             Text = data.Key,
                             IsVisible = false
                         };
-                       
+                        var colorlabel = new Xamarin.Forms.Label
+                        {
+                            Text=data.ColorNote,
+                            IsVisible=false
+                        };
                         //// Content view
                         var content = new Xamarin.Forms.Label
                         {
@@ -213,20 +217,25 @@ namespace Fundoo.View.Pages
                         {
                             Spacing = 2,
                             Margin = 2,
-                            BackgroundColor = Color.White
+                           // BackgroundColor = Color.White
                         };
 
                         var tapGestureRecognizer = new TapGestureRecognizer();
                         layout.Children.Add(labelKey);
                         layout.Children.Add(label);
                         layout.Children.Add(content);
+                        layout.Children.Add(colorlabel);
                         layout.GestureRecognizers.Add(tapGestureRecognizer);
                         layout.Spacing = 2;
                         layout.Margin = 2;
-                        layout.BackgroundColor = Color.White;
+                       // layout.BackgroundColor = Color.White;
                         var frame = new Frame();
                         frame.BorderColor = Color.Black;
                         frame.Content = layout;
+
+                        SetColor setColor = new SetColor();
+                        setColor.GetColor(data, frame);
+
                         tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {
                             StackLayout stacklayout = (StackLayout)sender;

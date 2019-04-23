@@ -43,7 +43,8 @@ namespace Fundoo.Database
                 IsDeleted = item.Object.IsDeleted,
                 Title = item.Object.Title,
                 Notes = item.Object.Notes,
-                Key = item.Key
+                Key = item.Key,
+                ColorNote = item.Object.ColorNote
             }).ToList();
 
             return notesData;

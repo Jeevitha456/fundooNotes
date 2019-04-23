@@ -21,6 +21,8 @@ namespace Fundoo.Firebase
     /// </summary>
     public class FirebaseHelper
     {
+        private string noteColor = "White"; 
+
         /// <summary>
         /// The firebase
         /// </summary>
@@ -64,7 +66,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = title, Notes = note });
+                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = title, Notes = note ,ColorNote = noteColor });
             }
             catch (Exception ex)
             {
@@ -117,7 +119,8 @@ namespace Fundoo.Firebase
                   IsDeleted = item.Object.IsDeleted,
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
-                  Key = item.Key
+                  Key = item.Key,
+                  ColorNote=item.Object.ColorNote
               }).ToList();
         }
 
@@ -145,7 +148,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Updates yhe notes in the firebase
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote=notes.ColorNote });
             }
             catch (Exception ex)
             {

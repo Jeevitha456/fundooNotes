@@ -12,6 +12,7 @@ namespace Fundoo.View.Pages
     using Fundoo.Firebase;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
+    using Rg.Plugins.Popup.Services;
 
     /// <summary>
     /// Take A Note
@@ -78,6 +79,79 @@ namespace Fundoo.View.Pages
         private void TxtArchieve_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ArchievePage());
+        }
+
+        private void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new PopTaskView());
+        }
+
+        public Color ColorNotes { get; set; }
+        private string noteColor = "White";
+        private void RedButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Red;
+            this.noteColor = "Red";
+        }
+
+        private void OrangeButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Orange;
+            this.noteColor = "Orange";
+        }
+
+        private void YellowButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Yellow;
+            this.noteColor = "Yellow";
+        }
+
+        private void GreenButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Green;
+            this.noteColor = "Green";
+        }
+
+        private void BlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Blue;
+            this.noteColor = "Blue";
+        }
+
+        private void TealButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Teal;
+            this.noteColor = "Teal";
+        }
+
+        private void DarkBlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.DarkBlue;
+            this.noteColor = "DarkBlue";
+        }
+
+        private void PurpleButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Purple;
+            this.noteColor = "Purple";
+        }
+
+        private void PinkButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Pink;
+            this.noteColor = "Pink";
+        }
+
+        private void BrownButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Red;
+            this.noteColor = "Red";
+        }
+
+        private void GrayButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Gray;
+            this.noteColor = "Gray";
         }
     }
 }

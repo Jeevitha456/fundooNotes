@@ -28,6 +28,15 @@ namespace Fundoo.View.Pages
         /// </summary>
         private string value = null;
 
+        public Color ColorNotes { get; set; }
+        private string noteColor = "White";
+
+        public PopTaskView()
+        {
+           
+            this.InitializeComponent();
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PopTaskView"/> class.
         /// </summary>
@@ -74,6 +83,93 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RedButton(object sender, EventArgs e)
         {
+            this.BackgroundColor = Color.Red;
+            this.noteColor = "Red";
+        }
+
+        /// <summary>
+        /// Oranges the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void OrangeButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Orange;
+            this.noteColor = "Orange";
+        }
+
+        /// <summary>
+        /// Yellows the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void YellowButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Yellow;
+            this.noteColor = "Yellow";
+        }
+
+        /// <summary>
+        /// Greens the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void GreenButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Green;
+            this.noteColor = "Green";
+        }
+
+        /// <summary>
+        /// Blues the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void BlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Blue;
+            this.noteColor = "Blue";
+        }
+
+        private void TealButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Teal;
+            this.noteColor = "Teal";
+        }
+
+        private void DarkBlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.DarkBlue;
+            this.noteColor = "DarkBlue";
+        }
+
+        private void PurpleButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Purple;
+            this.noteColor = "Purple";
+        }
+
+        private void PinkButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Pink;
+            this.noteColor = "Pink";
+        }
+
+        private void BrownButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Brown;
+            this.noteColor = "Brown";
+        }
+
+        private void GrayButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Gray;
+            this.noteColor = "Gray";
+        }
+
+        private void Collaborator_clicked(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new Collab());
         }
     }
 }

@@ -52,7 +52,7 @@
             <Button Text ="Send" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White" Clicked="Button_Clicked"  />
 
             <ImageButton Source="coll.png" Grid.Row="3" Grid.Column="0"  BackgroundColor="White"/>
-            <Button Text ="Collaborator" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White" />
+            <Button Text ="Collaborator" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White" Clicked="Collaborator_clicked" />
 
             <ImageButton Source="labelss.png" Grid.Row="4" Grid.Column="0"  BackgroundColor="White"/>
             <Button Text ="Labels" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="8" FontSize="Small" BackgroundColor="White" Clicked="Button_Clicked_1"/>
@@ -60,16 +60,16 @@
             <ScrollView Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="9"  Orientation="Horizontal" BackgroundColor="White" >
                 <StackLayout Orientation="Horizontal">
                     <Button CornerRadius="25" BackgroundColor="Red" HeightRequest="40 " WidthRequest="50" Clicked="RedButton"/>
-                    <Button CornerRadius="25" BackgroundColor="Orange" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Yellow" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Green" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Blue" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Teal" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="DarkBlue" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Purple" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Pink" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Brown" HeightRequest="40" WidthRequest="50"/>
-                    <Button CornerRadius="25" BackgroundColor="Gray" HeightRequest="40" WidthRequest="50"/>
+                    <Button CornerRadius="25" BackgroundColor="Orange" HeightRequest="40" WidthRequest="50" Clicked="OrangeButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Yellow" HeightRequest="40" WidthRequest="50" Clicked="YellowButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Green" HeightRequest="40" WidthRequest="50" Clicked="GreenButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Blue" HeightRequest="40" WidthRequest="50" Clicked="BlueButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Teal" HeightRequest="40" WidthRequest="50" Clicked="TealButton"/>
+                    <Button CornerRadius="25" BackgroundColor="DarkBlue" HeightRequest="40" WidthRequest="50" Clicked="DarkBlueButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Purple" HeightRequest="40" WidthRequest="50" Clicked="PurpleButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Pink" HeightRequest="40" WidthRequest="50" Clicked="PinkButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Brown" HeightRequest="40" WidthRequest="50" Clicked="BrownButton"/>
+                    <Button CornerRadius="25" BackgroundColor="Gray" HeightRequest="40" WidthRequest="50" Clicked="GrayButton"/>
                 </StackLayout>
             </ScrollView>
         </Grid>
