@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SetColor.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Jeevitha C"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.Model
 {
-    public class SetColor:ContentPage
+    using Xamarin.Forms;
+
+    /// <summary>
+    /// Set Color class
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.ContentPage" />
+    public class SetColor : ContentPage
     {
+        /// <summary>
+        /// Gets the color.
+        /// </summary>
+        /// <param name="note">The note.</param>
+        /// <param name="frame">The frame.</param>
         public void GetColor(NotesData note, Frame frame)
         {
             if (note.ColorNote.Equals("Red"))
             {
-                frame.BackgroundColor = Color.Red;
+                frame.BackgroundColor = Color.Crimson;
                 return;
             }
 
@@ -29,31 +41,31 @@ namespace Fundoo.Model
 
             if (note.ColorNote.Equals("Green"))
             {
-                frame.BackgroundColor = Color.Green;
+                frame.BackgroundColor = Color.PaleGreen;
                 return;
             }
 
             if (note.ColorNote.Equals("Blue"))
             {
-                frame.BackgroundColor = Color.Blue;
+                frame.BackgroundColor = Color.LightSkyBlue;
                 return;
             }
 
             if (note.ColorNote.Equals("Teal"))
             {
-                frame.BackgroundColor = Color.Teal;
+                frame.BackgroundColor = Color.Aquamarine;
                 return;
             }
 
             if (note.ColorNote.Equals("DarkBlue"))
             {
-                frame.BackgroundColor = Color.DarkBlue;
+                frame.BackgroundColor = Color.CornflowerBlue;
                 return;
             }
 
             if (note.ColorNote.Equals("Purple"))
             {
-                frame.BackgroundColor = Color.Purple;
+                frame.BackgroundColor = Color.LightSteelBlue;
                 return;
             }
             if (note.ColorNote.Equals("Pink"))
@@ -63,21 +75,26 @@ namespace Fundoo.Model
             }
             if (note.ColorNote.Equals("Brown"))
             {
-                frame.BackgroundColor = Color.Brown;
+                frame.BackgroundColor = Color.RosyBrown;
                 return;
             }
             if (note.ColorNote.Equals("Gray"))
             {
-                frame.BackgroundColor = Color.Gray;
+                frame.BackgroundColor = Color.LightGray;
                 return;
             }
         }
 
+        /// <summary>
+        /// Gets the color of the hexadecimal.
+        /// </summary>
+        /// <param name="note">The note.</param>
+        /// <returns></returns>
         public static string GetHexColor(NotesData note)
         {
             if (note.ColorNote.Equals("Red"))
             {
-                return "ff0000";
+                return "DC143C";
             }
 
             if (note.ColorNote.Equals("Orange"))
@@ -95,31 +112,31 @@ namespace Fundoo.Model
             if (note.ColorNote.Equals("Green"))
             {
 
-                return "00cd00";
+                return "98FB98";
             }
 
             if (note.ColorNote.Equals("Blue"))
             {
 
-                return "0000ff";
+                return "87CEFA";
             }
 
             if (note.ColorNote.Equals("Teal"))
             {
 
-                return "f5deb3";
+                return "7FFFD4";
             }
 
             if (note.ColorNote.Equals("DarkBlue"))
             {
 
-                return "00688b";
+                return "6495ED";
             }
 
             if (note.ColorNote.Equals("Purple"))
             {
 
-                return "a020f0";
+                return "BOC4DE";
             }
             if (note.ColorNote.Equals("Pink"))
             {
@@ -129,12 +146,12 @@ namespace Fundoo.Model
             if (note.ColorNote.Equals("Brown"))
             {
 
-                return "a52a2a";
+                return "BC8F8F";
             }
             if (note.ColorNote.Equals("Gray"))
             {
 
-                return "bebebe";
+                return "D3D3D3";
             }
 
             return "ffffff";

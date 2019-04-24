@@ -7,7 +7,9 @@
 namespace Fundoo.View.Pages
 {
     using System;
+    using System.Collections.Generic;
     using Fundoo.Firebase;
+    using Fundoo.Model;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     
@@ -23,7 +25,7 @@ namespace Fundoo.View.Pages
         /// The firebase helper
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
-
+        CreateNewLabel createNewLabel = new CreateNewLabel();
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatePage"/> class.
         /// </summary>
@@ -77,14 +79,14 @@ namespace Fundoo.View.Pages
                 Console.WriteLine(exception.Message);
             }
         }
-
-        /// <summary>
-        /// Handles the 1 event of the ImageButton_Clicked control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void ImageButton_Clicked_1(object sender, EventArgs e)
-        {           
+        
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+        
+            Label label  = (Label)sender;
+            var labelKey = label.Text;
+            
+            await Navigation.PushModalAsync(new UpdateLabels(labelKey));
         }
     }
 }

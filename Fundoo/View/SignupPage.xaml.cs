@@ -125,7 +125,7 @@ namespace Fundoo.View
                 {
                     //// Callls the AddUser method with user inputs for signup
                     await this.firebase.AddUser(txtFirstName.Text, txtLastName.Text, txtEmail.Text, txtPassword.Text, txtRepeatPassword.Text);
-                    listEmail.Add(txtEmail.Text);
+                    this.listEmail.Add(txtEmail.Text);
                     //// Empty all user input after the data
                     txtFirstName.Text = string.Empty;
                     txtLastName.Text = string.Empty;

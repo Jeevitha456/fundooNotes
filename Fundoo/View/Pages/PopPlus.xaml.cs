@@ -1,25 +1,25 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Collab.xaml.cs" company="Bridgelabz">
+// <copyright file="PopPlus.xaml.cs" company="Bridgelabz">
 //   Copyright © 2018 Company
 // </copyright>
 // <creator name="Jeevitha C"/>
 // --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.View.Pages
 {
-    using Xamarin.Forms;
+    using Rg.Plugins.Popup.Pages;
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    /// Collaborator class
+    /// PopPlus
     /// </summary>
-    /// <seealso cref="Xamarin.Forms.ContentPage" />
+    /// <seealso cref="Rg.Plugins.Popup.Pages.PopupPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Collab : ContentPage
+    public partial class PopPlus : PopupPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Collab"/> class.
+        /// Initializes a new instance of the <see cref="PopPlus"/> class.
         /// </summary>
-        public Collab()
+        public PopPlus()
         {
           this.InitializeComponent();
         }

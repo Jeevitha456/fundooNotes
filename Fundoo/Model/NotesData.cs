@@ -59,6 +59,12 @@ namespace Fundoo.Model
         /// </value>
         public bool IsPinned { get; set; }
 
+        /// <summary>
+        /// Gets or sets the color note.
+        /// </summary>
+        /// <value>
+        /// The color note.
+        /// </value>
         public string ColorNote { get; set; }
     }
 }

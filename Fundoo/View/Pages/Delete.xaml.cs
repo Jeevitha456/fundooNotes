@@ -40,6 +40,8 @@ namespace Fundoo.View.Pages
             this.DeleteData();
         }
 
+        public Color ColorNotes { get; set; }
+        private string noteColor = "White";
         /// <summary>
         /// Deletes the data.
         /// </summary>
@@ -57,6 +59,7 @@ namespace Fundoo.View.Pages
                 
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
+                this.noteColor = notesData.ColorNote;
             }
             catch (Exception e)
             {
@@ -80,7 +83,8 @@ namespace Fundoo.View.Pages
                 NotesData notes = new NotesData()
                 {
                     Title = txtTitle.Text,
-                    Notes = txtNotes.Text
+                    Notes = txtNotes.Text,
+                    ColorNote = this.noteColor
                 };
                 firebaseHelper.DeleteForever(notes, this.val, userid);
             }
@@ -107,7 +111,8 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-                IsDeleted = false
+                IsDeleted = false,
+               ColorNote = this.noteColor
             };
             firebaseHelper.RestoreNotes(notes, this.val, userid);
         }

@@ -24,10 +24,16 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" BackgroundColor="White">
+                            <StackLayout x:Name="stackLayout"  Orientation="Horizontal" BackgroundColor="White">
+                                
                                 <ImageButton Source="label.png"  BackgroundColor="White" Padding="5,5,10,5"/>
-                                <Label Text="{Binding Label}" HorizontalOptions="CenterAndExpand" TextColor="Black" BackgroundColor="White"></Label>
-                                <ImageButton Source="pencil.png" BackgroundColor="White" Clicked="ImageButton_Clicked_1" Padding="5,5,10,5"/>
+                                <Label Text="{Binding Label}" HorizontalOptions="CenterAndExpand" TextColor="Black" BackgroundColor="White">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Label x:Name="labelKey"  Text="{Binding LabelKey}" IsVisible="False"></Label>
+                                <ImageButton Source="pencil.png" BackgroundColor="White"  Padding="5,5,10,5"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

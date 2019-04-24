@@ -21,6 +21,8 @@ namespace Fundoo.View.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdatePinNotes : ContentPage
     {
+        public Color ColorNotes { get; set; }
+        private string noteColor = "White";
         /// <summary>
         /// The value
         /// </summary>
@@ -54,6 +56,7 @@ namespace Fundoo.View.Pages
 
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
+                this.noteColor = notesData.ColorNote; 
             }
             catch (Exception e)
             {
@@ -83,7 +86,8 @@ namespace Fundoo.View.Pages
                 NotesData notes = new NotesData()
                 {
                     Title = txtTitle.Text,
-                    Notes = txtNotes.Text
+                    Notes = txtNotes.Text,
+                    ColorNote = this.noteColor
                 };
                 firebaseHelper.UpdateNotes(notes, this.val, userid);
             }
@@ -112,7 +116,8 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-                IsPinned = true
+                IsPinned = true,
+                ColorNote = this.noteColor
             };
             firebaseHelper.UnPinnedNotes(notes, this.val, userid);
         }
@@ -134,7 +139,8 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-                IsArchive = true
+                IsArchive = true,
+                ColorNote = this.noteColor
             };
             firebaseHelper.ArchiveNotes(notes, this.val, userid);
         }
@@ -156,6 +162,7 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
+                ColorNote = this.noteColor,
                 IsDeleted = true
             };
             firebaseHelper.DeleteNotes(notes, this.val, userid);
@@ -169,6 +176,73 @@ namespace Fundoo.View.Pages
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
             PopupNavigation.Instance.PushAsync(new PopTaskView(this.val));
+        }
+
+        
+        private void RedButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Crimson;
+            this.noteColor = "Red";
+        }
+
+        private void OrangeButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Orange;
+            this.noteColor = "Orange";
+        }
+
+        private void YellowButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Yellow;
+            this.noteColor = "Yellow";
+        }
+
+        private void GreenButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.PaleGreen;
+            this.noteColor = "Green";
+        }
+
+        private void BlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.LightSkyBlue;
+            this.noteColor = "Blue";
+        }
+
+        private void TealButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Aquamarine;
+            this.noteColor = "Teal";
+        }
+
+        private void DarkBlueButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.CornflowerBlue;
+            this.noteColor = "DarkBlue";
+        }
+
+        private void PurpleButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.LightSteelBlue;
+            this.noteColor = "Purple";
+        }
+
+        private void PinkButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.Pink;
+            this.noteColor = "Pink";
+        }
+
+        private void BrownButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.RosyBrown;
+            this.noteColor = "Brown";
+        }
+
+        private void GrayButton(object sender, EventArgs e)
+        {
+            this.BackgroundColor = Color.LightGray;
+            this.noteColor = "Gray";
         }
     }
 }

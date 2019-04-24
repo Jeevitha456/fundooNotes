@@ -56,6 +56,7 @@ namespace Fundoo.View.Pages
 
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
+                this.noteColor = notesData.ColorNote;
             }
             catch (Exception e)
             {
@@ -86,7 +87,7 @@ namespace Fundoo.View.Pages
                 {
                     Title = txtTitle.Text,
                     Notes = txtNotes.Text,
-                    ColorNote=this.noteColor
+                    ColorNote = this.noteColor
                 };
                 firebaseHelper.UpdateNotes(notes, this.val, userid);
             }
@@ -125,6 +126,7 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
+                ColorNote = this.noteColor,
                 IsDeleted = true
             };
             firebaseHelper.DeleteNotes(notes, this.val, userid);
@@ -148,13 +150,16 @@ namespace Fundoo.View.Pages
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
                 IsArchive = true,
-               
-                
+                ColorNote = this.noteColor
             };
             firebaseHelper.ArchiveNotes(notes, this.val, userid);
         }
 
-        //
+        /// <summary>
+        /// Handles the Clicked event of the TxtPin control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TxtPin_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
@@ -167,7 +172,8 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-               IsPinned = true
+               IsPinned = true,
+                ColorNote = this.noteColor
             };
             firebaseHelper.PinnedNotes(notes, this.val, userid);
         }
@@ -176,7 +182,7 @@ namespace Fundoo.View.Pages
         private string noteColor = "White";
         private void RedButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Red;
+            this.BackgroundColor = Color.Crimson;
             this.noteColor = "Red";
         }
 
@@ -194,31 +200,31 @@ namespace Fundoo.View.Pages
 
         private void GreenButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Green;
+            this.BackgroundColor = Color.PaleGreen;
             this.noteColor = "Green";
         }
 
         private void BlueButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Blue;
+            this.BackgroundColor = Color.LightSkyBlue;
             this.noteColor = "Blue";
         }
 
         private void TealButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Teal;
+            this.BackgroundColor = Color.Aquamarine;
             this.noteColor = "Teal";
         }
 
         private void DarkBlueButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.DarkBlue;
+            this.BackgroundColor = Color.CornflowerBlue;
             this.noteColor = "DarkBlue";
         }
 
         private void PurpleButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Purple;
+            this.BackgroundColor = Color.LightSteelBlue;
             this.noteColor = "Purple";
         }
 
@@ -230,14 +236,19 @@ namespace Fundoo.View.Pages
 
         private void BrownButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Red;
-            this.noteColor = "Red";
+            this.BackgroundColor = Color.RosyBrown;
+            this.noteColor = "Brown";
         }
 
         private void GrayButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Gray;
+            this.BackgroundColor = Color.LightGray;
             this.noteColor = "Gray";
+        }
+
+        private void ImageButton_Clicked_1(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new PopPlus());
         }
     }
 }

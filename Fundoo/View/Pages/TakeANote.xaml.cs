@@ -57,7 +57,7 @@ namespace Fundoo.View.Pages
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
 
                 //// Adds notes to the firebase
-                this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text);
+                this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text, this.noteColor);
                
                 //// If it is successfull displays mesaage
                 this.DisplayAlert("Success", "Notes added successfully", "ok");
@@ -90,7 +90,7 @@ namespace Fundoo.View.Pages
         private string noteColor = "White";
         private void RedButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Red;
+            this.BackgroundColor = Color.Crimson;
             this.noteColor = "Red";
         }
 
@@ -108,31 +108,31 @@ namespace Fundoo.View.Pages
 
         private void GreenButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Green;
+            this.BackgroundColor = Color.PaleGreen;
             this.noteColor = "Green";
         }
 
         private void BlueButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Blue;
+            this.BackgroundColor = Color.LightSkyBlue;
             this.noteColor = "Blue";
         }
 
         private void TealButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Teal;
+            this.BackgroundColor = Color.Aquamarine;
             this.noteColor = "Teal";
         }
 
         private void DarkBlueButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.DarkBlue;
+            this.BackgroundColor = Color.CornflowerBlue;
             this.noteColor = "DarkBlue";
         }
 
         private void PurpleButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Purple;
+            this.BackgroundColor = Color.LightSteelBlue;
             this.noteColor = "Purple";
         }
 
@@ -144,13 +144,13 @@ namespace Fundoo.View.Pages
 
         private void BrownButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Red;
-            this.noteColor = "Red";
+            this.BackgroundColor = Color.RosyBrown;
+            this.noteColor = "Brown";
         }
 
         private void GrayButton(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.Gray;
+            this.BackgroundColor = Color.LightGray;
             this.noteColor = "Gray";
         }
     }

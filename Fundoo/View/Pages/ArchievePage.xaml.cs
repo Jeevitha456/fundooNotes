@@ -99,6 +99,12 @@ namespace Fundoo.View.Pages
                             IsVisible = false
                         };
 
+                        var colorlabel = new Xamarin.Forms.Label
+                        {
+                            Text = data.ColorNote,
+                            IsVisible = false
+                        };
+
                         //// Content view
                         var content = new Xamarin.Forms.Label
                         {
@@ -112,7 +118,7 @@ namespace Fundoo.View.Pages
                         {
                             Spacing = 2,
                             Margin = 2,
-                            BackgroundColor = Color.White
+                          ////  BackgroundColor = Color.White
                         };
 
                         //// Tapgesture is created
@@ -120,13 +126,20 @@ namespace Fundoo.View.Pages
                         layout.Children.Add(labelKey);
                         layout.Children.Add(label);
                         layout.Children.Add(content);
+                        layout.Children.Add(colorlabel);
                         layout.GestureRecognizers.Add(tapGestureRecognizer);
                         layout.Spacing = 2;
                         layout.Margin = 2;
-                        layout.BackgroundColor = Color.White;
+                       //// layout.BackgroundColor = Color.White;
                         var frame = new Frame();
                         frame.BorderColor = Color.Black;
                         frame.Content = layout;
+
+                        //// Setting the color class
+                        SetColor setColor = new SetColor();
+                        setColor.GetColor(data, frame);
+
+                        //// when tapped opens or navigates to particular page
                         tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {
                             StackLayout layout123 = (StackLayout)sender;

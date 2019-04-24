@@ -35,7 +35,8 @@ namespace Fundoo.View.Pages
             this.UnArchiveData();
             this.InitializeComponent();
         }
-
+        public Color ColorNotes { get; set; }
+        private string noteColor = "White";
         /// <summary>
         /// archive data.
         /// </summary>
@@ -51,6 +52,7 @@ namespace Fundoo.View.Pages
 
             txtTitle.Text = notesData.Title;
             txtNotes.Text = notesData.Notes;
+            this.noteColor = notesData.ColorNote;
         }
 
         /// <summary>
@@ -70,7 +72,8 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-                IsArchive = false
+                IsArchive = false,
+                ColorNote = this.noteColor
             };
             firebaseHelper.UnArchiveNotes(notes, this.val, userid);
         }

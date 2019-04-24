@@ -21,6 +21,9 @@ namespace Fundoo.Firebase
     /// </summary>
     public class FirebaseHelper
     {
+        /// <summary>
+        /// The note color
+        /// </summary>
         private string noteColor = "White"; 
 
         /// <summary>
@@ -58,7 +61,7 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="note">The note.</param>
-        public void AddNote(string title, string note)
+        public void AddNote(string title, string note, string noteColor)
         {
             try
             {
@@ -66,7 +69,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = title, Notes = note ,ColorNote = noteColor });
+                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = title, Notes = note , ColorNote = noteColor });
             }
             catch (Exception ex)
             {
@@ -99,7 +102,8 @@ namespace Fundoo.Firebase
             return (await this.firebase
               .Child("Persons").Child(userid).Child("Label").OnceAsync<CreateNewLabel>()).Select(item => new CreateNewLabel
               {
-                  Label = item.Object.Label                 
+                  Label = item.Object.Label,
+                  LabelKey=item.Key
               }).ToList();
         }
 
@@ -120,7 +124,7 @@ namespace Fundoo.Firebase
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
                   Key = item.Key,
-                  ColorNote=item.Object.ColorNote
+                  ColorNote = item.Object.ColorNote
               }).ToList();
         }
 
@@ -136,6 +140,13 @@ namespace Fundoo.Firebase
             NotesData notes = await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).OnceSingleAsync<NotesData>();
            return notes;
         }
+        public async Task<CreateNewLabel> GetLabelsData(string key,string uid)
+        {
+           
+            CreateNewLabel label = await this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).OnceSingleAsync<CreateNewLabel>();
+            return label;
+        }
+        
 
         /// <summary>
         /// Updates the notes.
@@ -148,7 +159,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Updates yhe notes in the firebase
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote=notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote });
             }
             catch (Exception ex)
             {
@@ -177,7 +188,7 @@ namespace Fundoo.Firebase
         public void DeleteNotes(NotesData notes, string key, string uid)
         {         
             //// Deletes the notes from the dashboard
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true });
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote });
         }
 
         /// <summary>
@@ -189,7 +200,7 @@ namespace Fundoo.Firebase
         public void ArchiveNotes(NotesData notes, string key, string uid)
         {
             //// Archives the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true });
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true, ColorNote = notes.ColorNote });
         }
 
         /// <summary>
@@ -201,7 +212,7 @@ namespace Fundoo.Firebase
         public void UnArchiveNotes(NotesData notes, string key, string uid)
         {
             //// UnArchives the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false });
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false, ColorNote = notes.ColorNote });
         }
 
         /// <summary>
@@ -213,7 +224,7 @@ namespace Fundoo.Firebase
         public void RestoreNotes(NotesData notes, string key, string uid)
         {
             //// Restores the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false });
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false, ColorNote = notes.ColorNote });
         }
 
         /// <summary>
@@ -225,7 +236,7 @@ namespace Fundoo.Firebase
         public void PinnedNotes(NotesData notes, string key, string uid)
         {
             //// Restores the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true });
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true, ColorNote = notes.ColorNote });
         }
 
         /// <summary>
@@ -237,7 +248,7 @@ namespace Fundoo.Firebase
         public void UnPinnedNotes(NotesData notes, string key, string uid)
         {
             //// Restores the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false });
+            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false, ColorNote = notes.ColorNote });
         }
     }
 }
