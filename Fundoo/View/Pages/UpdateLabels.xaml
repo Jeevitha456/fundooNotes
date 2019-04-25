@@ -2,6 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fundoo.View.Pages.UpdateLabels">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Delete1" Icon="deleteicon.png" Order="Primary" Clicked="Delete_Clicked"/>
+
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Editor x:Name="txtLabel"  Placeholder="Title" WidthRequest="300"/>

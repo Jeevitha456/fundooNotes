@@ -15,7 +15,7 @@
                 <StackLayout>
                    
                     <StackLayout>
-                        <Label Text="Pinned"/>
+                        <Label Text="Pinned" />
                         <Grid x:Name="GridLayout1"></Grid>
                     </StackLayout>
                     <StackLayout>

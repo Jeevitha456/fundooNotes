@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fundoo.View.Pages.CreatePage"
              Title="Edit Labels">
+   
     <StackLayout>
         <Grid>
             <Grid.RowDefinitions>
@@ -20,25 +21,13 @@
             <ImageButton Source="tick1.png" Grid.Row="0" Grid.Column="4" Padding="10,10,15,10" BackgroundColor="White" Clicked="ImageButton_Clicked"/>
         </Grid>
         <StackLayout>
-            <ListView x:Name="lstLabels">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout x:Name="stackLayout"  Orientation="Horizontal" BackgroundColor="White">
-                                
-                                <ImageButton Source="label.png"  BackgroundColor="White" Padding="5,5,10,5"/>
-                                <Label Text="{Binding Label}" HorizontalOptions="CenterAndExpand" TextColor="Black" BackgroundColor="White">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                                <Label x:Name="labelKey"  Text="{Binding LabelKey}" IsVisible="False"></Label>
-                                <ImageButton Source="pencil.png" BackgroundColor="White"  Padding="5,5,10,5"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <StackLayout>
+                <ScrollView>
+                    <Grid x:Name="GridLayout"></Grid>
+                </ScrollView>
+                
+            </StackLayout>
+
         </StackLayout>
     </StackLayout>
 

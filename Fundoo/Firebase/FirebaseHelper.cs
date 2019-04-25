@@ -166,6 +166,10 @@ namespace Fundoo.Firebase
                 Console.WriteLine(ex.Message);
             }
         }
+        public void UpdateLabels(CreateNewLabel label,string key,string uid)
+        {
+            this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).PutAsync(new CreateNewLabel() { Label = label.Label });
+        }
 
         /// <summary>
         /// Deletes the forever.
@@ -190,7 +194,10 @@ namespace Fundoo.Firebase
             //// Deletes the notes from the dashboard
             this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote });
         }
-
+        public void DeleteLabel(CreateNewLabel label, string key, string uid)
+        {
+            this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).DeleteAsync();
+        }
         /// <summary>
         /// Archives the notes.
         /// </summary>

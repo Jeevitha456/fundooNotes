@@ -36,5 +36,45 @@ namespace Fundoo.View.Pages
             txtLabel.Text = createNewLabel.Label;
           
         }
-	}
+
+        protected override bool OnBackButtonPressed()
+        {
+            try
+            {
+                FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+                //// Gets current user id
+                var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                //// Updates the notes whenUpdateNotes method is called
+                CreateNewLabel label = new CreateNewLabel()
+                {
+                    Label=txtLabel.Text,
+                  
+                };
+                firebaseHelper.UpdateLabels(label, this.value, userid);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return base.OnBackButtonPressed();
+        }
+
+        private void Delete_Clicked(object sender, EventArgs e)
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notes when DeleteNotes method is called
+            CreateNewLabel label = new CreateNewLabel()
+            {
+                Label=txtLabel.Text,
+            };
+            firebaseHelper.DeleteLabel(label, this.value, userid);
+        }
+    }
 }
