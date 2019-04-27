@@ -27,6 +27,7 @@ namespace Fundoo.View.Pages
         /// The value
         /// </summary>
         private string value = null;
+        NotesData notes = null;
 
         public Color ColorNotes { get; set; }
         private string noteColor = "White";
@@ -41,8 +42,9 @@ namespace Fundoo.View.Pages
         /// Initializes a new instance of the <see cref="PopTaskView"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
-        public PopTaskView(string key)
+        public PopTaskView(string key,NotesData notesData)
         {
+            this.notes = notesData;
             this.value = key;
           this.InitializeComponent();
         }
@@ -54,7 +56,7 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new Labels());
+            Navigation.PushModalAsync(new Labels(value,notes));
             PopupNavigation.Instance.PopAsync(true);
         }
 

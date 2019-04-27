@@ -61,7 +61,7 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <param name="title">The title.</param>
         /// <param name="note">The note.</param>
-        public void AddNote(string title, string note, string noteColor)
+        public void AddNote(NotesData notes)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = title, Notes = note , ColorNote = noteColor });
+                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes , ColorNote = noteColor,LabelData=notes.LabelData });
             }
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace Fundoo.Firebase
                   LabelKey=item.Key
               }).ToList();
         }
-
+       
         /// <summary>
         /// Gets all notes.
         /// </summary>
@@ -139,6 +139,16 @@ namespace Fundoo.Firebase
             //// Returns the notes from the firebase
             NotesData notes = await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).OnceSingleAsync<NotesData>();
            return notes;
+        }
+
+        public void AddLabelToNotes(string key,NotesData notes)
+        {
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            
+                this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData() {Title=notes.Title,Notes=notes.Notes,ColorNote=notes.ColorNote, LabelData = notes.LabelData });
+            
+          
+            
         }
         public async Task<CreateNewLabel> GetLabelsData(string key,string uid)
         {

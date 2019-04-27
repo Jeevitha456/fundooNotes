@@ -34,7 +34,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="12"  Orientation="Horizontal" BackgroundColor="White" WidthRequest="400">
+                <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="12"  Orientation="Horizontal" WidthRequest="400">
                     <StackLayout Orientation="Horizontal">
                         <Button CornerRadius="25" BackgroundColor="Crimson" HeightRequest="40 " WidthRequest="50" Clicked="RedButton"/>
                         <Button CornerRadius="25" BackgroundColor="Orange" HeightRequest="40" WidthRequest="50" Clicked="OrangeButton" />

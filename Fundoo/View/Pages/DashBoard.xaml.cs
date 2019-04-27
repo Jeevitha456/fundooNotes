@@ -322,7 +322,8 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Gridvertical_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new GridPage());     
+            Navigation.PushAsync(new GridPage());
+            this.Navigation.RemovePage(this);
         }
 
         /// <summary>

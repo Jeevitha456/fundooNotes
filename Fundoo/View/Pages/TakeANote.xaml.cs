@@ -13,6 +13,8 @@ namespace Fundoo.View.Pages
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     using Rg.Plugins.Popup.Services;
+    using Fundoo.Model;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Take A Note
@@ -57,7 +59,15 @@ namespace Fundoo.View.Pages
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
 
                 //// Adds notes to the firebase
-                this.firebaseHelper.AddNote(txtTitle.Text, txtNotes.Text, this.noteColor);
+                ///
+                NotesData notes = new NotesData()
+                {
+                    Title=txtTitle.Text,
+                    Notes=txtNotes.Text,
+                    ColorNote=noteColor,
+                    LabelData=new List<string>()
+                };
+                this.firebaseHelper.AddNote(notes);
                
                 //// If it is successfull displays mesaage
                 this.DisplayAlert("Success", "Notes added successfully", "ok");

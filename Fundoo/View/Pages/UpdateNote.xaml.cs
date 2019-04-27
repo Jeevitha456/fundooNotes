@@ -57,6 +57,7 @@ namespace Fundoo.View.Pages
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
                 this.noteColor = notesData.ColorNote;
+                this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
             }
             catch (Exception e)
             {
@@ -106,7 +107,19 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
-            PopupNavigation.Instance.PushAsync(new PopTaskView(this.val));
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notes whenUpdateNotes method is called
+            NotesData notes = new NotesData()
+            {
+                Title = txtTitle.Text,
+                Notes = txtNotes.Text,
+                ColorNote = this.noteColor
+            };
+            PopupNavigation.Instance.PushAsync(new PopTaskView(this.val,notes));
         }
 
         /// <summary>
@@ -130,6 +143,7 @@ namespace Fundoo.View.Pages
                 IsDeleted = true
             };
             firebaseHelper.DeleteNotes(notes, this.val, userid);
+            Navigation.RemovePage(this);
         }
 
         /// <summary>

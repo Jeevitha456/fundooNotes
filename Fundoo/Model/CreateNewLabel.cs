@@ -9,6 +9,7 @@ namespace Fundoo.Model
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using System.Windows.Input;
 
     /// <summary>
     /// Create New Label
@@ -30,5 +31,6 @@ namespace Fundoo.Model
         /// The key.
         /// </value>
         public string LabelKey { get; set; }
-    }
+       
+    }   
 }

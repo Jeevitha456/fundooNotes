@@ -4,6 +4,8 @@
 // </copyright>
 // <creator name="Jeevitha C"/>
 // --------------------------------------------------------------------------------------------------------------------
+using System.Collections.Generic;
+
 namespace Fundoo.Model
 {
     /// <summary>
@@ -66,5 +68,8 @@ namespace Fundoo.Model
         /// The color note.
         /// </value>
         public string ColorNote { get; set; }
+
+
+        public List<string> LabelData { get; set; } = new List<string>();
     }
 }

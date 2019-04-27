@@ -61,7 +61,7 @@ namespace Fundoo.View.Pages
             else
             {
                 list.ItemsSource = this.notesData.Where(x => x.Title.ToLower().Contains(e.NewTextValue.ToLower())                 
-                && x.Notes.ToLower().Contains(e.NewTextValue.ToLower()));
+                || x.Notes.ToLower().Contains(e.NewTextValue.ToLower()));
             }
         }
     }
