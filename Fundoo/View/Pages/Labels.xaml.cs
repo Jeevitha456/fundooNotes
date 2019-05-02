@@ -28,8 +28,7 @@ namespace Fundoo.View.Pages
     public partial class Labels : ContentPage
     {
         private FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
-        public ObservableCollection<CreateNewLabel> createNewLabels { get; set; }
-        public ObservableCollection<CreateNewLabel> selectedList;
+        
         /// <summary>
         /// The firebase helper
         /// </summary>

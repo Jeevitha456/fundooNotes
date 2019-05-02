@@ -8,6 +8,7 @@ using Android.OS;
 using Firebase;
 using Plugin.Media;
 using Plugin.CurrentActivity;
+using Xamarin.Essentials;
 
 namespace Fundoo.Droid
 {
@@ -23,11 +24,20 @@ namespace Fundoo.Droid
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
-          // await  CrossMedia.Current.Initialize();
-                
+            // await  CrossMedia.Current.Initialize();
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FirebaseApp.InitializeApp(Application.Context);
             this.LoadApplication(new App());
+           
+        }
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

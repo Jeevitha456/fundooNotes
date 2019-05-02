@@ -30,7 +30,8 @@ namespace Fundoo.Firebase
         /// The firebase
         /// </summary>
         private FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
- 
+     
+     
         /// <summary>
         /// Adds the user.
         /// </summary>

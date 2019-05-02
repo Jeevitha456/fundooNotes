@@ -4,7 +4,7 @@
              x:Class="Fundoo.View.Pages.UpdatePinNotes">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="txtPin" Order="Primary" Icon="unpin.png" Clicked="TxtPin_Clicked"/>
-        <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bellicon.png"/>
+        <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bellicon.png" Clicked="TxtBell_Clicked"/>
         <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="archiveicon.png" Clicked="TxtArchieve_Clicked"/>
         <ToolbarItem x:Name="Delete2" Text="Delete" Order="Secondary" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>

@@ -250,5 +250,10 @@ namespace Fundoo.View.Pages
             this.BackgroundColor = Color.LightGray;
             this.noteColor = "Gray";
         }
+
+        private void TxtBell_Clicked(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new PopUpReminder());
+        }
     }
 }

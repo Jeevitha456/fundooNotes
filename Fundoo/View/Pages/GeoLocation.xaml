@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fundoo.View.Pages.GeoLocation">
+    <ContentPage.Content>
+        <!--<StackLayout>
+            <SearchBar Placeholder="Enter an address or place" TextChanged="SearchBar_TextChanged"></SearchBar>
+        </StackLayout>-->
+        <StackLayout>
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
+                <Entry x:Name="txtAddress" Placeholder="Search Location..." WidthRequest="300"></Entry>
+                <Button x:Name="btnLocation" Text="Get Location" Clicked="btnLocation_Clicked" BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+                <Button x:Name="btnLocation1" Text="Get Location latitude" Clicked="btnLocation1_Clicked" BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+                <Label HorizontalTextAlignment="Center" x:Name="lblLatitude"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblLongitude"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblAdminArea"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblCountryName"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblCountryCode"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblLocality"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblSubAdminArea"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblSublocality"></Label>
+                <Label HorizontalTextAlignment="Center" x:Name="lblPostalcode"></Label>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

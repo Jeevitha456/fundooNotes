@@ -6,6 +6,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.View.Pages
 {
+    using System;
+    using System.Collections.Generic;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -16,12 +18,20 @@ namespace Fundoo.View.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Collab : ContentPage
     {
+        Login login = new Login();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Collab"/> class.
         /// </summary>
         public Collab()
         {
           this.InitializeComponent();
+           
         }
+     
+  
+      
+
+       
     }
 }
