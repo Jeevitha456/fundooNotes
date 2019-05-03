@@ -36,6 +36,7 @@ namespace Fundoo.View.Pages
         /// <returns>returns task</returns>
         public async Task<string> StoreImages(Stream imageStream)
         {
+            //// Updates the image in firebase storage
             var stroageImage = await new FirebaseStorage("fundooapp-50c31.appspot.com")
                 .Child("XamarinMonkeys")
                 .Child("image.jpg")
@@ -66,6 +67,7 @@ namespace Fundoo.View.Pages
                     SaveToAlbum = true
                 });
 
+                //// Checks if the file is null
                 if (file == null)
                 {
                     return;

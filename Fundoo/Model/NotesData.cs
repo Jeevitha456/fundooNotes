@@ -4,10 +4,10 @@
 // </copyright>
 // <creator name="Jeevitha C"/>
 // --------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-
 namespace Fundoo.Model
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Notes Data class
     /// </summary>
@@ -69,7 +69,36 @@ namespace Fundoo.Model
         /// </value>
         public string ColorNote { get; set; }
 
+        /// <summary>
+        /// Gets or sets the label data.
+        /// </summary>
+        /// <value>
+        /// The label data.
+        /// </value>
+        public IList<string> LabelData { get; set; } = new List<string>();
 
-        public List<string> LabelData { get; set; } = new List<string>();
+        /// <summary>
+        /// Gets or sets the latitude.
+        /// </summary>
+        /// <value>
+        /// The latitude.
+        /// </value>
+        public string Latitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets the longitude.
+        /// </summary>
+        /// <value>
+        /// The longitude.
+        /// </value>
+        public string Longitude { get; set; }
+
+        /// <summary>
+        /// Gets or sets the area.
+        /// </summary>
+        /// <value>
+        /// The area.
+        /// </value>
+        public string Area { get; set; }
     }
 }

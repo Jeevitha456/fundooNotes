@@ -4,7 +4,7 @@
              x:Class="Fundoo.View.Pages.UpdateNote">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="txtPin" Order="Primary" Icon="pinicon.png" Clicked="TxtPin_Clicked"/>
-        <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bellicon.png"/>
+        <ToolbarItem x:Name="txtBell" Order="Primary" Icon="bellicon.png" Clicked="TxtBell_Clicked"/>
         <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="archiveicon.png" Clicked="TxtArchieve_Clicked"/>
         <ToolbarItem x:Name="Delete" Text="Delete" Order="Secondary" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
@@ -13,6 +13,8 @@
         <Editor x:Name="txtTitle"  Placeholder="Title" WidthRequest="300"/>
         <Editor x:Name="txtNotes" Placeholder="Notes" WidthRequest="300"/>
         </StackLayout>
+        <StackLayout x:Name="labelLayout" Orientation="Horizontal"/>
+
 
 
         <StackLayout>

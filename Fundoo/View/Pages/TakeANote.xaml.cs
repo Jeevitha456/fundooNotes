@@ -4,17 +4,16 @@
 // </copyright>
 // <creator name="Jeevitha C"/>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Fundoo.View.Pages
 {
     using System;
+    using System.Collections.Generic;
     using global::Firebase.Database;
-    using Fundoo.Firebase;
+    using Fundoo.Firebase; 
+    using Fundoo.Model;
+    using Rg.Plugins.Popup.Services;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
-    using Rg.Plugins.Popup.Services;
-    using Fundoo.Model;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Take A Note
@@ -59,13 +58,12 @@ namespace Fundoo.View.Pages
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
 
                 //// Adds notes to the firebase
-                ///
                 NotesData notes = new NotesData()
                 {
-                    Title=txtTitle.Text,
-                    Notes=txtNotes.Text,
-                    ColorNote=noteColor,
-                    LabelData=new List<string>()
+                    Title = txtTitle.Text,
+                    Notes = txtNotes.Text,
+                    ColorNote = this.noteColor,
+                    LabelData = new List<string>()
                 };
                 this.firebaseHelper.AddNote(notes);
                
@@ -91,73 +89,144 @@ namespace Fundoo.View.Pages
             Navigation.PushAsync(new ArchievePage());
         }
 
+        /// <summary>
+        /// Handles the Clicked event of the ImageButton control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
             PopupNavigation.Instance.PushAsync(new PopTaskView());
         }
 
+        /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
         public Color ColorNotes { get; set; }
+
+        /// <summary>
+        /// The note color
+        /// </summary>
         private string noteColor = "White";
+
+        /// <summary>
+        /// Reds the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RedButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Crimson;
             this.noteColor = "Red";
         }
 
+        /// <summary>
+        /// Oranges the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OrangeButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Orange;
             this.noteColor = "Orange";
         }
 
+        /// <summary>
+        /// Yellows the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void YellowButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Yellow;
             this.noteColor = "Yellow";
         }
 
+        /// <summary>
+        /// Greens the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void GreenButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.PaleGreen;
             this.noteColor = "Green";
         }
 
+        /// <summary>
+        /// Blues the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BlueButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.LightSkyBlue;
             this.noteColor = "Blue";
         }
 
+        /// <summary>
+        /// Teals the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TealButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Aquamarine;
             this.noteColor = "Teal";
         }
 
+        /// <summary>
+        /// Darks the blue button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void DarkBlueButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.CornflowerBlue;
             this.noteColor = "DarkBlue";
         }
 
+        /// <summary>
+        /// Purples the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void PurpleButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.LightSteelBlue;
             this.noteColor = "Purple";
         }
 
+        /// <summary>
+        /// Pinks the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void PinkButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Pink;
             this.noteColor = "Pink";
         }
 
+        /// <summary>
+        /// Browns the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BrownButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.RosyBrown;
             this.noteColor = "Brown";
         }
 
+        /// <summary>
+        /// Grays the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void GrayButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.LightGray;

@@ -75,7 +75,7 @@ namespace Fundoo.View.Pages
                     for (int columnIndex = 0; columnIndex < 2; columnIndex++)
                     {
                         NotesData data = null;
-
+                      
                         index++;
                         if (index < pinlist.Count)
                         {
@@ -129,7 +129,6 @@ namespace Fundoo.View.Pages
                         layout.GestureRecognizers.Add(tapGestureRecognizer);
                         layout.Spacing = 2;
                         layout.Margin = 2;
-                       // layout.BackgroundColor = Color.White;
                         var frame = new Frame();
                         frame.BorderColor = Color.Black;
                         frame.Content = layout;
@@ -156,10 +155,11 @@ namespace Fundoo.View.Pages
         }
 
         /// <summary>
-        /// Notes the grid view.
+        /// Grids the view.
         /// </summary>
         /// <param name="list">The list.</param>
-        public void GridView(IList<NotesData> list)
+        /// <param name="listLabel">The list label.</param>
+        public void GridView(IList<NotesData> list, IList<CreateNewLabel> listLabel)
         {
             try
             {
@@ -228,7 +228,6 @@ namespace Fundoo.View.Pages
                         {
                             Spacing = 2,
                             Margin = 2,
-                           // BackgroundColor = Color.White
                         };
 
                         var tapGestureRecognizer = new TapGestureRecognizer();
@@ -239,15 +238,45 @@ namespace Fundoo.View.Pages
                         layout.GestureRecognizers.Add(tapGestureRecognizer);
                         layout.Spacing = 2;
                         layout.Margin = 2;
-                       // layout.BackgroundColor = Color.White;
                         var frame = new Frame();
                         frame.BorderColor = Color.Black;
                         frame.Content = layout;
 
+                        //// Initializing color class
                         SetColor setColor = new SetColor();
                         setColor.GetColor(data, frame);
 
-                        tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
+                       //// Loops over the labels class
+                        foreach (CreateNewLabel createNewLabel in listLabel)
+                        {
+                            IList<string> labellist = data.LabelData;
+
+                            //// Loops over the list of labels added to the notes
+                            foreach (var labelid in labellist)
+                            {
+                                //// Checks if the labels are equal from the label list
+                                if (createNewLabel.LabelKey.Equals(labelid))
+                                {
+                                    var labelName = new Label
+                                    {
+                                        Text = createNewLabel.Label,
+                                        HorizontalOptions = LayoutOptions.Center,
+                                        VerticalOptions = LayoutOptions.Start,
+                                        FontSize = 12,
+                                    };
+                                    var labelFrame = new Frame();
+                                    labelFrame.CornerRadius = 28;
+                                    labelFrame.HeightRequest = 14;
+                                    labelFrame.BorderColor = Color.Gray;
+                                    labelFrame.Content = labelName;
+                                    labelFrame.BackgroundColor = Color.FromHex(SetColor.GetHexColor(data));
+                                    layout.Children.Add(labelFrame);
+                                }
+                            }
+                        }
+
+                        //// Tap gesture recognizer
+                            tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {
                             StackLayout stacklayout = (StackLayout)sender;
                             IList<View> item = stacklayout.Children;
@@ -280,13 +309,17 @@ namespace Fundoo.View.Pages
 
                 //// Gets all the notes
                 var notes = await this.notesDatabase.GetNotesAsync();
-                
+
+                //// Gets all labels
+                var label = await this.firebaseHelper.GetAllLabels();
+
+                //// Checks if notes is not null
                 if (notes != null)
                 {
                     var notesPin = notes.Where(a => a.IsDeleted == false && a.IsArchive == false && a.IsPinned == true).ToList();
                     this.GridViewPin(notesPin);
                     var notesUnpin = notes.Where(a => a.IsDeleted == false && a.IsArchive == false && a.IsPinned == false).ToList();
-                    this.GridView(notesUnpin);
+                    this.GridView(notesUnpin, label);
                 }                             
             }
             catch (Exception ex)
@@ -302,6 +335,7 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Button_Clicked(object sender, EventArgs e)
         {
+            //// Navigates to take a note page
             Navigation.PushAsync(new TakeANote());
         }
 
@@ -311,7 +345,8 @@ namespace Fundoo.View.Pages
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Search_Clicked(object sender, EventArgs e)
-        {
+        { 
+            //// Navigates to take a Searchnote page
             Navigation.PushModalAsync(new SearchNotes());
         }
 
@@ -321,7 +356,8 @@ namespace Fundoo.View.Pages
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Gridvertical_Clicked(object sender, EventArgs e)
-        {
+        { 
+            //// Navigates to take a grid page
             Navigation.PushAsync(new GridPage());
             this.Navigation.RemovePage(this);
         }
@@ -333,6 +369,7 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ImageButton_Clicked_1(object sender, EventArgs e)
         {
+            //// PopUp Page
             PopupNavigation.Instance.PushAsync(new PopUpCamera());
         }
     }

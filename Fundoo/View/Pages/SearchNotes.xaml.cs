@@ -54,7 +54,16 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
+            //// Checks if the typed string is null or not
+            if (string.IsNullOrEmpty(e.NewTextValue))
+            {
+                list.ItemsSource = this.notesData;
+            }
+            else
+            {
+                list.ItemsSource = this.notesData.Where(x => x.Title.ToLower().Contains(e.NewTextValue.ToLower())
+                || x.Notes.ToLower().Contains(e.NewTextValue.ToLower()));           
+            }
         }
     }
 }

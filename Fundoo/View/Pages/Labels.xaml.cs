@@ -7,45 +7,56 @@
 namespace Fundoo.View.Pages
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
+    using global::Firebase.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
-    using global::Firebase.Database;
-    using global::Firebase.Database.Query;
     using Plugin.InputKit.Shared.Controls;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    /// Labels
+    /// Labels class
     /// </summary>
     /// <seealso cref="Xamarin.Forms.ContentPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Labels : ContentPage
     {
+        /// <summary>
+        /// The firebase
+        /// </summary>
         private FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
         
         /// <summary>
         /// The firebase helper
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
-        string key = null;
-        NotesData notes = null;
 
-        NotesData noteModel = new NotesData();
+        /// <summary>
+        /// The key
+        /// </summary>
+        private string key = null;
+
+        /// <summary>
+        /// The notes
+        /// </summary>
+        private NotesData notes = null;
+
+        /// <summary>
+        /// The note model
+        /// </summary>
+        private NotesData noteModel = new NotesData();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Labels"/> class.
         /// </summary>
-        public Labels(string value,NotesData notesData)
+        /// <param name="value">The value.</param>
+        /// <param name="notesData">The notes data.</param>
+        public Labels(string value, NotesData notesData)
         {
             this.notes = notesData;
             this.key = value;
-            this.InitializeComponent();
-         
+            this.InitializeComponent();        
         }
 
         /// <summary>
@@ -64,9 +75,7 @@ namespace Fundoo.View.Pages
                 //// Listing all the person in the list
                 var allLabels = await this.firebaseHelper.GetAllLabels();
                
-                lstLabels.ItemsSource = allLabels;
-               
-                
+                lstLabels.ItemsSource = allLabels;                         
             }
             catch (Exception exception)
             {
@@ -81,25 +90,33 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void CheckBox_CheckChanged(object sender, EventArgs e)
         {
-
             var checkbox = (CheckBox)sender;
+
+            //// Checks if the checkbox is checked
             if (checkbox.IsChecked)
             {            
+               //// Assigns color to the checkbox when ticked
                checkbox.Color = Color.Black;
-                string item = checkbox.Text;
-                var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-                NotesData notes =await firebaseHelper.GetNotesData(key,userid);
-                notes.LabelData.Add(item);
-                 noteModel= new NotesData()
-                {
-                    Title=notes.Title,
-                    Notes=notes.Notes,
-                    ColorNote=notes.ColorNote,
-                    LabelData=notes.LabelData
-                };
-                   
-                firebaseHelper.AddLabelToNotes(this.key, noteModel);
 
+                //// Gets the description of the checkbox when checked
+                string item = checkbox.Text;
+
+                //// Gets the currents user id
+                var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                //// Gets the notes data choosen
+                NotesData notes = await this.firebaseHelper.GetNotesData(this.key, userid);
+                notes.LabelData.Add(item);
+                this.noteModel = new NotesData()
+                {
+                    Title = notes.Title,
+                    Notes = notes.Notes,
+                    ColorNote = notes.ColorNote,
+                    LabelData = notes.LabelData
+                };
+               
+               //// Updates it to the firebase
+               this.firebaseHelper.AddLabelToNotes(this.key, this.noteModel);
             }
         }
 

@@ -34,9 +34,7 @@ namespace Fundoo.View
         {
             this.InitializeComponent();
         }
-        private List<string> listEmail = new List<string>();
-     //   private List<string> myList = new List<string>();
-     
+
         /// <summary>
         /// Handles the Clicked event of the Button Login control.
         /// </summary>
@@ -49,11 +47,6 @@ namespace Fundoo.View
                 //// Using dependency service and logging in with email and password
                 var validate = await DependencyService.Get<IFirebaseAuthenticator>().LoginWithEmailPassword(txtEmail.Text, txtPassword.Text);
                 var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-                this.listEmail.Add(txtEmail.Text);
-                if (listEmail.Contains(uid))
-                {
-                    listEmail.Remove(uid);
-                }
                
                 //// checks if its a valid email and password
                 if (validate)
@@ -73,11 +66,6 @@ namespace Fundoo.View
             }           
         }
 
-        public List<string> GetList()
-        {
-            return listEmail;
-        }
-
         /// <summary>
         /// Handles the Clicked event of the Button Signup control.
         /// </summary>
@@ -94,7 +82,6 @@ namespace Fundoo.View
             {
                 Console.WriteLine(exception.Message);
             }
-            //this.listEmail.Add(txtEmail.Text);
         }
 
         /// <summary>

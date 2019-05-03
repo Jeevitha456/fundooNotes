@@ -27,22 +27,39 @@ namespace Fundoo.View.Pages
         /// The value
         /// </summary>
         private string value = null;
-        NotesData notes = null;
 
+        /// <summary>
+        /// The notes
+        /// </summary>
+       private NotesData notes = null;
+
+        /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
         public Color ColorNotes { get; set; }
+
+        /// <summary>
+        /// The note color
+        /// </summary>
         private string noteColor = "White";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PopTaskView"/> class.
+        /// </summary>
         public PopTaskView()
-        {
-           
-            this.InitializeComponent();
+        {          
+          this.InitializeComponent();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PopTaskView"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
-        public PopTaskView(string key,NotesData notesData)
+        /// <param name="notesData">The notes data.</param>
+        public PopTaskView(string key, NotesData notesData)
         {
             this.notes = notesData;
             this.value = key;
@@ -56,7 +73,8 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Button_Clicked_1(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new Labels(value,notes));
+            //// Navigate sto label page
+            Navigation.PushModalAsync(new Labels(this.value, this.notes));
             PopupNavigation.Instance.PopAsync(true);
         }
 
@@ -68,6 +86,8 @@ namespace Fundoo.View.Pages
         private async void Button_Clicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             NotesData notesData = await firebaseHelper.GetNotesData(this.value, userid);
             await Share.RequestAsync(new ShareTextRequest
@@ -133,45 +153,70 @@ namespace Fundoo.View.Pages
             this.noteColor = "Blue";
         }
 
+        /// <summary>
+        /// Teals the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TealButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Teal;
             this.noteColor = "Teal";
         }
 
+        /// <summary>
+        /// Darks the blue button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void DarkBlueButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.DarkBlue;
             this.noteColor = "DarkBlue";
         }
 
+        /// <summary>
+        /// Purples the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void PurpleButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Purple;
             this.noteColor = "Purple";
         }
 
+        /// <summary>
+        /// Pinks the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void PinkButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Pink;
             this.noteColor = "Pink";
         }
 
+        /// <summary>
+        /// Browns the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BrownButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Brown;
             this.noteColor = "Brown";
         }
 
+        /// <summary>
+        /// Grays the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void GrayButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Gray;
             this.noteColor = "Gray";
-        }
-
-        private void Collaborator_clicked(object sender, EventArgs e)
-        {
-            Navigation.PushModalAsync(new Collab());
         }
     }
 }

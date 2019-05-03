@@ -15,6 +15,71 @@ namespace Fundoo.Model
     public class SetColor : ContentPage
     {
         /// <summary>
+        /// Gets the color of the hexadecimal.
+        /// </summary>
+        /// <param name="note">The note.</param>
+        /// <returns>returns string</returns>
+        public static string GetHexColor(NotesData note)
+        {
+            if (note.ColorNote.Equals("Red"))
+            {
+                return "DC143C";
+            }
+
+            if (note.ColorNote.Equals("Orange"))
+            {
+                return "ffa500";
+            }
+
+            if (note.ColorNote.Equals("Yellow"))
+            {
+                return "ffff00";
+            }
+
+            if (note.ColorNote.Equals("Green"))
+            {
+                return "98FB98";
+            }
+
+            if (note.ColorNote.Equals("Blue"))
+            {
+                return "87CEFA";
+            }
+
+            if (note.ColorNote.Equals("Teal"))
+            {
+                return "7FFFD4";
+            }
+
+            if (note.ColorNote.Equals("DarkBlue"))
+            {
+                return "6495ED";
+            }
+
+            if (note.ColorNote.Equals("Purple"))
+            {
+                return "BOC4DE";
+            }
+
+            if (note.ColorNote.Equals("Pink"))
+            {
+                return "ffc0cb";
+            }
+
+            if (note.ColorNote.Equals("Brown"))
+            {
+                return "BC8F8F";
+            }
+
+            if (note.ColorNote.Equals("Gray"))
+            {
+                return "D3D3D3";
+            }
+
+            return "ffffff";
+        }
+
+        /// <summary>
         /// Gets the color.
         /// </summary>
         /// <param name="note">The note.</param>
@@ -68,93 +133,24 @@ namespace Fundoo.Model
                 frame.BackgroundColor = Color.LightSteelBlue;
                 return;
             }
+
             if (note.ColorNote.Equals("Pink"))
             {
                 frame.BackgroundColor = Color.Pink;
                 return;
             }
+
             if (note.ColorNote.Equals("Brown"))
             {
                 frame.BackgroundColor = Color.RosyBrown;
                 return;
             }
+
             if (note.ColorNote.Equals("Gray"))
             {
                 frame.BackgroundColor = Color.LightGray;
                 return;
             }
-        }
-
-        /// <summary>
-        /// Gets the color of the hexadecimal.
-        /// </summary>
-        /// <param name="note">The note.</param>
-        /// <returns></returns>
-        public static string GetHexColor(NotesData note)
-        {
-            if (note.ColorNote.Equals("Red"))
-            {
-                return "DC143C";
-            }
-
-            if (note.ColorNote.Equals("Orange"))
-            {
-
-                return "ffa500";
-            }
-
-            if (note.ColorNote.Equals("Yellow"))
-            {
-
-                return "ffff00";
-            }
-
-            if (note.ColorNote.Equals("Green"))
-            {
-
-                return "98FB98";
-            }
-
-            if (note.ColorNote.Equals("Blue"))
-            {
-
-                return "87CEFA";
-            }
-
-            if (note.ColorNote.Equals("Teal"))
-            {
-
-                return "7FFFD4";
-            }
-
-            if (note.ColorNote.Equals("DarkBlue"))
-            {
-
-                return "6495ED";
-            }
-
-            if (note.ColorNote.Equals("Purple"))
-            {
-
-                return "BOC4DE";
-            }
-            if (note.ColorNote.Equals("Pink"))
-            {
-
-                return "ffc0cb";
-            }
-            if (note.ColorNote.Equals("Brown"))
-            {
-
-                return "BC8F8F";
-            }
-            if (note.ColorNote.Equals("Gray"))
-            {
-
-                return "D3D3D3";
-            }
-
-            return "ffffff";
         }
     }
 }

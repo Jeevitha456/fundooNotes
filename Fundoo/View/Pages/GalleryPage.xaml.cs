@@ -10,8 +10,6 @@ namespace Fundoo.View.Pages
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using global::Firebase.Storage;
     using Plugin.Media;
@@ -48,6 +46,7 @@ namespace Fundoo.View.Pages
         /// <returns>returns task</returns>
         public async Task<string> StoreImages(Stream imageStream)
         {
+            //// Stores the image in firebase storage
             var stroageImage = await new FirebaseStorage("fundooapp-50c31.appspot.com")
                 .Child("XamarinMonkeys")
                 .Child("image.jpg")
@@ -63,11 +62,12 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtnStore_Clicked(object sender, EventArgs e)
         {
+            //// Gets the file path
             await this.StoreImages(this.file.GetStream());
         }
 
         /// <summary>
-        /// Handles the Clicked event of the BtnPick control.
+        /// Handles the Clicked event of the Button Pick control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
@@ -80,6 +80,8 @@ namespace Fundoo.View.Pages
                 {
                     PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
                 });
+
+                //// Checks that the file choosen is not null
                 if (this.file == null)
                 {
                     return;

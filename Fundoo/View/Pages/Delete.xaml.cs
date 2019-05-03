@@ -30,6 +30,19 @@ namespace Fundoo.View.Pages
         private string val = null;
 
         /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
+        public Color ColorNotes { get; set; }
+
+        /// <summary>
+        /// The note color
+        /// </summary>
+        private string noteColor = "White";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Delete"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -40,8 +53,6 @@ namespace Fundoo.View.Pages
             this.DeleteData();
         }
 
-        public Color ColorNotes { get; set; }
-        private string noteColor = "White";
         /// <summary>
         /// Deletes the data.
         /// </summary>
@@ -56,7 +67,7 @@ namespace Fundoo.View.Pages
 
                 //// Gets all notes data from firebase
                 NotesData notesData = await firebaseHelper.GetNotesData(this.val, userid);
-                
+
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
                 this.noteColor = notesData.ColorNote;
@@ -112,7 +123,7 @@ namespace Fundoo.View.Pages
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
                 IsDeleted = false,
-               ColorNote = this.noteColor
+                ColorNote = this.noteColor
             };
             firebaseHelper.RestoreNotes(notes, this.val, userid);
         }

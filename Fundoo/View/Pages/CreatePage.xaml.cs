@@ -26,7 +26,12 @@ namespace Fundoo.View.Pages
         /// The firebase helper
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
-        CreateNewLabel createNewLabel = new CreateNewLabel();
+
+        /// <summary>
+        /// The create new label
+        /// </summary>
+        private CreateNewLabel createNewLabel = new CreateNewLabel();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatePage"/> class.
         /// </summary>
@@ -34,11 +39,15 @@ namespace Fundoo.View.Pages
         {
             this.InitializeComponent();
         }
+
+        /// <summary>
+        /// Grids the view.
+        /// </summary>
+        /// <param name="list">The list.</param>
         public void GridView(IList<CreateNewLabel> list)
         {
             try
             {
-
                 GridLayout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(350) });
                 GridLayout.Margin = 5;
                 int rowCount = 0;
@@ -72,8 +81,7 @@ namespace Fundoo.View.Pages
                             TextColor = Color.Black,
                             FontAttributes = FontAttributes.None,
                             VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = LayoutOptions.Center,
-                         
+                            HorizontalOptions = LayoutOptions.Center,                        
                         };
 
                         //// Created label key
@@ -83,6 +91,7 @@ namespace Fundoo.View.Pages
                             IsVisible = false
                         };
 
+                        //// Image added to layout
                         var image = new Image
                         {
                             Source = "label.png",
@@ -90,17 +99,15 @@ namespace Fundoo.View.Pages
                             HorizontalOptions = LayoutOptions.Start,
                             WidthRequest = 20,
                             HeightRequest = 20,
-
                         };
+
+                        //// Image added to layout
                         var imageedit = new Image
                         {
                             Source = "editicon.png",
                              VerticalOptions = LayoutOptions.Start,
                             HorizontalOptions = LayoutOptions.End,
-
                         };
-
-
 
                         //// Creates stack layout for each label
                         StackLayout layout = new StackLayout()
@@ -122,6 +129,8 @@ namespace Fundoo.View.Pages
                         var frame = new Frame();
                         frame.BorderColor = Color.White;
                         frame.Content = layout;
+
+                        //// Tapped gesture when tapped navigates to Update Labels Page
                         tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {
                             StackLayout stacklayout = (StackLayout)sender;
@@ -134,12 +143,12 @@ namespace Fundoo.View.Pages
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
+
         /// <summary>
         /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
         /// </summary>
@@ -155,10 +164,9 @@ namespace Fundoo.View.Pages
                 //// Gets all the notes
                 var notes = await this.firebaseHelper.GetAllLabels();
 
+                //// Checks if the note is not null
                 if (notes != null)
                 {
-
-
                     this.GridView(notes);
                 }
             }
@@ -182,13 +190,11 @@ namespace Fundoo.View.Pages
 
                 //// Empty the placeholder
                 txtLabel.Text = string.Empty;
-
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception.Message);
             }
         }
-
     }
 }

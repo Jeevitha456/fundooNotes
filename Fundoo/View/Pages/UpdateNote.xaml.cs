@@ -7,6 +7,8 @@
 namespace Fundoo.View.Pages
 {
     using System;
+    using System.Collections.Generic;
+    using Fundoo.Database;
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
@@ -26,7 +28,17 @@ namespace Fundoo.View.Pages
         /// >
         /// The value
         /// </summary>
-        private string val = null;
+        private string value = null;
+
+        /// <summary>
+        /// The notes database
+        /// </summary>
+        private NotesDatabase notesDatabase = new NotesDatabase();
+
+        /// <summary>
+        /// The firebase helper
+        /// </summary>
+        private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateNote"/> class.
@@ -34,9 +46,57 @@ namespace Fundoo.View.Pages
         /// <param name="value">The value.</param>
         public UpdateNote(string value)
         {
-            this.val = value;
+            this.value = value;
             this.InitializeComponent();
             this.UpdateData();
+        }
+
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+        protected async override void OnAppearing()
+        {
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            var notesData = await this.firebaseHelper.GetNotesData(this.value, userid);
+            var label = notesData.LabelData;
+            this.LabelList(label);
+            base.OnAppearing();
+        }
+
+        /// <summary>
+        /// Labels the list.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        public async void LabelList(IList<string> label)
+        {        
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            var allLabels = await this.firebaseHelper.GetAllLabels();
+            foreach (CreateNewLabel createNewLabel in allLabels)
+            {
+                foreach (var labelid in label)
+                {
+                    if (createNewLabel.LabelKey.Equals(labelid))
+                    {
+                        var labelName = new Label
+                        {
+                            Text = createNewLabel.Label,
+                            HorizontalOptions = LayoutOptions.Center,
+                            VerticalOptions = LayoutOptions.Start,
+                            FontSize = 12,
+                        };
+                        var labelFrame = new Frame();
+                        labelFrame.CornerRadius = 28;
+                        labelFrame.HeightRequest = 14;
+                        labelFrame.BorderColor = Color.Gray;
+                        labelFrame.Content = labelName;
+                        labelFrame.BackgroundColor = this.BackgroundColor;
+                        labelLayout.Children.Add(labelFrame);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -52,7 +112,7 @@ namespace Fundoo.View.Pages
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
                
                 ////Gets the notes data
-                NotesData notesData = await firebaseHelper.GetNotesData(this.val, userid);
+                NotesData notesData = await firebaseHelper.GetNotesData(this.value, userid);
 
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
@@ -88,9 +148,9 @@ namespace Fundoo.View.Pages
                 {
                     Title = txtTitle.Text,
                     Notes = txtNotes.Text,
-                    ColorNote = this.noteColor
+                    ColorNote = this.noteColor,
                 };
-                firebaseHelper.UpdateNotes(notes, this.val, userid);
+                firebaseHelper.UpdateNotes(notes, this.value, userid);
             }
             catch (Exception e)
             {
@@ -119,7 +179,7 @@ namespace Fundoo.View.Pages
                 Notes = txtNotes.Text,
                 ColorNote = this.noteColor
             };
-            PopupNavigation.Instance.PushAsync(new PopTaskView(this.val,notes));
+            PopupNavigation.Instance.PushAsync(new PopTaskView(this.value, notes));
         }
 
         /// <summary>
@@ -142,7 +202,7 @@ namespace Fundoo.View.Pages
                 ColorNote = this.noteColor,
                 IsDeleted = true
             };
-            firebaseHelper.DeleteNotes(notes, this.val, userid);
+            firebaseHelper.DeleteNotes(notes, this.value, userid);
             Navigation.RemovePage(this);
         }
 
@@ -166,7 +226,7 @@ namespace Fundoo.View.Pages
                 IsArchive = true,
                 ColorNote = this.noteColor
             };
-            firebaseHelper.ArchiveNotes(notes, this.val, userid);
+            firebaseHelper.ArchiveNotes(notes, this.value, userid);
         }
 
         /// <summary>
@@ -189,80 +249,173 @@ namespace Fundoo.View.Pages
                IsPinned = true,
                 ColorNote = this.noteColor
             };
-            firebaseHelper.PinnedNotes(notes, this.val, userid);
+            firebaseHelper.PinnedNotes(notes, this.value, userid);
         }
 
+        /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
         public Color ColorNotes { get; set; }
+
+        /// <summary>
+        /// The note color
+        /// </summary>
         private string noteColor = "White";
+
+        /// <summary>
+        /// Reds the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void RedButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Crimson;
             this.noteColor = "Red";
         }
 
+        /// <summary>
+        /// Oranges the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void OrangeButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Orange;
             this.noteColor = "Orange";
         }
 
+        /// <summary>
+        /// Yellows the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void YellowButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Yellow;
             this.noteColor = "Yellow";
         }
 
+        /// <summary>
+        /// Greens the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void GreenButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.PaleGreen;
             this.noteColor = "Green";
         }
 
+        /// <summary>
+        /// Blues the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BlueButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.LightSkyBlue;
             this.noteColor = "Blue";
         }
 
+        /// <summary>
+        /// Teals the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TealButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Aquamarine;
             this.noteColor = "Teal";
         }
 
+        /// <summary>
+        /// Darks the blue button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void DarkBlueButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.CornflowerBlue;
             this.noteColor = "DarkBlue";
         }
 
+        /// <summary>
+        /// Purples the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void PurpleButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.LightSteelBlue;
             this.noteColor = "Purple";
         }
 
+        /// <summary>
+        /// Pinks the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void PinkButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.Pink;
             this.noteColor = "Pink";
         }
 
+        /// <summary>
+        /// Browns the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void BrownButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.RosyBrown;
             this.noteColor = "Brown";
         }
 
+        /// <summary>
+        /// Grays the button.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void GrayButton(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.LightGray;
             this.noteColor = "Gray";
         }
 
+        /// <summary>
+        /// Handles the 1 event of the ImageButton_Clicked control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void ImageButton_Clicked_1(object sender, EventArgs e)
         {
             PopupNavigation.Instance.PushAsync(new PopPlus());
+        }
+
+        /// <summary>
+        /// Handles the Clicked event of the TxtBell control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        private void TxtBell_Clicked(object sender, EventArgs e)
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+         
+            //// Updates the notes when DeleteNotes method is called
+            NotesData notes = new NotesData()
+            {
+                Title = txtTitle.Text,
+                Notes = txtNotes.Text,
+                ColorNote = this.noteColor,
+            };
+            PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value, notes));
         }
     }
 }

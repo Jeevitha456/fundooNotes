@@ -44,7 +44,11 @@ namespace Fundoo.Database
                 Title = item.Object.Title,
                 Notes = item.Object.Notes,
                 Key = item.Key,
-                ColorNote = item.Object.ColorNote
+                ColorNote = item.Object.ColorNote,
+                LabelData = item.Object.LabelData,
+                Longitude = item.Object.Longitude,
+                Latitude = item.Object.Latitude,
+                Area = item.Object.Area,
             }).ToList();
 
             return notesData;

@@ -30,7 +30,6 @@ namespace Fundoo.Model
         /// <value>
         /// The key.
         /// </value>
-        public string LabelKey { get; set; }
-       
+        public string LabelKey { get; set; }     
     }   
 }

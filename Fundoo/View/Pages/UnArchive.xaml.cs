@@ -35,8 +35,20 @@ namespace Fundoo.View.Pages
             this.UnArchiveData();
             this.InitializeComponent();
         }
+
+        /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
         public Color ColorNotes { get; set; }
+
+        /// <summary>
+        /// The note color
+        /// </summary>
         private string noteColor = "White";
+
         /// <summary>
         /// archive data.
         /// </summary>

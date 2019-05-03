@@ -56,7 +56,6 @@ namespace Fundoo.Droid.Android
             }
         }
 
-
         /// <summary>
         /// Statuses this instance.
         /// </summary>
@@ -166,7 +165,7 @@ namespace Fundoo.Droid.Android
             else
             {
                 return false;
-            }             
+            }
         }
 
         /// <summary>
@@ -175,7 +174,6 @@ namespace Fundoo.Droid.Android
         /// <returns>
         /// returns string
         /// </returns>
-     
         public string UserId()
         {
             string uid = null;
@@ -190,8 +188,6 @@ namespace Fundoo.Droid.Android
             }
 
             return uid;
-        }
-
-       
+        }       
     }
 }

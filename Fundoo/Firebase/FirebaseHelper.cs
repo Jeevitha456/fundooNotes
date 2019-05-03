@@ -30,8 +30,7 @@ namespace Fundoo.Firebase
         /// The firebase
         /// </summary>
         private FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
-     
-     
+    
         /// <summary>
         /// Adds the user.
         /// </summary>
@@ -58,10 +57,9 @@ namespace Fundoo.Firebase
         }
 
         /// <summary>
-        /// Adds the note
+        /// Adds the note.
         /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="note">The note.</param>
+        /// <param name="notes">The notes.</param>
         public void AddNote(NotesData notes)
         {
             try
@@ -70,7 +68,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes , ColorNote = noteColor,LabelData=notes.LabelData });
+                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = this.noteColor, LabelData = notes.LabelData });
             }
             catch (Exception ex)
             {
@@ -85,11 +83,18 @@ namespace Fundoo.Firebase
         /// <returns>returns task</returns>
         public async Task CreateLabel(string label)
         {
-            //// Gets the current user id
-            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            try
+            {
+                //// Gets the current user id
+                var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
-            //// creates the label
-            await this.firebase.Child("Persons").Child(userid).Child("Label").PostAsync(new CreateNewLabel { Label = label });
+                //// creates the label
+                await this.firebase.Child("Persons").Child(userid).Child("Label").PostAsync(new CreateNewLabel { Label = label });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -104,7 +109,7 @@ namespace Fundoo.Firebase
               .Child("Persons").Child(userid).Child("Label").OnceAsync<CreateNewLabel>()).Select(item => new CreateNewLabel
               {
                   Label = item.Object.Label,
-                  LabelKey=item.Key
+                  LabelKey = item.Key
               }).ToList();
         }
        
@@ -142,23 +147,40 @@ namespace Fundoo.Firebase
            return notes;
         }
 
-        public void AddLabelToNotes(string key,NotesData notes)
+        /// <summary>
+        /// Adds the label to notes.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="notes">The notes.</param>
+        public void AddLabelToNotes(string key, NotesData notes)
         {
-            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-            
-                this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData() {Title=notes.Title,Notes=notes.Notes,ColorNote=notes.ColorNote, LabelData = notes.LabelData });
-            
-          
-            
+            try
+            {
+                //// Gets the current user id
+                var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                //// Adds the label to the notes choosen
+                this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
-        public async Task<CreateNewLabel> GetLabelsData(string key,string uid)
+
+        /// <summary>
+        /// Gets the labels data.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
+        /// <returns>returns label</returns>
+        public async Task<CreateNewLabel> GetLabelsData(string key, string uid)
         {
-           
+            //// Returns the label from notes choosen
             CreateNewLabel label = await this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).OnceSingleAsync<CreateNewLabel>();
             return label;
         }
         
-
         /// <summary>
         /// Updates the notes.
         /// </summary>
@@ -177,9 +199,24 @@ namespace Fundoo.Firebase
                 Console.WriteLine(ex.Message);
             }
         }
-        public void UpdateLabels(CreateNewLabel label,string key,string uid)
+
+        /// <summary>
+        /// Updates the labels.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
+        public void UpdateLabels(CreateNewLabel label, string key, string uid)
         {
-            this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).PutAsync(new CreateNewLabel() { Label = label.Label });
+            try
+            {
+                //// Updates the label in firebase
+                this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).PutAsync(new CreateNewLabel() { Label = label.Label });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -190,8 +227,15 @@ namespace Fundoo.Firebase
         /// <param name="uid">The id.</param>
         public void DeleteForever(NotesData notes, string key, string uid)
         {
-            //// Deletes the notes from the firebase
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
+            try
+            {
+                //// Deletes the notes from the firebase
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -201,14 +245,37 @@ namespace Fundoo.Firebase
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
         public void DeleteNotes(NotesData notes, string key, string uid)
-        {         
-            //// Deletes the notes from the dashboard
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote });
+        {
+            try
+            {
+                //// Deletes the notes from the dashboard
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
+
+        /// <summary>
+        /// Deletes the label.
+        /// </summary>
+        /// <param name="label">The label.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
         public void DeleteLabel(CreateNewLabel label, string key, string uid)
         {
-            this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).DeleteAsync();
+            try
+            {
+                //// Deletes the choosen label
+                this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).DeleteAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
+
         /// <summary>
         /// Archives the notes.
         /// </summary>
@@ -217,8 +284,15 @@ namespace Fundoo.Firebase
         /// <param name="uid">The id.</param>
         public void ArchiveNotes(NotesData notes, string key, string uid)
         {
-            //// Archives the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true, ColorNote = notes.ColorNote });
+            try
+            {
+                //// Archives the notes 
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true, ColorNote = notes.ColorNote });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -229,8 +303,15 @@ namespace Fundoo.Firebase
         /// <param name="uid">The id.</param>
         public void UnArchiveNotes(NotesData notes, string key, string uid)
         {
-            //// UnArchives the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false, ColorNote = notes.ColorNote });
+            try
+            {
+                //// UnArchives the notes 
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false, ColorNote = notes.ColorNote });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -241,8 +322,15 @@ namespace Fundoo.Firebase
         /// <param name="uid">The id.</param>
         public void RestoreNotes(NotesData notes, string key, string uid)
         {
-            //// Restores the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false, ColorNote = notes.ColorNote });
+            try
+            {
+                //// Restores the notes 
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false, ColorNote = notes.ColorNote });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -250,11 +338,18 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <param name="notes">the notes.</param>
         /// <param name="key">key notes.</param>
-        /// <param name="uid">id.</param>
+        /// <param name="uid">user id.</param>
         public void PinnedNotes(NotesData notes, string key, string uid)
         {
-            //// Restores the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true, ColorNote = notes.ColorNote });
+            try
+            {
+                //// Restores the notes 
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true, ColorNote = notes.ColorNote });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -262,11 +357,73 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <param name="notes">the notes.</param>
         /// <param name="key">key notes.</param>
-        /// <param name="uid">id.</param>
+        /// <param name="uid">user id.</param>
         public void UnPinnedNotes(NotesData notes, string key, string uid)
         {
-            //// Restores the notes 
-            this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false, ColorNote = notes.ColorNote });
+            try
+            {
+                //// Restores the notes and unpins it
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false, ColorNote = notes.ColorNote });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Adds the location.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="latitude">The latitude.</param>
+        /// <param name="longitude">The longitude.</param>
+        public async void AddLocation(string key, NotesData notes, string latitude, string longitude)
+        {
+            //// Gets the current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notesdata by fetching the current loaction
+            await this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData()
+            {
+                Title = notes.Title,
+                Notes = notes.Notes,
+                ColorNote = notes.ColorNote,
+                LabelData = notes.LabelData,
+                Area = notes.Area,
+                IsArchive = notes.IsArchive,
+                IsDeleted = notes.IsDeleted,
+                IsPinned = notes.IsPinned,
+                Latitude = latitude,
+                Longitude = longitude,
+            });
+        }
+
+        /// <summary>
+        /// Adds the location area.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="address">The address.</param>
+        public async void AddLocationArea(string key, NotesData notes, string address)
+        {
+            //// Gets the current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notesdata by fetching the loaction from the user
+            await this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData()
+            {
+                Title = notes.Title,
+                Notes = notes.Notes,
+                ColorNote = notes.ColorNote,
+                LabelData = notes.LabelData,
+                Latitude = notes.Latitude,
+                Longitude = notes.Longitude,
+                IsArchive = notes.IsArchive,
+                IsDeleted = notes.IsDeleted,
+                IsPinned = notes.IsPinned,
+                Area = address
+            });
         }
     }
 }
