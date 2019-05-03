@@ -170,10 +170,10 @@ namespace Fundoo.View.Pages
         }
 
         /// <summary>
-        /// Grid vertical
+        /// Handles the Clicked event of the Grid vertical control.
         /// </summary>
-        /// <param name="sender">name.</param>
-        /// <param name="e">event name</param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Gridvertical_Clicked(object sender, EventArgs e)
         {
             Navigation.PushModalAsync(new Master());

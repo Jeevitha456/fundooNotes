@@ -118,7 +118,6 @@ namespace Fundoo.View.Pages
                         {
                             Spacing = 2,
                             Margin = 2,
-                           // BackgroundColor = Color.White
                         };
 
                         var tapGestureRecognizer = new TapGestureRecognizer();

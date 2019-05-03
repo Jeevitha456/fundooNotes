@@ -121,11 +121,11 @@ namespace Fundoo.View.Pages
         }
 
         /// <summary>
-        /// Called when clicked.
+        /// Called when clicked
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        /// <exception cref="NotImplementedException">OnClicked</exception>
+        /// <exception cref="NotImplementedException">exception message</exception>
         private void OnClicked(object sender, EventArgs e)
         {
             throw new NotImplementedException();

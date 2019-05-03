@@ -10,7 +10,7 @@ namespace Fundoo.View.Pages
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    /// PopPlus
+    /// Pop Plus class
     /// </summary>
     /// <seealso cref="Rg.Plugins.Popup.Pages.PopupPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]

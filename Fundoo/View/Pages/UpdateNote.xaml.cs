@@ -41,6 +41,19 @@ namespace Fundoo.View.Pages
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
+        public Color ColorNotes { get; set; }
+
+        /// <summary>
+        /// The note color
+        /// </summary>
+        private string noteColor = "White";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UpdateNote"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -49,21 +62,6 @@ namespace Fundoo.View.Pages
             this.value = value;
             this.InitializeComponent();
             this.UpdateData();
-        }
-
-        /// <summary>
-        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
-        /// </summary>
-        /// <remarks>
-        /// To be added.
-        /// </remarks>
-        protected async override void OnAppearing()
-        {
-            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-            var notesData = await this.firebaseHelper.GetNotesData(this.value, userid);
-            var label = notesData.LabelData;
-            this.LabelList(label);
-            base.OnAppearing();
         }
 
         /// <summary>
@@ -161,6 +159,21 @@ namespace Fundoo.View.Pages
         }
 
         /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// To be added.
+        /// </remarks>
+        protected async override void OnAppearing()
+        {
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            var notesData = await this.firebaseHelper.GetNotesData(this.value, userid);
+            var label = notesData.LabelData;
+            this.LabelList(label);
+            base.OnAppearing();
+        }
+
+        /// <summary>
         /// Handles the Clicked event of the ImageButton control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
@@ -251,19 +264,6 @@ namespace Fundoo.View.Pages
             };
             firebaseHelper.PinnedNotes(notes, this.value, userid);
         }
-
-        /// <summary>
-        /// Gets or sets the color notes.
-        /// </summary>
-        /// <value>
-        /// The color notes.
-        /// </value>
-        public Color ColorNotes { get; set; }
-
-        /// <summary>
-        /// The note color
-        /// </summary>
-        private string noteColor = "White";
 
         /// <summary>
         /// Reds the button.

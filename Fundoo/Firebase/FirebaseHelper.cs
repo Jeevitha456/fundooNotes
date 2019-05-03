@@ -353,11 +353,11 @@ namespace Fundoo.Firebase
         }
 
         /// <summary>
-        /// UnPinnedNotes
+        /// the pinned notes.
         /// </summary>
-        /// <param name="notes">the notes.</param>
-        /// <param name="key">key notes.</param>
-        /// <param name="uid">user id.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="uid">The id.</param>
         public void UnPinnedNotes(NotesData notes, string key, string uid)
         {
             try

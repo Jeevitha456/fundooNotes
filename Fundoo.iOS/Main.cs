@@ -1,15 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Main.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Jeevitha C"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.iOS
 {
+    using UIKit;
+
+    /// <summary>
+    /// Application class
+    /// </summary>
     public class Application
     {
-        // This is the main entry point of the application.
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         static void Main(string[] args)
         {
             // if you want to use a different Application Delegate class from "AppDelegate"

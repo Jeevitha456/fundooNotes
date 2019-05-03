@@ -1,4 +1,10 @@
-﻿namespace Fundoo.View.Pages
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GeoLocation.xaml.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator name="Jeevitha C"/>
+// --------------------------------------------------------------------------------------------------------------------
+namespace Fundoo.View.Pages
 {
     using System;
     using System.Linq;
@@ -15,7 +21,7 @@
     public partial class GeoLocation : ContentPage
     {
         /// <summary>
-        /// string
+        /// The value
         /// </summary>
         private string value = null;
 
@@ -25,10 +31,10 @@
         private NotesData note = null;
 
         /// <summary>
-        /// GeoLocation
+        /// Initializes a new instance of the <see cref="GeoLocation"/> class.
         /// </summary>
-        /// <param name="key">the key.</param>
-        /// <param name="notesData">notes data.</param>
+        /// <param name="key">The key.</param>
+        /// <param name="notesData">The notes data.</param>
         public GeoLocation(string key, NotesData notesData)
         {
             this.value = key;
@@ -42,10 +48,10 @@
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
-        /// Location class
+        /// Handles the Clicked event of the Button Location control.
         /// </summary>
-        /// <param name="sender">sender object.</param>
-        /// <param name="e">events.</param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtnLocation_Clicked(object sender, EventArgs e)
         {         
             try
@@ -97,10 +103,10 @@
         }
 
         /// <summary>
-        /// Button Location1_Clicked
+        /// Handles the Clicked event of the Button Location1 control.
         /// </summary>
-        /// <param name="sender">sender object.</param>
-        /// <param name="e">events.</param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtnLocation1_Clicked(object sender, EventArgs e)
         {
             try
