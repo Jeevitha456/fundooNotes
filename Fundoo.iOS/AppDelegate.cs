@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-
-namespace Fundoo.iOS
+﻿namespace Fundoo.iOS
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Foundation;
+    using UIKit;
+
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
@@ -20,7 +19,7 @@ namespace Fundoo.iOS
         // You have 17 seconds to return from this method, or iOS will terminate your application.
 
         /// <summary>
-        /// Finisheds the launching.
+        /// Finished the launching.
         /// </summary>
         /// <param name="app">The application.</param>
         /// <param name="options">The options.</param>

@@ -31,6 +31,11 @@ namespace Fundoo.View.Pages
         private NotesData note = null;
 
         /// <summary>
+        /// Firebase Helper class
+        /// </summary>
+        private FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="GeoLocation"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
@@ -41,11 +46,6 @@ namespace Fundoo.View.Pages
             this.note = notesData;
             this.InitializeComponent();
         }
-
-        /// <summary>
-        /// Firebase Helper class
-        /// </summary>
-        private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
         /// Handles the Clicked event of the Button Location control.
@@ -90,15 +90,15 @@ namespace Fundoo.View.Pages
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                await this.DisplayAlert("Faild", fnsEx.Message, "OK");
+                await this.DisplayAlert("Failed", fnsEx.Message, "OK");
             }
             catch (PermissionException pEx)
             {
-                await this.DisplayAlert("Faild", pEx.Message, "OK");
+                await this.DisplayAlert("Failed", pEx.Message, "OK");
             }
             catch (Exception ex)
             {
-                await this.DisplayAlert("Faild", ex.Message, "OK");
+                await this.DisplayAlert("Failed", ex.Message, "OK");
             }
         }
 

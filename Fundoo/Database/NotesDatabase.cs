@@ -33,10 +33,10 @@ namespace Fundoo.Database
         public async Task<IList<NotesData>> GetNotesAsync()
         {
             //// Gets the current user id
-            var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
             //// Returns all the data
-            IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(uid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
+            IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
             {
                 IsPinned = item.Object.IsPinned,
                 IsArchive = item.Object.IsArchive,

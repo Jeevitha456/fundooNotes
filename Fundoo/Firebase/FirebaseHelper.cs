@@ -102,7 +102,8 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <returns>returns task</returns>
         public async Task<List<CreateNewLabel>> GetAllLabels()
-        {
+        {  
+            //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             //// returns all the person contained in the list
             return (await this.firebase
@@ -118,7 +119,8 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <returns>returns Task</returns>
         public async Task<List<NotesData>> GetAllNotes()
-        {
+        { 
+            //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
             //// Returns all the data from the firebase

@@ -25,6 +25,10 @@ namespace Fundoo.Droid
     [Activity(Label = "Fundoo", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        /// <summary>
+        /// Called when create.
+        /// </summary>
+        /// <param name="savedInstanceState">State of the saved instance.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;

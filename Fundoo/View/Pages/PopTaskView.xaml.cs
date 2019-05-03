@@ -29,9 +29,22 @@ namespace Fundoo.View.Pages
         private string value = null;
 
         /// <summary>
+        /// The note color
+        /// </summary>
+        private string noteColor = "White";
+
+        /// <summary>
         /// The notes
         /// </summary>
-       private NotesData notes = null;
+        private NotesData notes = null;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PopTaskView"/> class.
+        /// </summary>
+        public PopTaskView()
+        {
+            this.InitializeComponent();
+        }
 
         /// <summary>
         /// Gets or sets the color notes.
@@ -39,20 +52,7 @@ namespace Fundoo.View.Pages
         /// <value>
         /// The color notes.
         /// </value>
-        public Color ColorNotes { get; set; }
-
-        /// <summary>
-        /// The note color
-        /// </summary>
-        private string noteColor = "White";
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PopTaskView"/> class.
-        /// </summary>
-        public PopTaskView()
-        {          
-          this.InitializeComponent();
-        }
+        public Color ColorNotes { get; set; }      
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PopTaskView"/> class.

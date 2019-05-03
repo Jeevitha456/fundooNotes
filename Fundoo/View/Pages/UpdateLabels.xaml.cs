@@ -58,9 +58,6 @@ namespace Fundoo.View.Pages
         /// <returns>
         /// To be added.
         /// </returns>
-        /// <remarks>
-        /// To be added.
-        /// </remarks>
         protected override bool OnBackButtonPressed()
         {
             try

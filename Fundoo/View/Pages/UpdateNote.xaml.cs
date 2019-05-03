@@ -24,6 +24,11 @@ namespace Fundoo.View.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UpdateNote : ContentPage
     {
+        /// <summary>
+        /// The note color
+        /// </summary>
+        private string noteColor = "White";
+
         /// <summary
         /// >
         /// The value
@@ -41,19 +46,6 @@ namespace Fundoo.View.Pages
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         /// <summary>
-        /// Gets or sets the color notes.
-        /// </summary>
-        /// <value>
-        /// The color notes.
-        /// </value>
-        public Color ColorNotes { get; set; }
-
-        /// <summary>
-        /// The note color
-        /// </summary>
-        private string noteColor = "White";
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UpdateNote"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -63,6 +55,14 @@ namespace Fundoo.View.Pages
             this.InitializeComponent();
             this.UpdateData();
         }
+
+        /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
+        public Color ColorNotes { get; set; }
 
         /// <summary>
         /// Labels the list.
@@ -129,9 +129,6 @@ namespace Fundoo.View.Pages
         /// <returns>
         /// To be added.
         /// </returns>
-        /// <remarks>
-        /// To be added.
-        /// </remarks>
         protected override bool OnBackButtonPressed()
         {
             try

@@ -22,14 +22,6 @@ namespace Fundoo.View.Pages
     public partial class UpdatePinNotes : ContentPage
     {
         /// <summary>
-        /// Gets or sets the color notes.
-        /// </summary>
-        /// <value>
-        /// The color notes.
-        /// </value>
-        public Color ColorNotes { get; set; }
-
-        /// <summary>
         /// The note color
         /// </summary>
         private string noteColor = "White";
@@ -38,7 +30,7 @@ namespace Fundoo.View.Pages
         /// The value
         /// </summary>
         private string value = null;
-
+      
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdatePinNotes"/> class.
         /// </summary>
@@ -49,6 +41,14 @@ namespace Fundoo.View.Pages
             this.InitializeComponent();
             this.UpdatePinData();
         }
+
+        /// <summary>
+        /// Gets or sets the color notes.
+        /// </summary>
+        /// <value>
+        /// The color notes.
+        /// </value>
+        public Color ColorNotes { get; set; }
 
         /// <summary>
         /// Updates the pin data.
@@ -81,9 +81,6 @@ namespace Fundoo.View.Pages
         /// <returns>
         /// To be added.
         /// </returns>
-        /// <remarks>
-        /// To be added.
-        /// </remarks>
         protected override bool OnBackButtonPressed()
         {
             try
