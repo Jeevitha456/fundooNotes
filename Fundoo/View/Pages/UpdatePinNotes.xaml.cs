@@ -332,7 +332,7 @@ namespace Fundoo.View.Pages
                 Notes = txtNotes.Text,
                 ColorNote = this.noteColor,         
             };
-            PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value, notes));
+            PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value));
         }
     }
 }

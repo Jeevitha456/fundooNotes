@@ -398,21 +398,9 @@ namespace Fundoo.View.Pages
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void TxtBell_Clicked(object sender, EventArgs e)
-        {
-            FirebaseHelper firebaseHelper = new FirebaseHelper();
-
-            //// Gets current user id
-            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-         
-            //// Updates the notes when DeleteNotes method is called
-            NotesData notes = new NotesData()
-            {
-                Title = txtTitle.Text,
-                Notes = txtNotes.Text,
-                ColorNote = this.noteColor,
-            };
-            PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value, notes));
+        private async void TxtBell_Clicked(object sender, EventArgs e)
+        { 
+          await  PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value));
         }
     }
 }

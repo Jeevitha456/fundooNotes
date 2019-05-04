@@ -10,7 +10,6 @@
             <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
                 <Entry x:Name="txtAddress" Placeholder="Search Location..." WidthRequest="300"></Entry>
                 <Button x:Name="btnLocation" Text="Get Location" Clicked="BtnLocation_Clicked" BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
-                <Button x:Name="btnLocation1" Text="Get Location latitude" Clicked="btnLocation1_Clicked" BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
                 <Label HorizontalTextAlignment="Center" x:Name="lblLatitude"></Label>
                 <Label HorizontalTextAlignment="Center" x:Name="lblLongitude"></Label>
                 <Label HorizontalTextAlignment="Center" x:Name="lblAdminArea"></Label>

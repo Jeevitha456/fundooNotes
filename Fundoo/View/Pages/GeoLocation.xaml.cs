@@ -9,6 +9,7 @@ namespace Fundoo.View.Pages
     using System;
     using System.Linq;
     using Fundoo.Firebase;
+    using Fundoo.Interface;
     using Fundoo.Model;
     using Xamarin.Essentials;
     using Xamarin.Forms;
@@ -26,11 +27,6 @@ namespace Fundoo.View.Pages
         private string value = null;
 
         /// <summary>
-        /// Notes Data
-        /// </summary>
-        private NotesData note = null;
-
-        /// <summary>
         /// Firebase Helper class
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
@@ -40,10 +36,9 @@ namespace Fundoo.View.Pages
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="notesData">The notes data.</param>
-        public GeoLocation(string key, NotesData notesData)
+        public GeoLocation(string key)
         {
             this.value = key;
-            this.note = notesData;
             this.InitializeComponent();
         }
 
@@ -77,14 +72,37 @@ namespace Fundoo.View.Pages
                             lblAdminArea.Text = "Admin Area: " + placemark.AdminArea;
                             lblCountryName.Text = "Country Name:" + placemark.CountryName;
                             lblCountryCode.Text = "Country Code:" + placemark.CountryCode;
-                            lblLocality.Text = "Locality:" + placemark.Locality;
+                            lblLocality.Text = placemark.Locality;
                             lblSubAdminArea.Text = "SubAdmin Area:" + placemark.SubAdminArea;
                             lblSublocality.Text = "SubLocality:" + placemark.SubLocality;
                             lblPostalcode.Text = "PostalCode:" + placemark.PostalCode;
                         }
+                        //// Gets the current location
+                        var locationArea = await Geolocation.GetLastKnownLocationAsync();
 
+                        //// Checks if the location is not null
+                        if (locationArea != null)
+                        {
+                            lblLatitude.Text = "Latitude: " + locationArea.Latitude.ToString();
+                            lblLongitude.Text = "Longitude:" + locationArea.Longitude.ToString();
+                        }
+                        var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+                        NotesData notes = await this.firebaseHelper.GetNotesData(this.value, userid);
+                        //// Updates the notes when DeleteNotes method is called
+                        notes = new NotesData()
+                        {
+
+                            Title = notes.Title,
+                            Notes = notes.Notes,
+                            ColorNote = notes.ColorNote,
+                            LabelData = notes.LabelData,
+                            Latitude=notes.Latitude,
+                            Longitude=notes.Longitude,
+                            Area=notes.Area
+                            
+                        };
                         //// Updates the data to firebase
-                       this.firebaseHelper.AddLocationArea(this.value, this.note, lblLocality.Text);
+                        this.firebaseHelper.AddLocationArea(this.value, notes, lblLocality.Text ,lblLatitude.Text,lblLongitude.Text);
                     }
                 }
             }
@@ -99,42 +117,6 @@ namespace Fundoo.View.Pages
             catch (Exception ex)
             {
                 await this.DisplayAlert("Failed", ex.Message, "OK");
-            }
-        }
-
-        /// <summary>
-        /// Handles the Clicked event of the Button Location1 control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private async void BtnLocation1_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                //// Gets the current location
-                var location = await Geolocation.GetLastKnownLocationAsync();
-
-                //// Checks if the location is not null
-                if (location != null)
-                {
-                    lblLatitude.Text = "Latitude: " + location.Latitude.ToString();
-                    lblLongitude.Text = "Longitude:" + location.Longitude.ToString();
-                }
-
-                //// Updates the current location in firebase class
-                 this.firebaseHelper.AddLocation(this.value, this.note, lblLatitude.Text, lblLongitude.Text);
-            }
-            catch (FeatureNotSupportedException fnsEx)
-            {
-                await this.DisplayAlert("Faild", fnsEx.Message, "OK");
-            }
-            catch (PermissionException pEx)
-            {
-                await this.DisplayAlert("Faild", pEx.Message, "OK");
-            }
-            catch (Exception ex)
-            {
-                await this.DisplayAlert("Faild", ex.Message, "OK");
             }
         }
     }

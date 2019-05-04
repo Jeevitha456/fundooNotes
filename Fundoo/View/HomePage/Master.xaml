@@ -7,9 +7,13 @@
 
         
             <ContentPage Title="Menu">
+               
+
                 <Grid BackgroundColor="Transparent">
                     <Grid>
                         <StackLayout>
+                            
+
                             <Label Text="Fundoo" TextColor="Black" FontSize="Large" />
                             <StackLayout Grid.Row="1">
                                 <ListView x:Name="navigationDrawerList"

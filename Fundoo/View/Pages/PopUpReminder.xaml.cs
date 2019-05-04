@@ -33,19 +33,13 @@ namespace Fundoo.View.Pages
         private string value = null;
 
         /// <summary>
-        /// The note
-        /// </summary>
-        private NotesData note = null;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PopUpReminder"/> class.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="notesData">The notes data.</param>
-        public PopUpReminder(string key, NotesData notesData)
+        public PopUpReminder(string key)
         {
             this.value = key;
-            this.note = notesData;
             this.InitializeComponent();
         }
 
@@ -76,7 +70,7 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void PlaceClicked_Clicked(object sender, EventArgs e)
         {         
-            Navigation.PushModalAsync(new GeoLocation(this.value, this.note));
+            Navigation.PushModalAsync(new GeoLocation(this.value));
             PopupNavigation.Instance.PopAsync(true);
         }
     }

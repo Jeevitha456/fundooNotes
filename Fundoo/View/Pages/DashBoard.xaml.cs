@@ -274,7 +274,34 @@ namespace Fundoo.View.Pages
                                 }
                             }
                         }
-
+                        if(data.Area!=null)
+                        {
+                            var image = new Image
+                            {
+                                Source = "location.png",
+                                VerticalOptions = LayoutOptions.Start,
+                                HorizontalOptions = LayoutOptions.Start,
+                            };
+                            var location = new Label
+                            {
+                                Text = data.Area,
+                                HorizontalOptions = LayoutOptions.Center,
+                                VerticalOptions = LayoutOptions.Center,
+                                FontSize = 10,
+                            };
+                            var locationFrame = new Frame();
+                            locationFrame.CornerRadius = 28;
+                            locationFrame.HeightRequest = 12;
+                            locationFrame.WidthRequest = 30;
+                            locationFrame.BorderColor = Color.Gray;
+                            locationFrame.Content = location;
+                           // locationFrame.Content = image;
+                          
+                            locationFrame.BackgroundColor = Color.FromHex(SetColor.GetHexColor(data));
+                            //layout.Children.Add(image);
+                            layout.Children.Add(locationFrame);
+                        }
+                     
                         //// Tap gesture recognizer
                             tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {

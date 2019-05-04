@@ -129,6 +129,8 @@ namespace Fundoo.Firebase
               {
                   IsArchive = item.Object.IsArchive,
                   IsDeleted = item.Object.IsDeleted,
+                  IsPinned=item.Object.IsPinned,
+                  LabelData=item.Object.LabelData,
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
                   Key = item.Key,
@@ -392,10 +394,7 @@ namespace Fundoo.Firebase
                 Notes = notes.Notes,
                 ColorNote = notes.ColorNote,
                 LabelData = notes.LabelData,
-                Area = notes.Area,
-                IsArchive = notes.IsArchive,
-                IsDeleted = notes.IsDeleted,
-                IsPinned = notes.IsPinned,
+               // Area = notes.Area,
                 Latitude = latitude,
                 Longitude = longitude,
             });
@@ -407,7 +406,7 @@ namespace Fundoo.Firebase
         /// <param name="key">The key.</param>
         /// <param name="notes">The notes.</param>
         /// <param name="address">The address.</param>
-        public async void AddLocationArea(string key, NotesData notes, string address)
+        public async void AddLocationArea(string key, NotesData notes, string address,string latitude,string longitude)
         {
             //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
@@ -419,11 +418,8 @@ namespace Fundoo.Firebase
                 Notes = notes.Notes,
                 ColorNote = notes.ColorNote,
                 LabelData = notes.LabelData,
-                Latitude = notes.Latitude,
-                Longitude = notes.Longitude,
-                IsArchive = notes.IsArchive,
-                IsDeleted = notes.IsDeleted,
-                IsPinned = notes.IsPinned,
+                Latitude = latitude,
+                Longitude = longitude,
                 Area = address
             });
         }
