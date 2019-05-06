@@ -1,28 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fundoo.View.HomePage.Master"
+                  xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+                  x:Class="Fundoo.View.HomePage.Master"
                               >
     <MasterDetailPage.Master>
-
-        
-            <ContentPage Title="Menu">
-               
-
-                <Grid BackgroundColor="Transparent">
-                    <Grid>
-                        <StackLayout>
-                            
-
-                            <Label Text="Fundoo" TextColor="Black" FontSize="Large" />
-                            <StackLayout Grid.Row="1">
-                                <ListView x:Name="navigationDrawerList"
+        <ContentPage Title="Menu">
+            <Grid BackgroundColor="Transparent">
+               <Grid>
+                 <StackLayout >
+                    <StackLayout Grid.Row="1" HorizontalOptions="End" BackgroundColor="Black">
+                        <controls:CircleImage x:Name="ProfilePic" Source="profile.png" WidthRequest="40" HeightRequest="40"/>
+                      </StackLayout>
+                     <StackLayout HorizontalOptions="Center">
+                            <AbsoluteLayout>
+                        <Label Text="Fundoo" TextColor="Black"  FontSize="Large" />
+                            </AbsoluteLayout>
+                            <StackLayout Grid.Row="2">
+                                <ScrollView>
+                            <ListView x:Name="navigationDrawerList"
                                        RowHeight="60"
                                        SeparatorVisibility="None"
                                        BackgroundColor="White"
                                        ItemSelected="OnItemSelected">
-
-                                    <ListView.ItemTemplate>
+                                <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
                                                 <StackLayout>
@@ -47,9 +48,11 @@
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
+                                </ScrollView>
                             </StackLayout>
                         </StackLayout>
-                    </Grid>
+                    </StackLayout>
+                </Grid>
                 </Grid>
             </ContentPage>
         </MasterDetailPage.Master>

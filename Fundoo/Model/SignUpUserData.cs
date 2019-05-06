@@ -12,6 +12,7 @@ namespace Fundoo.Model
     /// </summary>
     public class SignUpUserData
     {
+        
         /// <summary>
         /// Gets or sets the email.
         /// </summary>

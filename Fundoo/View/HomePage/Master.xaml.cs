@@ -8,6 +8,7 @@ namespace Fundoo.View.HomePage
 {
     using System;
     using System.Collections.Generic;
+    using Fundoo.Firebase;
     using Fundoo.Model;
     using Fundoo.View.Pages;
     using Xamarin.Forms;
@@ -26,6 +27,10 @@ namespace Fundoo.View.HomePage
         public Master()
         {
             this.InitializeComponent();
+           // OnAppearing();
+            var image = new TapGestureRecognizer();
+            image.Tapped += imageTapped;
+            ProfilePic.GestureRecognizers.Add(image);
             this.MasterList = new List<MasterItems>();
             this.MasterList.Add(new MasterItems() { Title = "Notes", Icon = "Note.png", TargetType = typeof(DashBoard) });
             this.MasterList.Add(new MasterItems() { Title = "Reminders", Icon = "Reminders.png", TargetType = typeof(RemindersPage) });
@@ -36,7 +41,12 @@ namespace Fundoo.View.HomePage
             this.navigationDrawerList.ItemsSource = this.MasterList;
             this.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(DashBoard)));
         } 
-       
+
+        public async void imageTapped(object sender,EventArgs e)
+        {
+            await Navigation.PushModalAsync(new GalleryPage());
+        }
+
         /// <summary>
         /// Gets or sets the menu list.
         /// </summary>
@@ -57,5 +67,21 @@ namespace Fundoo.View.HomePage
             this.Detail = new NavigationPage((Page)Activator.CreateInstance(page));
             this.IsPresented = false;
         }
+
+        //protected async override void OnAppearing()
+        //{
+        //    FirebaseHelper firebaseHelper = new FirebaseHelper();
+        //    //SignUpUserData user = await firebaseHelper.GetUser();
+        //    if(user.imageurl!=null)
+        //    {
+        //        var imagesource = new UriImageSource { Uri = new Uri(user.imageurl) };
+
+        //        imagesource.CachingEnabled = false;
+        //        ProfilePic.Source = imagesource;
+        //        ProfilePic.HeightRequest = 70;
+        //        ProfilePic.WidthRequest = 70;
+        //    }
+        //    base.OnAppearing();
+        //}
     }
 }

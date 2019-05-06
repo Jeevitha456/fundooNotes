@@ -24,13 +24,13 @@ namespace Fundoo.Firebase
         /// <summary>
         /// The note color
         /// </summary>
-        private string noteColor = "White"; 
+        private string noteColor = "White";
 
         /// <summary>
         /// The firebase
         /// </summary>
         private FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
-    
+
         /// <summary>
         /// Adds the user.
         /// </summary>
@@ -41,9 +41,9 @@ namespace Fundoo.Firebase
         /// <param name="repeatPassword">The repeat password.</param>
         /// <returns>returns task</returns>
         public async Task AddUser(string firstName, string lastName, string email, string password, string repeatPassword)
-        {          
+        {
             try
-            {      
+            {
                 //// used for signing up with email and password
                 var userid = await DependencyService.Get<IFirebaseAuthenticator>().SignUpWithEmailPassword(email, password);
 
@@ -53,7 +53,7 @@ namespace Fundoo.Firebase
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }                                     
+            }
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                 this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = this.noteColor, LabelData = notes.LabelData });
+                this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = this.noteColor, LabelData = notes.LabelData });
             }
             catch (Exception ex)
             {
@@ -102,7 +102,7 @@ namespace Fundoo.Firebase
         /// </summary>
         /// <returns>returns task</returns>
         public async Task<List<CreateNewLabel>> GetAllLabels()
-        {  
+        {
             //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             //// returns all the person contained in the list
@@ -113,13 +113,13 @@ namespace Fundoo.Firebase
                   LabelKey = item.Key
               }).ToList();
         }
-       
+
         /// <summary>
         /// Gets all notes.
         /// </summary>
         /// <returns>returns Task</returns>
         public async Task<List<NotesData>> GetAllNotes()
-        { 
+        {
             //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
@@ -129,8 +129,8 @@ namespace Fundoo.Firebase
               {
                   IsArchive = item.Object.IsArchive,
                   IsDeleted = item.Object.IsDeleted,
-                  IsPinned=item.Object.IsPinned,
-                  LabelData=item.Object.LabelData,
+                  IsPinned = item.Object.IsPinned,
+                  LabelData = item.Object.LabelData,
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
                   Key = item.Key,
@@ -148,7 +148,7 @@ namespace Fundoo.Firebase
         {
             //// Returns the notes from the firebase
             NotesData notes = await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).OnceSingleAsync<NotesData>();
-           return notes;
+            return notes;
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Fundoo.Firebase
             CreateNewLabel label = await this.firebase.Child("Persons").Child(uid).Child("Label").Child(key).OnceSingleAsync<CreateNewLabel>();
             return label;
         }
-        
+
         /// <summary>
         /// Updates the notes.
         /// </summary>
@@ -394,7 +394,7 @@ namespace Fundoo.Firebase
                 Notes = notes.Notes,
                 ColorNote = notes.ColorNote,
                 LabelData = notes.LabelData,
-               // Area = notes.Area,
+                // Area = notes.Area,
                 Latitude = latitude,
                 Longitude = longitude,
             });
@@ -406,7 +406,7 @@ namespace Fundoo.Firebase
         /// <param name="key">The key.</param>
         /// <param name="notes">The notes.</param>
         /// <param name="address">The address.</param>
-        public async void AddLocationArea(string key, NotesData notes, string address,string latitude,string longitude)
+        public async void AddLocationArea(string key, NotesData notes, string address, string latitude, string longitude)
         {
             //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
@@ -422,6 +422,52 @@ namespace Fundoo.Firebase
                 Longitude = longitude,
                 Area = address
             });
+        }
+
+        //public async Task GetImage(string imageSource)
+        //{
+        //    var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+        //    SignUpUserData signUp = await GetUser();
+        //    if(userid!=null && signUp!=null)
+        //    {
+        //        await firebase.Child("Persons").Child(userid).Child("userinfo").PutAsync<SignUpUserData>(new SignUpUserData()
+        //        {
+        //            FirstName=signUp.FirstName,
+        //            LastName=signUp.LastName,
+        //            Email=signUp.Email,
+        //            imageurl=imageSource
+        //        });
+        //    }
+
+        //}
+
+        //public async Task<SignUpUserData> GetUser()
+        //{
+        //    try
+        //    {
+        //        string userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+        //        if (userid != null)
+        //        {
+        //            SignUpUserData sign = await firebase.Child("Persons").Child(userid).Child("userinfo").OnceSingleAsync<SignUpUserData>();
+        //            return sign;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //    return null;
+        //}
+
+        public async void GetImage(string imageSource)
+        {
+            string userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            await this.firebase.Child("Persons").Child(userid).Child("Profile").PostAsync(new ProfileModel()
+            {
+               imageurl=imageSource,
+            });
+
+
         }
     }
 }

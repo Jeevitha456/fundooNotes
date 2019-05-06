@@ -11,6 +11,7 @@ namespace Fundoo.View.Pages
     using System.Diagnostics;
     using System.IO;
     using System.Threading.Tasks;
+    using Fundoo.Firebase;
     using global::Firebase.Storage;
     using Plugin.Media;
     using Plugin.Media.Abstractions;
@@ -29,6 +30,7 @@ namespace Fundoo.View.Pages
         /// </summary>
         private MediaFile file;
 
+        FirebaseHelper firebase = new FirebaseHelper();
         /// <summary>
         /// Initializes a new instance of the <see cref="GalleryPage"/> class.
         /// </summary>
@@ -44,7 +46,7 @@ namespace Fundoo.View.Pages
         /// </summary>
         /// <param name="imageStream">The image stream.</param>
         /// <returns>returns task</returns>
-        public async Task<string> StoreImages(Stream imageStream)
+        public async Task StoreImages(Stream imageStream)
         {
             //// Stores the image in firebase storage
             var stroageImage = await new FirebaseStorage("fundooapp-50c31.appspot.com")
@@ -52,7 +54,8 @@ namespace Fundoo.View.Pages
                 .Child("image.jpg")
                 .PutAsync(imageStream);
             string imgurl = stroageImage;
-            return imgurl;
+            //return imgurl;
+            firebase.GetImage(imgurl);
         }
 
         /// <summary>
