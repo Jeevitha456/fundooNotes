@@ -73,5 +73,10 @@ namespace Fundoo.View.Pages
             Navigation.PushModalAsync(new GeoLocation(this.value));
             PopupNavigation.Instance.PopAsync(true);
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

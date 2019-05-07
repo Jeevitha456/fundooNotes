@@ -466,8 +466,20 @@ namespace Fundoo.Firebase
             {
                imageurl=imageSource,
             });
-
-
         }
+
+        public async Task<List<ProfileModel>> GetProfilePic()
+        {
+            //// Gets the current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            //// returns all the person contained in the list
+            return (await this.firebase
+              .Child("Persons").Child(userid).Child("Profile").OnceAsync<ProfileModel>()).Select(item => new ProfileModel
+              {
+                  imageurl = item.Object.imageurl,
+                  ProfileKey = item.Key
+              }).ToList();
+        }
+
     }
 }

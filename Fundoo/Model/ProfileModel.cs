@@ -7,5 +7,6 @@ namespace Fundoo.Model
     public class ProfileModel
     {
        public string imageurl { get; set; }
+        public string ProfileKey { get; set; }
     }
 }

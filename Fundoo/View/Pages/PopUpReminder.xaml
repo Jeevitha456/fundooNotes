@@ -38,7 +38,7 @@
         </StackLayout>
         <StackLayout Orientation="Horizontal">
             <Button Text="Cancel" BackgroundColor="Transparent"/>
-            <Button Text="Save" BackgroundColor="Transparent" />
+            <Button Text="Save" BackgroundColor="Transparent" Clicked="Button_Clicked"/>
         </StackLayout>
     </StackLayout>
 </pages:PopupPage>
