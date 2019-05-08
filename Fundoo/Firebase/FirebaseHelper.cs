@@ -479,7 +479,6 @@ namespace Fundoo.Firebase
                   imageurl = item.Object.imageurl,
                   ProfileKey = item.Key
               }).ToList();
-        }
-
+        }   
     }
 }

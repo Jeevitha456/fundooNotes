@@ -218,5 +218,12 @@ namespace Fundoo.View.Pages
             this.BackgroundColor = Color.Gray;
             this.noteColor = "Gray";
         }
+
+        private void CollaboratorButton(object sender, EventArgs e)
+        {
+            Navigation.PushModalAsync(new Collaborator());
+            PopupNavigation.Instance.PopAsync(true);
+
+        }
     }
 }
