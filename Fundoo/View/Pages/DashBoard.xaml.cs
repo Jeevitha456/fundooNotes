@@ -4,7 +4,6 @@
 // </copyright>
 // <creator name="Jeevitha C"/>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Fundoo.View.Pages
 {
     using System;
@@ -281,20 +280,29 @@ namespace Fundoo.View.Pages
                                 Source = "location.png",
                                 VerticalOptions = LayoutOptions.Start,
                                 HorizontalOptions = LayoutOptions.Start,
+                                HeightRequest=13,
+                                WidthRequest=13
                             };
                             var location = new Label
                             {
                                 Text = data.Area,
-                                HorizontalOptions = LayoutOptions.Center,
-                                VerticalOptions = LayoutOptions.Center,
-                                FontSize = 10,
+                                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                VerticalOptions = LayoutOptions.StartAndExpand,
+                                FontSize = 12,
                             };
-                            var locationFrame = new Frame();
+                            StackLayout framelayout = new StackLayout()
+                            {
+                                Spacing = 1,
+                                Margin = 1,
+                            };
+                            framelayout.Children.Add(image);
+                            framelayout.Children.Add(location);
+                            var locationFrame = new Frame();                                                        
                             locationFrame.CornerRadius = 28;
-                            locationFrame.HeightRequest = 12;
+                            locationFrame.HeightRequest = 10;
                             locationFrame.WidthRequest = 30;
                             locationFrame.BorderColor = Color.Gray;
-                            locationFrame.Content = location;
+                            locationFrame.Content = framelayout;
                            // locationFrame.Content = image;
                           
                             locationFrame.BackgroundColor = Color.FromHex(SetColor.GetHexColor(data));

@@ -21,19 +21,10 @@
                 </Grid.ColumnDefinitions>
                 <ImageButton Source="cross.png" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" WidthRequest="10" HeightRequest="5" BackgroundColor="White" Padding="10,10,15,10"/>
                 <Label x:Name="txtLabel" FontSize="Medium" Text="Collaborator" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" BackgroundColor="White" />
-                <Button  Grid.Row="0" Grid.Column="4"  BackgroundColor="White" Text="SAVE"/>
-                
+                <Button  Grid.Row="0" Grid.Column="4"  BackgroundColor="White" Text="SAVE" Clicked="SaveButton"/>
+
                 <Entry x:Name="txtCurrentMail" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" />
-                <!--<input:AutoCompleteEntry
-                x:Name="autoCompleteEntry"
-                Title="Type something"
-                Annotation="Email"
-                IconImage="ic_account_balance_black"
-                IsRequired="True"
-                Placeholder="Start writing xamarin"
-                TextColor="Black"
-                ValidationMessage="Is not valid" />-->
-                <input:AutoCompleteEntry TextColor="Black" Annotation="Email" x:Name="txtMail" IsRequired="True" Placeholder="Person or email to share with" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" TextChanged="TxtMail_TextChanged"/>
+                <input:AutoCompleteEntry TextColor="Black" BorderColor="Transparent" Annotation="Email" x:Name="txtMail" IsRequired="True" Placeholder="Person or email to share with" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" />
             </Grid>
         </StackLayout>
     </ContentPage.Content>

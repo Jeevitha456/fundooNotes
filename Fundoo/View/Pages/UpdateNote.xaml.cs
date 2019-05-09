@@ -49,9 +49,9 @@ namespace Fundoo.View.Pages
         /// Initializes a new instance of the <see cref="UpdateNote"/> class.
         /// </summary>
         /// <param name="value">The value.</param>
-        public UpdateNote(string value)
+        public UpdateNote(string key)
         {
-            this.value = value;
+            this.value = key;
             this.InitializeComponent();
             this.UpdateData();
         }
@@ -95,6 +95,63 @@ namespace Fundoo.View.Pages
                     }
                 }
             }
+        }
+
+        public async void LocationArea(string Area)
+        {
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            var notes= await this.firebaseHelper.GetNotesData(value,userid);
+            if(notes.Area!=null)
+            {
+                var image = new Image
+                {
+                    Source = "location.png",
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.Start,
+                   
+                    HeightRequest = 13,
+                    WidthRequest = 13
+                };
+                var location = new Label
+                {
+                    Text = notes.Area,
+                    HorizontalOptions = LayoutOptions.Start,
+                    VerticalOptions = LayoutOptions.Start,
+                    FontSize = 14,
+                   
+                };
+                StackLayout framelayout = new StackLayout()
+                {
+                  Spacing=2,
+                  Margin=1
+
+                };
+                var tapGestureRecognizer = new TapGestureRecognizer();
+                framelayout.GestureRecognizers.Add(tapGestureRecognizer);
+                framelayout.Children.Add(image);
+                framelayout.Children.Add(location);
+                var locationFrame = new Frame();
+                locationFrame.CornerRadius = 28;
+                locationFrame.HeightRequest = 14;
+                location.WidthRequest = 50;
+                locationFrame.BorderColor = Color.Gray;
+                locationFrame.Content = framelayout;
+                // locationFrame.Content = image;
+
+                locationFrame.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notes));
+
+                tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
+                {
+                    StackLayout stacklayout = (StackLayout)sender;
+                    IList<View> item = stacklayout.Children;
+                  
+                    Navigation.PushAsync(new GeoLocation());
+                };
+                //layout.Children.Add(image);
+                locationLayout.Children.Add(locationFrame);
+            }
+           
+
         }
 
         /// <summary>
@@ -166,7 +223,9 @@ namespace Fundoo.View.Pages
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             var notesData = await this.firebaseHelper.GetNotesData(this.value, userid);
             var label = notesData.LabelData;
+            string location = notesData.Area;
             this.LabelList(label);
+            LocationArea(location);
             base.OnAppearing();
         }
 

@@ -1,5 +1,6 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
+using Fundoo.Firebase;
 using Fundoo.Interface;
 using Fundoo.Model;
 using System;
@@ -16,45 +17,62 @@ namespace Fundoo.View.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Collaborator : ContentPage
-	{
+    {
+        FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
+        string value = null;
         ObservableCollection<string> source = new ObservableCollection<string>();
-        public Collaborator ()
+        public Collaborator (string key)
 		{
 			InitializeComponent ();
             txtMail.ItemsSource = source;
             Data();
+            this.value = key;
 		}
+        string id = null;
         public async void Data()
         {
             var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
-           // IList<string> mailid = new List<string>();
+        
             IList<string> mail = new List<string>();
             string uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
             foreach (var items in users)
             {
-                if (items.ToString() != uid)
+                if (items.Key.ToString() != uid)
                 {
                     var email = await firebase.Child("Persons").Child(items.Key).Child("userinfo").OnceAsync<SignUpUserData>();
                     foreach (var item in email)
                     {
                         var emailDetails = item.Object.Email;
                         // var emailId = item.Key;
-
+                      id = items.Key;
                         source.Add(emailDetails);
                     }
                 }
 
             }
-            //List<SignUpUserData> notes = await firebaseHelper.GetAllNotes();
-            //notes = notes.Where(a => a.IsDeleted == false && a.IsArchive == false).ToList();
-            //this.notesData = notes;
+           
         }
-        FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
-        private async void TxtMail_TextChanged(object sender, TextChangedEventArgs e)
+        FirebaseHelper firebaseHelper = new FirebaseHelper();
+        private async void SaveButton(object sender, EventArgs e)
         {
             
+            string uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+            NotesData notes = await this.firebaseHelper.GetNotesData(this.value, uid);
+            //// Updates the notes when DeleteNotes method is called
+            notes = new NotesData()
+            {
 
+                Title = notes.Title,
+                Notes = notes.Notes,
+                ColorNote = notes.ColorNote,
+                LabelData = notes.LabelData,
+                Latitude = notes.Latitude,
+                Longitude = notes.Longitude,
+                Area = notes.Area
+
+            };
+            await firebase.Child("Persons").Child(this.id).Child("Notes").Child(value).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData });
         }
     }
 }

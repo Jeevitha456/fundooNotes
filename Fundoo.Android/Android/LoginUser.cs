@@ -45,7 +45,7 @@ namespace Fundoo.Droid.Android
             {
                 //// Authenticates with firebase for sign up with email and password
                 var user = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
-
+              //  var mkl=await FirebaseAuth.Instance.FetchProvidersForEmail()
                 //// gets the satatus
                 var token = this.Status();
                 return token;
@@ -100,6 +100,7 @@ namespace Fundoo.Droid.Android
                 //// Sending the email verification after sign up
                 using (var actionCode = ActionCodeSettings.NewBuilder().SetAndroidPackageName(PackageName, true, "0").Build())
                 {
+                   
                     await user.SendEmailVerificationAsync(actionCode);
                 }
 
@@ -122,6 +123,7 @@ namespace Fundoo.Droid.Android
             using (var actioncode = ActionCodeSettings.NewBuilder().SetAndroidPackageName(PackageName, true, "0").Build())
             {
                 await FirebaseAuth.Instance.SendPasswordResetEmailAsync(email);
+                
             }            
         }
 

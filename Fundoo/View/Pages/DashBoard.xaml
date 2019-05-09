@@ -31,7 +31,6 @@
                         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}">
 
                 <StackLayout Orientation="Horizontal" >
-
                     <Button Text="  Take a note ......         "  TextColor="Black"  Clicked="Button_Clicked" BackgroundColor="White" FontSize="Micro" />
                     <ImageButton  Source="CheckBox.png" BackgroundColor="White" HeightRequest="15" WidthRequest="50" Padding="10,10,15,10"/>
                     <ImageButton Source="brush.png" HeightRequest="15" WidthRequest="50" BackgroundColor="White" Padding="4,4,9,4"/>

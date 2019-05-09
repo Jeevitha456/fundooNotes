@@ -221,7 +221,7 @@ namespace Fundoo.View.Pages
 
         private void CollaboratorButton(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new Collaborator());
+            Navigation.PushModalAsync(new Collaborator(value));
             PopupNavigation.Instance.PopAsync(true);
 
         }

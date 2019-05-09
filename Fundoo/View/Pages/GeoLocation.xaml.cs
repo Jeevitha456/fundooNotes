@@ -30,7 +30,10 @@ namespace Fundoo.View.Pages
         /// Firebase Helper class
         /// </summary>
         private FirebaseHelper firebaseHelper = new FirebaseHelper();
-
+        public GeoLocation()
+        {
+            this.InitializeComponent();
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="GeoLocation"/> class.
         /// </summary>
