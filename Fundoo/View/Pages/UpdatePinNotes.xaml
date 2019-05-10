@@ -8,6 +8,7 @@
         <ToolbarItem x:Name="txtArchieve" Order="Primary" Icon="archiveicon.png" Clicked="TxtArchieve_Clicked"/>
         <ToolbarItem x:Name="Delete2" Text="Delete" Order="Secondary" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
+    <RelativeLayout>
     <StackLayout>
         <StackLayout>
             <Editor x:Name="txtTitle"  Placeholder="Title" WidthRequest="300"/>
@@ -16,11 +17,9 @@
 
         <StackLayout>
             <Grid>
-                <Grid.RowDefinitions>
-
-                    <RowDefinition Height="300" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    <RowDefinition Height="50" />
 
 
                 </Grid.RowDefinitions>
@@ -52,11 +51,22 @@
                     </StackLayout>
                 </ScrollView>
 
-                <ImageButton Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Source="AddButton.png" HeightRequest="15" WidthRequest="50" BackgroundColor="White"  />
+                <!--<ImageButton Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Source="AddButton.png" HeightRequest="15" WidthRequest="50" BackgroundColor="White"  />
                 <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="11" Text="                edited                               " BackgroundColor="White"/>
-                <ImageButton Grid.Row="2" Grid.Column="11"  Source="option.png" HeightRequest="15" WidthRequest="50" BackgroundColor="White"  Clicked="ImageButton_Clicked"/>
+                <ImageButton Grid.Row="2" Grid.Column="11"  Source="option.png" HeightRequest="15" WidthRequest="50" BackgroundColor="White"  Clicked="ImageButton_Clicked"/>-->
 
             </Grid>
         </StackLayout>
     </StackLayout>
+        <StackLayout VerticalOptions="End"  BackgroundColor="White"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.90}"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}">
+            <StackLayout Orientation="Horizontal" >
+                <ImageButton  Source="AddButton.png"  BackgroundColor="White" Clicked="ImageButton_Clicked_1" />
+                <Button  Text="                            edited                                 " BackgroundColor="White"/>
+                <ImageButton  Source="option.png" BackgroundColor="White"  Clicked="ImageButton_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </RelativeLayout>
 </ContentPage>

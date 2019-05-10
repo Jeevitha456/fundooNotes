@@ -68,7 +68,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = this.noteColor, LabelData = notes.LabelData });
+                this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData,Area=notes.Area });
             }
             catch (Exception ex)
             {
@@ -134,7 +134,8 @@ namespace Fundoo.Firebase
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
                   Key = item.Key,
-                  ColorNote = item.Object.ColorNote
+                  ColorNote = item.Object.ColorNote,
+                  Area=item.Object.Area,
               }).ToList();
         }
 
@@ -164,7 +165,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adds the label to the notes choosen
-                this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData });
+                this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData,Area=notes.Area });
             }
             catch (Exception ex)
             {
@@ -196,7 +197,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Updates yhe notes in the firebase
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area});
             }
             catch (Exception ex)
             {
@@ -253,7 +254,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Deletes the notes from the dashboard
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote,LabelData=notes.LabelData, Area=notes.Area });
             }
             catch (Exception ex)
             {
@@ -291,7 +292,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Archives the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true, ColorNote = notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area});
             }
             catch (Exception ex)
             {
@@ -310,7 +311,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// UnArchives the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false, ColorNote = notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
             }
             catch (Exception ex)
             {
@@ -329,7 +330,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Restores the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false, ColorNote = notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
             }
             catch (Exception ex)
             {
@@ -348,7 +349,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Restores the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true, ColorNote = notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
             }
             catch (Exception ex)
             {
@@ -367,7 +368,7 @@ namespace Fundoo.Firebase
             try
             {
                 //// Restores the notes and unpins it
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false, ColorNote = notes.ColorNote });
+                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
             }
             catch (Exception ex)
             {

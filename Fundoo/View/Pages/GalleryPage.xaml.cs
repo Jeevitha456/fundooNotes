@@ -54,7 +54,7 @@ namespace Fundoo.View.Pages
                 .Child("image.jpg")
                 .PutAsync(imageStream);
             string imgurl = stroageImage;
-            //return imgurl;
+            
             firebase.GetImage(imgurl);
         }
 

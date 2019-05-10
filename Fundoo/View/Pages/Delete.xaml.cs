@@ -42,6 +42,10 @@ namespace Fundoo.View.Pages
         /// </summary>
         private string noteColor = "White";
 
+        IList<string> labelList = new List<string>();
+
+        string area;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Delete"/> class.
         /// </summary>
@@ -71,6 +75,9 @@ namespace Fundoo.View.Pages
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
                 this.noteColor = notesData.ColorNote;
+                this.labelList = notesData.LabelData;
+                this.area = notesData.Area;
+                this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
             }
             catch (Exception e)
             {
@@ -95,7 +102,9 @@ namespace Fundoo.View.Pages
                 {
                     Title = txtTitle.Text,
                     Notes = txtNotes.Text,
-                    ColorNote = this.noteColor
+                    ColorNote = this.noteColor,
+                    LabelData=this.labelList,
+                    Area=this.area,
                 };
                 firebaseHelper.DeleteForever(notes, this.val, userid);
             }
@@ -123,7 +132,10 @@ namespace Fundoo.View.Pages
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
                 IsDeleted = false,
-                ColorNote = this.noteColor
+                ColorNote = this.noteColor,
+                LabelData=this.labelList,
+                Area=this.area,
+
             };
             firebaseHelper.RestoreNotes(notes, this.val, userid);
         }

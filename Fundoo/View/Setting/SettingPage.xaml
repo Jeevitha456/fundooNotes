@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fundoo.View.Setting.SettingPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="txtAppInfo" Text="App Info" Clicked="TxtAppInfo_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+            <Button x:Name="txtDeviceInfo" Text="Device Info" Clicked="TxtDeviceInfo_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+            <Button x:Name="txtVersionTracking" Text="Version Tracking" Clicked="TxtVersionTracking_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+            <Button x:Name="txtBrowser" Text="Open browser" Clicked="TxtBrowser_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+            <Button x:Name="txtOrientationSensor" Text="Orientation Sensor" Clicked="TxtOrientationSensor_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

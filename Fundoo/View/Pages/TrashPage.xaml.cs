@@ -47,7 +47,7 @@ namespace Fundoo.View.Pages
         /// Grids the view.
         /// </summary>
         /// <param name="list">The list.</param>
-        public void GridView(IList<NotesData> list)
+        public void GridView(IList<NotesData> list, IList<CreateNewLabel> listLabel)
         {
             try
             {
@@ -136,6 +136,71 @@ namespace Fundoo.View.Pages
                         SetColor setColor = new SetColor();
                         setColor.GetColor(data, frame);
 
+                        //// Loops over the labels class
+                        foreach (CreateNewLabel createNewLabel in listLabel)
+                        {
+                            IList<string> labellist = data.LabelData;
+
+                            //// Loops over the list of labels added to the notes
+                            foreach (var labelid in labellist)
+                            {
+                                //// Checks if the labels are equal from the label list
+                                if (createNewLabel.LabelKey.Equals(labelid))
+                                {
+                                    var labelName = new Label
+                                    {
+                                        Text = createNewLabel.Label,
+                                        HorizontalOptions = LayoutOptions.Center,
+                                        VerticalOptions = LayoutOptions.Start,
+                                        FontSize = 12,
+                                    };
+                                    var labelFrame = new Frame();
+                                    labelFrame.CornerRadius = 28;
+                                    labelFrame.HeightRequest = 14;
+                                    labelFrame.BorderColor = Color.Gray;
+                                    labelFrame.Content = labelName;
+                                    labelFrame.BackgroundColor = Color.FromHex(SetColor.GetHexColor(data));
+                                    layout.Children.Add(labelFrame);
+                                }
+                            }
+                        }
+                        if (data.Area != null)
+                        {
+                            var image = new Image
+                            {
+                                Source = "location.png",
+                                VerticalOptions = LayoutOptions.Start,
+                                HorizontalOptions = LayoutOptions.Start,
+                                HeightRequest = 13,
+                                WidthRequest = 13
+                            };
+                            var location = new Label
+                            {
+                                Text = data.Area,
+                                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                VerticalOptions = LayoutOptions.StartAndExpand,
+                                FontSize = 12,
+                            };
+                            StackLayout framelayout = new StackLayout()
+                            {
+                                Spacing = 1,
+                                Margin = 1,
+                            };
+                            framelayout.Children.Add(image);
+                            framelayout.Children.Add(location);
+                            var locationFrame = new Frame();
+                            locationFrame.CornerRadius = 28;
+                            locationFrame.HeightRequest = 10;
+                            locationFrame.WidthRequest = 30;
+                            locationFrame.BorderColor = Color.Gray;
+                            locationFrame.Content = framelayout;
+                            // locationFrame.Content = image;
+
+                            locationFrame.BackgroundColor = Color.FromHex(SetColor.GetHexColor(data));
+                            //layout.Children.Add(image);
+                            layout.Children.Add(locationFrame);
+                        }
+
                         tapGestureRecognizer.Tapped += (object sender, EventArgs args) =>
                         {
                             StackLayout stacklayout = (StackLayout)sender;
@@ -167,12 +232,14 @@ namespace Fundoo.View.Pages
                 //// Gets current user id
                 var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
+                var label = await this.firebaseHelper.GetAllLabels();
+
                 //// Gets all the notes
                 var notes = await this.notesDatabase.GetNotesAsync();
                 if (notes != null)
                 {
                     notes = notes.Where(a => a.IsDeleted == true).ToList();
-                    this.GridView(notes);
+                    this.GridView(notes,label);
                 }
             }
             catch (Exception ex)

@@ -11,6 +11,7 @@ namespace Fundoo.View.HomePage
     using Fundoo.Firebase;
     using Fundoo.Model;
     using Fundoo.View.Pages;
+    using Fundoo.View.Setting;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -37,6 +38,7 @@ namespace Fundoo.View.HomePage
             this.MasterList.Add(new MasterItems() { Title = "Create new label", Icon = "CreateLabel.png", TargetType = typeof(CreatePage) });
             this.MasterList.Add(new MasterItems() { Title = "Archive", Icon = "archiveicon.png", TargetType = typeof(ArchievePage) });
             this.MasterList.Add(new MasterItems() { Title = "Trash", Icon = "Trash.png", TargetType = typeof(TrashPage) });
+            this.MasterList.Add(new MasterItems() { Title = "Settings", Icon = "settingicon.png", TargetType = typeof(SettingPage) });
             this.MasterList.Add(new MasterItems() { Title = "Logout", TargetType = typeof(SignOut) });
             this.navigationDrawerList.ItemsSource = this.MasterList;
             this.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(DashBoard)));

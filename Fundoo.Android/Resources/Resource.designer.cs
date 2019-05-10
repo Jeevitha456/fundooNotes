@@ -6769,26 +6769,26 @@ namespace Fundoo.Droid
 			// aapt resource value: 0x7f020055
 			public const int avd_hide_password = 2130837589;
 			
-			// aapt resource value: 0x7f020165
-			public const int avd_hide_password_1 = 2130837861;
-			
 			// aapt resource value: 0x7f020166
-			public const int avd_hide_password_2 = 2130837862;
+			public const int avd_hide_password_1 = 2130837862;
 			
 			// aapt resource value: 0x7f020167
-			public const int avd_hide_password_3 = 2130837863;
+			public const int avd_hide_password_2 = 2130837863;
+			
+			// aapt resource value: 0x7f020168
+			public const int avd_hide_password_3 = 2130837864;
 			
 			// aapt resource value: 0x7f020056
 			public const int avd_show_password = 2130837590;
 			
-			// aapt resource value: 0x7f020168
-			public const int avd_show_password_1 = 2130837864;
-			
 			// aapt resource value: 0x7f020169
-			public const int avd_show_password_2 = 2130837865;
+			public const int avd_show_password_1 = 2130837865;
 			
 			// aapt resource value: 0x7f02016a
-			public const int avd_show_password_3 = 2130837866;
+			public const int avd_show_password_2 = 2130837866;
+			
+			// aapt resource value: 0x7f02016b
+			public const int avd_show_password_3 = 2130837867;
 			
 			// aapt resource value: 0x7f020057
 			public const int bellicon = 2130837591;
@@ -7543,11 +7543,11 @@ namespace Fundoo.Droid
 			// aapt resource value: 0x7f020151
 			public const int notification_icon_background = 2130837841;
 			
-			// aapt resource value: 0x7f020163
-			public const int notification_template_icon_bg = 2130837859;
-			
 			// aapt resource value: 0x7f020164
-			public const int notification_template_icon_low_bg = 2130837860;
+			public const int notification_template_icon_bg = 2130837860;
+			
+			// aapt resource value: 0x7f020165
+			public const int notification_template_icon_low_bg = 2130837861;
 			
 			// aapt resource value: 0x7f020152
 			public const int notification_tile_bg = 2130837842;
@@ -7580,25 +7580,28 @@ namespace Fundoo.Droid
 			public const int Reminders = 2130837851;
 			
 			// aapt resource value: 0x7f02015c
-			public const int share = 2130837852;
+			public const int settingicon = 2130837852;
 			
 			// aapt resource value: 0x7f02015d
-			public const int tick1 = 2130837853;
+			public const int share = 2130837853;
 			
 			// aapt resource value: 0x7f02015e
-			public const int tooltip_frame_dark = 2130837854;
+			public const int tick1 = 2130837854;
 			
 			// aapt resource value: 0x7f02015f
-			public const int tooltip_frame_light = 2130837855;
+			public const int tooltip_frame_dark = 2130837855;
 			
 			// aapt resource value: 0x7f020160
-			public const int Trash = 2130837856;
+			public const int tooltip_frame_light = 2130837856;
 			
 			// aapt resource value: 0x7f020161
-			public const int unarchive = 2130837857;
+			public const int Trash = 2130837857;
 			
 			// aapt resource value: 0x7f020162
-			public const int unpin = 2130837858;
+			public const int unarchive = 2130837858;
+			
+			// aapt resource value: 0x7f020163
+			public const int unpin = 2130837859;
 			
 			static Drawable()
 			{

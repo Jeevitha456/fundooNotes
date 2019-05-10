@@ -11,6 +11,7 @@ namespace Fundoo.View
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.View.HomePage;
+    using Xamarin.Essentials;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     
@@ -42,23 +43,33 @@ namespace Fundoo.View
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void BtnLogin_Clicked(object sender, EventArgs e)
         {
+            var current = Connectivity.NetworkAccess;          
             try
             {
-                //// Using dependency service and logging in with email and password
-                var validate = await DependencyService.Get<IFirebaseAuthenticator>().LoginWithEmailPassword(txtEmail.Text, txtPassword.Text);
-                var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-               
-                //// checks if its a valid email and password
-                if (validate)
+                if (current == NetworkAccess.Internet)
                 {
-                    //// Navigates to the homepage
-                    await Navigation.PushModalAsync(new Master());
+                    // Connection to internet is available
+                    //// Using dependency service and logging in with email and password
+                    var validate = await DependencyService.Get<IFirebaseAuthenticator>().LoginWithEmailPassword(txtEmail.Text, txtPassword.Text);
+                    var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+                    //// checks if its a valid email and password
+                    if (validate)
+                    {
+                        //// Navigates to the homepage
+                        await Navigation.PushModalAsync(new Master());
+                    }
+                    else
+                    {
+                        //// displays an alert
+                        await this.DisplayAlert("Hello", "Invalid email or password", "ok");
+                    }
                 }
                 else
                 {
-                    //// displays an alert
-                    await this.DisplayAlert("Hello", "Invalid email or password", "ok");
+                    await this.DisplayAlert("Alert","Check for Network Connection","OK");
                 }
+               
             }
             catch (Exception exception)
             {

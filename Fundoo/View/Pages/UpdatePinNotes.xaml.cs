@@ -7,6 +7,7 @@
 namespace Fundoo.View.Pages
 {
     using System;
+    using System.Collections.Generic;
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
@@ -25,6 +26,13 @@ namespace Fundoo.View.Pages
         /// The note color
         /// </summary>
         private string noteColor = "White";
+
+        /// <summary>
+        /// The list label
+        /// </summary>
+        IList<string> listLabel = new List<string>();
+
+        string area;
 
         /// <summary>
         /// The value
@@ -67,7 +75,10 @@ namespace Fundoo.View.Pages
 
                 txtTitle.Text = notesData.Title;
                 txtNotes.Text = notesData.Notes;
-                this.noteColor = notesData.ColorNote; 
+                this.noteColor = notesData.ColorNote;
+                this.listLabel = notesData.LabelData;
+                this.area = notesData.Area;
+                this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
             }
             catch (Exception e)
             {
@@ -95,7 +106,9 @@ namespace Fundoo.View.Pages
                 {
                     Title = txtTitle.Text,
                     Notes = txtNotes.Text,
-                    ColorNote = this.noteColor
+                    ColorNote = this.noteColor,
+                    LabelData=this.listLabel,
+                    Area=this.area
                 };
                 firebaseHelper.UpdateNotes(notes, this.value, userid);
             }
@@ -125,7 +138,9 @@ namespace Fundoo.View.Pages
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
                 IsPinned = true,
-                ColorNote = this.noteColor
+                ColorNote = this.noteColor,
+                LabelData=this.listLabel,
+                Area=this.area
             };
             firebaseHelper.UnPinnedNotes(notes, this.value, userid);
         }
@@ -148,7 +163,9 @@ namespace Fundoo.View.Pages
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
                 IsArchive = true,
-                ColorNote = this.noteColor
+                ColorNote = this.noteColor,
+                Area=this.area,
+                LabelData=this.listLabel
             };
             firebaseHelper.ArchiveNotes(notes, this.value, userid);
         }
@@ -171,7 +188,9 @@ namespace Fundoo.View.Pages
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
                 ColorNote = this.noteColor,
-                IsDeleted = true
+                IsDeleted = true,
+                Area=this.area,
+                LabelData=this.listLabel,
             };
             firebaseHelper.DeleteNotes(notes, this.value, userid);
         }
@@ -187,7 +206,9 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-                ColorNote = this.noteColor
+                ColorNote = this.noteColor,
+                LabelData=this.listLabel,
+                Area=this.area
             };
             PopupNavigation.Instance.PushAsync(new PopTaskView(this.value, notes));
         }
@@ -330,9 +351,16 @@ namespace Fundoo.View.Pages
             {
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
-                ColorNote = this.noteColor,         
+                ColorNote = this.noteColor,  
+                LabelData=this.listLabel,
+                Area=this.area
             };
             PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value));
+        }
+
+        private void ImageButton_Clicked_1(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new PopPlus());
         }
     }
 }

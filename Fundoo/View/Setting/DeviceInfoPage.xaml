@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fundoo.View.Setting.DeviceInfoPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label HorizontalTextAlignment="Center" x:Name="txtDeviceModel"></Label>
+            <Label HorizontalTextAlignment="Center" x:Name="txtDeviceManufacturer"></Label>
+            <Label HorizontalTextAlignment="Center" x:Name="txtDeviceName"></Label>
+            <Label HorizontalTextAlignment="Center" x:Name="txtDeviceVersion"></Label>
+            <Label HorizontalTextAlignment="Center" x:Name="txtDevicePlatform"></Label>
+            <Label HorizontalTextAlignment="Center" x:Name="txtDeviceIdiom"></Label>
+            <Label HorizontalTextAlignment="Center" x:Name="txtDeviceType"></Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

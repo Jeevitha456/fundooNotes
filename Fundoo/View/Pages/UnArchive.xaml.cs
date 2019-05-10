@@ -7,6 +7,7 @@
 namespace Fundoo.View.Pages
 {
     using System;
+    using System.Collections.Generic;
     using Fundoo.Firebase;
     using Fundoo.Interface;
     using Fundoo.Model;
@@ -24,6 +25,13 @@ namespace Fundoo.View.Pages
         /// The value
         /// </summary>
         private string val = null;
+
+        /// <summary>
+        /// The label list
+        /// </summary>
+        IList<string> labelList = new List<string>();
+
+        string area;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UnArchive"/> class.
@@ -65,6 +73,9 @@ namespace Fundoo.View.Pages
             txtTitle.Text = notesData.Title;
             txtNotes.Text = notesData.Notes;
             this.noteColor = notesData.ColorNote;
+            this.labelList = notesData.LabelData;
+            this.area = notesData.Area;
+            this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
         }
 
         /// <summary>
@@ -85,7 +96,9 @@ namespace Fundoo.View.Pages
                 Title = txtTitle.Text,
                 Notes = txtNotes.Text,
                 IsArchive = false,
-                ColorNote = this.noteColor
+                ColorNote = this.noteColor,
+                LabelData=this.labelList,
+                Area=this.area
             };
             firebaseHelper.UnArchiveNotes(notes, this.val, userid);
         }
