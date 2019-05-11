@@ -460,26 +460,23 @@ namespace Fundoo.Firebase
         //    return null;
         //}
 
-        public async void GetImage(string imageSource)
+        public async Task GetImage(string imageSource)
         {
             string userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-            await this.firebase.Child("Persons").Child(userid).Child("Profile").PostAsync(new ProfileModel()
+            await this.firebase.Child("Persons").Child(userid).Child("Profile").PutAsync(new ProfileModel()
             {
                imageurl=imageSource,
             });
         }
 
-        public async Task<List<ProfileModel>> GetProfilePic()
+        public async Task<string> GetProfilePic()
         {
             //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             //// returns all the person contained in the list
-            return (await this.firebase
-              .Child("Persons").Child(userid).Child("Profile").OnceAsync<ProfileModel>()).Select(item => new ProfileModel
-              {
-                  imageurl = item.Object.imageurl,
-                  ProfileKey = item.Key
-              }).ToList();
+            var profilepic = await this.firebase.Child("Persons").Child(userid).Child("Profile").OnceSingleAsync<ProfileModel>();
+               
+            return profilepic.imageurl;
         }   
     }
 }

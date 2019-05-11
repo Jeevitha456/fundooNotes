@@ -38,9 +38,9 @@ namespace Fundoo.View.Setting
                 Xamarin.Essentials.BrowserLaunchMode.SystemPreferred);
         }
 
-        private void TxtOrientationSensor_Clicked(object sender, EventArgs e)
+        private void TxtPhoneDialing_Clicked(object sender, EventArgs e)
         {
-           
+            Navigation.PushAsync(new PhoneDialing());
         }
     }
 }

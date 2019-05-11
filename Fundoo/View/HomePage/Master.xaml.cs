@@ -70,20 +70,20 @@ namespace Fundoo.View.HomePage
             this.IsPresented = false;
         }
 
-        //protected async override void OnAppearing()
-        //{
-        //    FirebaseHelper firebaseHelper = new FirebaseHelper();
-        //    //SignUpUserData user = await firebaseHelper.GetUser();
-        //    if(user.imageurl!=null)
-        //    {
-        //        var imagesource = new UriImageSource { Uri = new Uri(user.imageurl) };
+        protected async override void OnAppearing()
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+            string  imageURL = await firebaseHelper.GetProfilePic();
+            if (imageURL != null)
+            {
+                var imagesource = new UriImageSource { Uri = new Uri(imageURL) };
 
-        //        imagesource.CachingEnabled = false;
-        //        ProfilePic.Source = imagesource;
-        //        ProfilePic.HeightRequest = 70;
-        //        ProfilePic.WidthRequest = 70;
-        //    }
-        //    base.OnAppearing();
-        //}
+                imagesource.CachingEnabled = false;
+                ProfilePic.Source = imagesource;
+                ProfilePic.HeightRequest = 70;
+                ProfilePic.WidthRequest = 70;
+            }
+            base.OnAppearing();
+        }
     }
 }

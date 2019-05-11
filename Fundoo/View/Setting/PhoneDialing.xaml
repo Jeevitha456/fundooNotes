@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fundoo.View.Setting.PhoneDialing">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="EntryNumber"/>
+            <Button Text="Call" BackgroundColor="White" x:Name="txtPhoneDialer" Clicked="PhoneDialer_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -4,11 +4,11 @@
              x:Class="Fundoo.View.Setting.SettingPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button x:Name="txtAppInfo" Text="App Info" Clicked="TxtAppInfo_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
-            <Button x:Name="txtDeviceInfo" Text="Device Info" Clicked="TxtDeviceInfo_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
-            <Button x:Name="txtVersionTracking" Text="Version Tracking" Clicked="TxtVersionTracking_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
-            <Button x:Name="txtBrowser" Text="Open browser" Clicked="TxtBrowser_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
-            <Button x:Name="txtOrientationSensor" Text="Orientation Sensor" Clicked="TxtOrientationSensor_Clicked"  BackgroundColor="Transparent" FontSize="Micro" TextColor="Blue"/>
+            <Button x:Name="txtAppInfo" Text="App Info" Clicked="TxtAppInfo_Clicked" HorizontalOptions="Start" BackgroundColor="Transparent"  TextColor="Black"/>
+            <Button x:Name="txtDeviceInfo" Text="Device Info" Clicked="TxtDeviceInfo_Clicked" HorizontalOptions="Start"  BackgroundColor="Transparent"  TextColor="Black"/>
+            <Button x:Name="txtVersionTracking" Text="Version Tracking" Clicked="TxtVersionTracking_Clicked" HorizontalOptions="Start" BackgroundColor="Transparent"  TextColor="Black"/>
+            <Button x:Name="txtBrowser" Text="Open browser" Clicked="TxtBrowser_Clicked"  BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="Black"/>
+            <Button x:Name="txtPhoneDialing" Text="Phone Dialor" Clicked="TxtPhoneDialing_Clicked"  BackgroundColor="Transparent" HorizontalOptions="Start" TextColor="Black"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
