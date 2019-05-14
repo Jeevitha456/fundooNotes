@@ -31,19 +31,27 @@ namespace Fundoo.Droid
         /// <param name="savedInstanceState">State of the saved instance.</param>
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
+            try
+            {
+                TabLayoutResource = Resource.Layout.Tabbar;
+                ToolbarResource = Resource.Layout.Toolbar;
 
-            base.OnCreate(savedInstanceState);
-            CrossCurrentActivity.Current.Init(this, savedInstanceState);
-            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+                base.OnCreate(savedInstanceState);
+                CrossCurrentActivity.Current.Init(this, savedInstanceState);
+                Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
-            // await  CrossMedia.Current.Initialize();
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+                // await  CrossMedia.Current.Initialize();
+                Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            FirebaseApp.InitializeApp(Application.Context);
-            this.LoadApplication(new App());           
+                global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+                FirebaseApp.InitializeApp(Application.Context);
+                this.LoadApplication(new App());
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         /// <summary>

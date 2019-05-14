@@ -33,6 +33,8 @@ namespace Fundoo.View.Pages
 
         string area;
 
+        public bool collabarate = false;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UnArchive"/> class.
         /// </summary>
@@ -76,6 +78,7 @@ namespace Fundoo.View.Pages
             this.labelList = notesData.LabelData;
             this.area = notesData.Area;
             this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
+            this.collabarate = notesData.IsCollaborated;
         }
 
         /// <summary>
@@ -98,7 +101,9 @@ namespace Fundoo.View.Pages
                 IsArchive = false,
                 ColorNote = this.noteColor,
                 LabelData=this.labelList,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated=this.collabarate,
+                Key=this.val
             };
             firebaseHelper.UnArchiveNotes(notes, this.val, userid);
         }

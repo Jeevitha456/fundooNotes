@@ -34,6 +34,8 @@ namespace Fundoo.View.Pages
 
         string area;
 
+        public bool collaborate = false;
+
         /// <summary>
         /// The value
         /// </summary>
@@ -79,6 +81,7 @@ namespace Fundoo.View.Pages
                 this.listLabel = notesData.LabelData;
                 this.area = notesData.Area;
                 this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
+                this.collaborate = notesData.IsCollaborated;
             }
             catch (Exception e)
             {
@@ -108,7 +111,9 @@ namespace Fundoo.View.Pages
                     Notes = txtNotes.Text,
                     ColorNote = this.noteColor,
                     LabelData=this.listLabel,
-                    Area=this.area
+                    Area=this.area,
+                    IsCollaborated=this.collaborate,
+                    Key=this.value
                 };
                 firebaseHelper.UpdateNotes(notes, this.value, userid);
             }
@@ -140,7 +145,9 @@ namespace Fundoo.View.Pages
                 IsPinned = true,
                 ColorNote = this.noteColor,
                 LabelData=this.listLabel,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated = this.collaborate,
+                Key = this.value
             };
             firebaseHelper.UnPinnedNotes(notes, this.value, userid);
         }
@@ -165,7 +172,9 @@ namespace Fundoo.View.Pages
                 IsArchive = true,
                 ColorNote = this.noteColor,
                 Area=this.area,
-                LabelData=this.listLabel
+                LabelData=this.listLabel,
+                IsCollaborated = this.collaborate,
+                Key = this.value
             };
             firebaseHelper.ArchiveNotes(notes, this.value, userid);
         }
@@ -191,6 +200,8 @@ namespace Fundoo.View.Pages
                 IsDeleted = true,
                 Area=this.area,
                 LabelData=this.listLabel,
+                IsCollaborated = this.collaborate,
+                Key = this.value
             };
             firebaseHelper.DeleteNotes(notes, this.value, userid);
         }
@@ -208,7 +219,9 @@ namespace Fundoo.View.Pages
                 Notes = txtNotes.Text,
                 ColorNote = this.noteColor,
                 LabelData=this.listLabel,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated = this.collaborate,
+               
             };
             PopupNavigation.Instance.PushAsync(new PopTaskView(this.value, notes));
         }
@@ -353,7 +366,9 @@ namespace Fundoo.View.Pages
                 Notes = txtNotes.Text,
                 ColorNote = this.noteColor,  
                 LabelData=this.listLabel,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated = this.collaborate,
+                Key = this.value
             };
             PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value));
         }

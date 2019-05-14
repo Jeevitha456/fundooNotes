@@ -13,6 +13,7 @@ namespace Fundoo
     using Fundoo.Interface;
     using Fundoo.View;
     using Fundoo.View.HomePage;
+    using System;
     using Xamarin.Forms;
 
     /// <summary>
@@ -25,15 +26,22 @@ namespace Fundoo
         /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
         public App()
-        {       
-            this.InitializeComponent();
-            if (DependencyService.Get<IFirebaseAuthenticator>().IsUserLoggedIn())
+        {
+            try
             {
-                this.MainPage = new Master();
+                this.InitializeComponent();
+                if (DependencyService.Get<IFirebaseAuthenticator>().IsUserLoggedIn())
+                {
+                    this.MainPage = new Master();
+                }
+                else
+                {
+                    this.MainPage = new Login();
+                }
             }
-            else
+            catch(Exception ex)
             {
-                this.MainPage = new Login();
+                System.Console.WriteLine(ex.Message);
             }
         }
 

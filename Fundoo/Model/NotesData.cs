@@ -100,5 +100,7 @@ namespace Fundoo.Model
         /// The area.
         /// </value>
         public string Area { get; set; }
+
+        public bool IsCollaborated { get; set; }
     }
 }

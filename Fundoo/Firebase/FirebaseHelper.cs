@@ -6,14 +6,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Fundoo.Firebase
 {
+    using Fundoo.Interface;
+    using Fundoo.Model;
+    using global::Firebase.Database;
+    using global::Firebase.Database.Query;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using global::Firebase.Database;
-    using global::Firebase.Database.Query;
-    using Fundoo.Interface;
-    using Fundoo.Model;
     using Xamarin.Forms;
 
     /// <summary>
@@ -25,6 +25,7 @@ namespace Fundoo.Firebase
         /// The note color
         /// </summary>
         private string noteColor = "White";
+
 
         /// <summary>
         /// The firebase
@@ -47,6 +48,8 @@ namespace Fundoo.Firebase
                 //// used for signing up with email and password
                 var userid = await DependencyService.Get<IFirebaseAuthenticator>().SignUpWithEmailPassword(email, password);
 
+
+
                 //// Creats persons object to add to the firebase
                 await this.firebase.Child("Persons").Child(userid).Child("userinfo").PostAsync(new SignUpUserData() { FirstName = firstName, LastName = lastName, Email = email });
             }
@@ -68,7 +71,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adding notes given id
-                this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData,Area=notes.Area });
+                this.firebase.Child("Persons").Child(userid).Child("Notes").PostAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
             }
             catch (Exception ex)
             {
@@ -103,15 +106,16 @@ namespace Fundoo.Firebase
         /// <returns>returns task</returns>
         public async Task<List<CreateNewLabel>> GetAllLabels()
         {
-            //// Gets the current user id
+            // Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             //// returns all the person contained in the list
-            return (await this.firebase
-              .Child("Persons").Child(userid).Child("Label").OnceAsync<CreateNewLabel>()).Select(item => new CreateNewLabel
-              {
-                  Label = item.Object.Label,
-                  LabelKey = item.Key
-              }).ToList();
+            return (await this.firebase.Child("Persons").Child(userid).Child("Label").OnceAsync<CreateNewLabel>()).Select(item => new CreateNewLabel
+            {
+                Label = item.Object.Label,
+                LabelKey = item.Key
+            }).ToList();
+
+
         }
 
         /// <summary>
@@ -130,12 +134,13 @@ namespace Fundoo.Firebase
                   IsArchive = item.Object.IsArchive,
                   IsDeleted = item.Object.IsDeleted,
                   IsPinned = item.Object.IsPinned,
+                  IsCollaborated = item.Object.IsCollaborated,
                   LabelData = item.Object.LabelData,
                   Title = item.Object.Title,
                   Notes = item.Object.Notes,
                   Key = item.Key,
                   ColorNote = item.Object.ColorNote,
-                  Area=item.Object.Area,
+                  Area = item.Object.Area,
               }).ToList();
         }
 
@@ -165,7 +170,7 @@ namespace Fundoo.Firebase
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
                 //// Adds the label to the notes choosen
-                this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData,Area=notes.Area });
+                this.firebase.Child("Persons").Child(userid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
             }
             catch (Exception ex)
             {
@@ -192,18 +197,60 @@ namespace Fundoo.Firebase
         /// <param name="notes">The notes.</param>
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
-        public void UpdateNotes(NotesData notes, string key, string uid)
+        public async void UpdateNotes(NotesData notes, string key, string uid)
         {
             try
             {
-                //// Updates yhe notes in the firebase
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area});
+                if (notes.IsCollaborated == false)
+                {
+                    await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
+                }
+                else
+                {
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true });
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
+        //public async void UpdateCollabratedNotes(NotesData notes, string key)
+        //{
+        //    try
+        //    {
+        //        var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+        //        foreach (var items in users)
+        //        {
+        //            var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+        //            foreach (var item in noteCollabrator)
+        //            {
+        //                if (item.Key == notes.Key)
+        //                {
+        //                    await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true });
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //}
+
 
         /// <summary>
         /// Updates the labels.
@@ -230,12 +277,32 @@ namespace Fundoo.Firebase
         /// <param name="notes">The notes.</param>
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
-        public void DeleteForever(NotesData notes, string key, string uid)
+        public async void DeleteForever(NotesData notes, string key, string uid)
         {
             try
             {
-                //// Deletes the notes from the firebase
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
+                if(notes.IsCollaborated==false)
+                {
+                    //// Deletes the notes from the firebase
+                  await  this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).DeleteAsync();
+                }
+                else
+                {
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).DeleteAsync();
+                            }
+                        }
+                    }
+                }
+               
             }
             catch (Exception ex)
             {
@@ -249,12 +316,33 @@ namespace Fundoo.Firebase
         /// <param name="notes">The notes.</param>
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
-        public void DeleteNotes(NotesData notes, string key, string uid)
+        public async void DeleteNotes(NotesData notes, string key, string uid)
         {
             try
             {
-                //// Deletes the notes from the dashboard
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote,LabelData=notes.LabelData, Area=notes.Area });
+                if (notes.IsCollaborated == false)
+                {
+                    await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = true, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
+
+                }
+                else
+                {
+
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true, IsDeleted = true });
+                            }
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -287,12 +375,32 @@ namespace Fundoo.Firebase
         /// <param name="notes">The notes.</param>
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
-        public void ArchiveNotes(NotesData notes, string key, string uid)
+        public async void ArchiveNotes(NotesData notes, string key, string uid)
         {
             try
             {
-                //// Archives the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area});
+                if (notes.IsCollaborated == false)
+                {
+                    await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = true, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
+
+                }
+                else
+                {
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true, IsArchive = true });
+                            }
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -306,12 +414,32 @@ namespace Fundoo.Firebase
         /// <param name="notes">The notes.</param>
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
-        public void UnArchiveNotes(NotesData notes, string key, string uid)
+        public async void UnArchiveNotes(NotesData notes, string key, string uid)
         {
             try
             {
-                //// UnArchives the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
+                if (notes.IsCollaborated == false)
+                {
+                    await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsArchive = false, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
+
+                }
+                else
+                {
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true, IsArchive = false });
+                            }
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -325,12 +453,32 @@ namespace Fundoo.Firebase
         /// <param name="notes">The notes.</param>
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
-        public void RestoreNotes(NotesData notes, string key, string uid)
+        public async void RestoreNotes(NotesData notes, string key, string uid)
         {
             try
             {
-                //// Restores the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
+                if (notes.IsCollaborated == false)
+                {
+                    //// Restores the notes 
+                   await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsDeleted = false, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
+                }
+                else
+                {
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true, IsDeleted = false });
+                            }
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -344,12 +492,30 @@ namespace Fundoo.Firebase
         /// <param name="notes">the notes.</param>
         /// <param name="key">key notes.</param>
         /// <param name="uid">user id.</param>
-        public void PinnedNotes(NotesData notes, string key, string uid)
+        public async void PinnedNotes(NotesData notes, string key, string uid)
         {
             try
             {
-                //// Restores the notes 
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
+                if (notes.IsCollaborated == false)
+                {
+                    await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = true, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
+                }
+                else
+                {
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true, IsPinned = true });
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -363,13 +529,33 @@ namespace Fundoo.Firebase
         /// <param name="notes">The notes.</param>
         /// <param name="key">The key.</param>
         /// <param name="uid">The id.</param>
-        public void UnPinnedNotes(NotesData notes, string key, string uid)
+        public async void UnPinnedNotes(NotesData notes, string key, string uid)
         {
             try
             {
-                //// Restores the notes and unpins it
-                this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false, ColorNote = notes.ColorNote,LabelData=notes.LabelData,Area=notes.Area });
-            }
+                if (notes.IsCollaborated == false)
+                {
+                   await this.firebase.Child("Persons").Child(uid).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, IsPinned = false, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area });
+
+                }
+                else
+                {
+                    var users = await firebase.Child("Persons").OnceAsync<SignUpUserData>();
+
+                    foreach (var items in users)
+                    {
+                        var noteCollabrator = await firebase.Child("Persons").Child(items.Key).Child("Notes").OnceAsync<NotesData>();
+                        foreach (var item in noteCollabrator)
+                        {
+                            if (item.Key == notes.Key)
+                            {
+                                await this.firebase.Child("Persons").Child(items.Key).Child("Notes").Child(key).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, Area = notes.Area, IsCollaborated = true, IsPinned = false });
+                            }
+                        }
+                    }
+                }
+                    //// Restores the notes and unpins it
+                               }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -465,18 +651,27 @@ namespace Fundoo.Firebase
             string userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
             await this.firebase.Child("Persons").Child(userid).Child("Profile").PutAsync(new ProfileModel()
             {
-               imageurl=imageSource,
+                imageurl = imageSource,
             });
         }
 
         public async Task<string> GetProfilePic()
         {
-            //// Gets the current user id
-            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-            //// returns all the person contained in the list
-            var profilepic = await this.firebase.Child("Persons").Child(userid).Child("Profile").OnceSingleAsync<ProfileModel>();
-               
-            return profilepic.imageurl;
-        }   
+            try
+            {
+                //// Gets the current user id
+                var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+                //// returns all the person contained in the list
+                var profilepic = await this.firebase.Child("Persons").Child(userid).Child("Profile").OnceSingleAsync<ProfileModel>();
+                return profilepic.imageurl;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
+
+        }
     }
 }

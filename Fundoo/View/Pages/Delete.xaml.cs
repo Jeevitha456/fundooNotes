@@ -46,6 +46,8 @@ namespace Fundoo.View.Pages
 
         string area;
 
+        public bool collaborate = false;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Delete"/> class.
         /// </summary>
@@ -78,6 +80,7 @@ namespace Fundoo.View.Pages
                 this.labelList = notesData.LabelData;
                 this.area = notesData.Area;
                 this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
+                this.collaborate = notesData.IsCollaborated;
             }
             catch (Exception e)
             {
@@ -105,6 +108,8 @@ namespace Fundoo.View.Pages
                     ColorNote = this.noteColor,
                     LabelData=this.labelList,
                     Area=this.area,
+                    IsCollaborated=this.collaborate,
+                    Key=this.val
                 };
                 firebaseHelper.DeleteForever(notes, this.val, userid);
             }
@@ -135,6 +140,8 @@ namespace Fundoo.View.Pages
                 ColorNote = this.noteColor,
                 LabelData=this.labelList,
                 Area=this.area,
+                IsCollaborated = this.collaborate,
+                Key = this.val
 
             };
             firebaseHelper.RestoreNotes(notes, this.val, userid);

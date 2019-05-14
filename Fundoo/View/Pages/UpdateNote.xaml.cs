@@ -13,6 +13,7 @@ namespace Fundoo.View.Pages
     using Fundoo.Interface;
     using Fundoo.Model;
     using Fundoo.View.HomePage;
+    using global::Firebase.Database;
     using Rg.Plugins.Popup.Services;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -35,12 +36,16 @@ namespace Fundoo.View.Pages
         IList<string> lists = new List<string>();
 
         string area;
+       
+
 
         /// <summary
         /// >
         /// The value
         /// </summary>
         private string value = null;
+
+        public bool collabarate=false;
 
         /// <summary>
         /// The notes database
@@ -182,6 +187,7 @@ namespace Fundoo.View.Pages
                 this.lists=notesData.LabelData;
                 this.area = notesData.Area;
                 this.BackgroundColor = Color.FromHex(SetColor.GetHexColor(notesData));
+                this.collabarate = notesData.IsCollaborated;
             }
             catch (Exception e)
             {
@@ -200,10 +206,12 @@ namespace Fundoo.View.Pages
             try
             {
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
-
+                FirebaseClient firebase = new FirebaseClient("https://fundooapp-50c31.firebaseio.com/");
+               
                 //// Gets current user id
                 var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
 
+                
                 //// Updates the notes whenUpdateNotes method is called
                 NotesData notes = new NotesData()
                 {
@@ -212,8 +220,17 @@ namespace Fundoo.View.Pages
                     ColorNote = this.noteColor,
                     LabelData=this.lists,
                     Area=this.area,
-                };
-                firebaseHelper.UpdateNotes(notes, this.value, userid);
+                    IsCollaborated=this.collabarate,
+                    Key=this.value
+                };                             
+                    firebaseHelper.UpdateNotes(notes, this.value, userid);
+                
+                //else
+                //{
+
+                //    firebaseHelper.UpdateCollabratedNotes(notes, this.value);
+           
+                //}
             }
             catch (Exception e)
             {
@@ -238,6 +255,7 @@ namespace Fundoo.View.Pages
             this.LabelList(label);
             LocationArea(location);
             base.OnAppearing();
+
         }
 
         /// <summary>
@@ -245,7 +263,7 @@ namespace Fundoo.View.Pages
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void ImageButton_Clicked(object sender, EventArgs e)
+        private void OptionClicked(object sender, EventArgs e)
         {
             FirebaseHelper firebaseHelper = new FirebaseHelper();
 
@@ -259,8 +277,11 @@ namespace Fundoo.View.Pages
                 Notes = txtNotes.Text,
                 ColorNote = this.noteColor,
                 LabelData=this.lists,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated=this.collabarate,
+
             };
+           
             PopupNavigation.Instance.PushAsync(new PopTaskView(this.value, notes));
         }
 
@@ -284,7 +305,9 @@ namespace Fundoo.View.Pages
                 ColorNote = this.noteColor,
                 IsDeleted = true,
                 LabelData=this.lists,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated = this.collabarate,
+                Key = this.value
             };
             firebaseHelper.DeleteNotes(notes, this.value, userid);
             Navigation.RemovePage(this);
@@ -297,6 +320,8 @@ namespace Fundoo.View.Pages
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void TxtArchieve_Clicked(object sender, EventArgs e)
         {
+           
+            
             FirebaseHelper firebaseHelper = new FirebaseHelper();
 
             //// Gets current user id
@@ -310,7 +335,9 @@ namespace Fundoo.View.Pages
                 IsArchive = true,
                 ColorNote = this.noteColor,
                 LabelData=this.lists,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated = this.collabarate,
+                Key = this.value
             };
             firebaseHelper.ArchiveNotes(notes, this.value, userid);
         }
@@ -335,7 +362,9 @@ namespace Fundoo.View.Pages
                  IsPinned = true,
                 ColorNote = this.noteColor,
                 LabelData=this.lists,
-                Area=this.area
+                Area=this.area,
+                IsCollaborated = this.collabarate,
+                Key = this.value
             };
             firebaseHelper.PinnedNotes(notes, this.value, userid);
         }
@@ -477,8 +506,24 @@ namespace Fundoo.View.Pages
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private async void TxtBell_Clicked(object sender, EventArgs e)
-        { 
-          await  PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value));
+        {
+            FirebaseHelper firebaseHelper = new FirebaseHelper();
+
+            //// Gets current user id
+            var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
+
+            //// Updates the notes when DeleteNotes method is called
+            NotesData notes = new NotesData()
+            {
+                Title = txtTitle.Text,
+                Notes = txtNotes.Text,
+                ColorNote = this.noteColor,
+                LabelData = this.lists,
+                Area = this.area,
+                IsCollaborated = this.collabarate,
+                Key = this.value
+            };
+            await  PopupNavigation.Instance.PushAsync(new PopUpReminder(this.value));
         }
     }
 }

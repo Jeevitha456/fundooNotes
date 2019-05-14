@@ -64,7 +64,7 @@
             <StackLayout Orientation="Horizontal" >
                 <ImageButton  Source="AddButton.png"  BackgroundColor="White" Clicked="ImageButton_Clicked_1" />
                 <Button  Text="                            edited                                 " BackgroundColor="White"/>
-                <ImageButton  Source="option.png" BackgroundColor="White"  Clicked="ImageButton_Clicked"/>
+                <ImageButton  Source="option.png" BackgroundColor="White"  Clicked="OptionClicked"/>
             </StackLayout>
         </StackLayout>
     </RelativeLayout>

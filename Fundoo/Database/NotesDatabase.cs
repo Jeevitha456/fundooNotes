@@ -34,24 +34,31 @@ namespace Fundoo.Database
         {
             //// Gets the current user id
             var userid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-
-            //// Returns all the data
-            IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
+            try
             {
-                IsPinned = item.Object.IsPinned,
-                IsArchive = item.Object.IsArchive,
-                IsDeleted = item.Object.IsDeleted,
-                Title = item.Object.Title,
-                Notes = item.Object.Notes,
-                Key = item.Key,
-                ColorNote = item.Object.ColorNote,
-                LabelData = item.Object.LabelData,
-                Longitude = item.Object.Longitude,
-                Latitude = item.Object.Latitude,
-                Area = item.Object.Area,
-            }).ToList();
-
-            return notesData;
+                ////// Returns all the data
+                IList<NotesData> notesData = (await this.firebase.Child("Persons").Child(userid).Child("Notes").OnceAsync<NotesData>()).Select(item => new NotesData
+                {
+                    IsPinned = item.Object.IsPinned,
+                    IsArchive = item.Object.IsArchive,
+                    IsDeleted = item.Object.IsDeleted,
+                    IsCollaborated=item.Object.IsCollaborated,
+                    Title = item.Object.Title,
+                    Notes = item.Object.Notes,
+                    Key = item.Key,
+                    ColorNote = item.Object.ColorNote,
+                    LabelData = item.Object.LabelData,
+                    Longitude = item.Object.Longitude,
+                    Latitude = item.Object.Latitude,
+                    Area = item.Object.Area
+                }).ToList();
+                return notesData;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
     }
 }

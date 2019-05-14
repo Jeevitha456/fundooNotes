@@ -5,27 +5,43 @@
              x:Class="Fundoo.View.Pages.Collaborator">
     <ContentPage.Content>
         <StackLayout>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ImageButton Source="cross.png" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" WidthRequest="10" HeightRequest="5" BackgroundColor="White" Padding="10,10,15,10"/>
-                <Label x:Name="txtLabel" FontSize="Medium" Text="Collaborator" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" BackgroundColor="White" />
-                <Button  Grid.Row="0" Grid.Column="4"  BackgroundColor="White" Text="SAVE" Clicked="SaveButton"/>
-
-                <Entry x:Name="txtCurrentMail" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" />
-                <input:AutoCompleteEntry TextColor="Black" BorderColor="Transparent" Annotation="Email" x:Name="txtMail" IsRequired="True" Placeholder="Person or email to share with" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" />
-            </Grid>
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Source="cross.png" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" WidthRequest="10" HeightRequest="5" BackgroundColor="White" Padding="10,10,15,10"/>
+                    <Label x:Name="txtLabel" FontSize="Large"  TextColor="Black" VerticalOptions="Center" Text="         Collaborator" Grid.Row="0"  Grid.Column="1" Grid.ColumnSpan="4" BackgroundColor="White" />
+                    <Button  Grid.Row="0" Grid.Column="4" BackgroundColor="White" Text="SAVE" Clicked="SaveButton"/>
+                    <Image Source="collaborator.png" Grid.Row="1" Grid.Column="0"/>
+                    <Label x:Name="txtCurrentMail" Grid.Row="1" FontSize="Medium" VerticalOptions="Center" TextColor="Black" Grid.Column="1" Grid.ColumnSpan="4"/>
+                    <input:AutoCompleteEntry TextColor="Black" BorderColor="Transparent" Annotation="Email" x:Name="txtMail" IsRequired="True" Placeholder="Person or email to share with" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" />
+                </Grid>
+            </StackLayout>
+            <StackLayout>
+                <ListView x:Name="lstEmail" SeparatorColor="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <ImageButton Source="coll.png" Padding="5,5,10,5" BackgroundColor="White" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding Email}" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                                    <!--<input:CheckBox Text="{Binding Email}" Type="Check" Color="White" CheckChanged="CheckBox_CheckChanged" TextColor="White" />-->
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

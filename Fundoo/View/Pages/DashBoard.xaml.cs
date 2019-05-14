@@ -403,11 +403,12 @@ namespace Fundoo.View.Pages
         {
             try
             {
+                FirebaseHelper firebaseHelper = new FirebaseHelper();
                 //// Gets current user id
                 var uid = DependencyService.Get<IFirebaseAuthenticator>().UserId();
-
+               
                 //// Gets all the notes
-                var notes = await this.notesDatabase.GetNotesAsync();
+                IList<NotesData> notes = await this.notesDatabase.GetNotesAsync();
 
                 //// Gets all labels
                 var label = await this.firebaseHelper.GetAllLabels();
@@ -419,7 +420,8 @@ namespace Fundoo.View.Pages
                     this.GridViewPin(notesPin,label);
                     var notesUnpin = notes.Where(a => a.IsDeleted == false && a.IsArchive == false && a.IsPinned == false).ToList();
                     this.GridView(notesUnpin, label);
-                }                             
+                }
+                base.OnAppearing();
             }
             catch (Exception ex)
             {
