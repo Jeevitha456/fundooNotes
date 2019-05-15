@@ -16,13 +16,16 @@ namespace Fundoo.Droid.Android
     using System.Threading.Tasks;
     using global::Firebase.Auth;
     using Fundoo.Interface;
+  
 
     /// <summary>
     /// Login User
     /// </summary>
     /// <seealso cref="Fundoo.Interface.IFirebaseAuthenticator" />
+
     public class LoginUser : IFirebaseAuthenticator
     {
+
         /// <summary>
         /// Gets the name of the package.
         /// </summary>
@@ -178,6 +181,8 @@ namespace Fundoo.Droid.Android
         /// </returns>
         public string UserId()
         {
+            
+         
             string uid = null;
             try
             {

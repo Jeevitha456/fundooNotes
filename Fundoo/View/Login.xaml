@@ -10,6 +10,21 @@
                 <Label Text="FUNDOO NOTES" VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" TextColor="SaddleBrown" FontAttributes="Bold"/>
                 <Entry x:Name="txtEmail"  Placeholder="Enter Email"  />
                 <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Enter Password"  />
+
+                <StackLayout HorizontalOptions="Center">
+                    <AbsoluteLayout>
+                        <ActivityIndicator
+                            x:Name="Loading"
+                            IsEnabled="False"
+                            IsRunning="False"
+                            IsVisible="False"
+                            BackgroundColor="Transparent"
+                            Color="Black"
+                            />
+
+
+                    </AbsoluteLayout> 
+                </StackLayout>
                 <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                     <Button x:Name="btnLogin" CornerRadius="30" WidthRequest="100" BackgroundColor="DeepSkyBlue" Text="Login" 
                             Clicked="BtnLogin_Clicked"   />

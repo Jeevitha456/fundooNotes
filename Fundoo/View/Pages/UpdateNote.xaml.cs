@@ -17,12 +17,15 @@ namespace Fundoo.View.Pages
     using Rg.Plugins.Popup.Services;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
+    using NUnit.Framework;
+
 
     /// <summary>
     /// Update Note
     /// </summary>
     /// <seealso cref="Xamarin.Forms.ContentPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    [TestFixture]
     public partial class UpdateNote : ContentPage
     {
         /// <summary>
@@ -173,6 +176,7 @@ namespace Fundoo.View.Pages
         {
             try
             {
+                
                 FirebaseHelper firebaseHelper = new FirebaseHelper();
 
                 //// Gets current user id
@@ -201,6 +205,7 @@ namespace Fundoo.View.Pages
         /// <returns>
         /// To be added.
         /// </returns>
+        [Test]
         protected override bool OnBackButtonPressed()
         {
             try
@@ -224,12 +229,12 @@ namespace Fundoo.View.Pages
                     Key=this.value
                 };                             
                     firebaseHelper.UpdateNotes(notes, this.value, userid);
-                
+                Assert.NotNull(notes);
                 //else
                 //{
 
                 //    firebaseHelper.UpdateCollabratedNotes(notes, this.value);
-           
+
                 //}
             }
             catch (Exception e)

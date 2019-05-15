@@ -48,6 +48,9 @@ namespace Fundoo.View
             {
                 if (current == NetworkAccess.Internet)
                 {
+                    Loading.IsEnabled = true;
+                    Loading.IsRunning = true;
+                    Loading.IsVisible = true;
                     // Connection to internet is available
                     //// Using dependency service and logging in with email and password
                     var validate = await DependencyService.Get<IFirebaseAuthenticator>().LoginWithEmailPassword(txtEmail.Text, txtPassword.Text);

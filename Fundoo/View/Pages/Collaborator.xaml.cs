@@ -71,6 +71,7 @@ namespace Fundoo.View.Pages
            
         }
         FirebaseHelper firebaseHelper = new FirebaseHelper();
+
         private async void SaveButton(object sender, EventArgs e)
         {
            var collabPerson = txtMail.Text;
@@ -98,7 +99,6 @@ namespace Fundoo.View.Pages
                             //// Updates the notes when DeleteNotes method is called
                             notes = new NotesData()
                             {
-
                                 Title = notes.Title,
                                 Notes = notes.Notes,
                                 ColorNote = notes.ColorNote,
@@ -107,12 +107,10 @@ namespace Fundoo.View.Pages
                                 Longitude = notes.Longitude,
                                 Area = notes.Area,
                                 IsCollaborated=true
-
                             };
                             await firebase.Child("Persons").Child(this.id).Child("Notes").Child(value).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData,IsCollaborated=true });
-                            await firebase.Child("Persons").Child(uid).Child("Notes").Child(value).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, IsCollaborated = true });
-                         
-                        }
+                            await firebase.Child("Persons").Child(uid).Child("Notes").Child(value).PutAsync(new NotesData() { Title = notes.Title, Notes = notes.Notes, ColorNote = notes.ColorNote, LabelData = notes.LabelData, IsCollaborated = true });                       
+                       }
                     }
                 }
 

@@ -77,6 +77,7 @@ namespace Fundoo.Model
         /// </value>
         public IList<string> LabelData { get; set; } = new List<string>();
 
+        
         /// <summary>
         /// Gets or sets the latitude.
         /// </summary>
