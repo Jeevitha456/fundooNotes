@@ -19,7 +19,6 @@
                 <Label HorizontalTextAlignment="Center" x:Name="lblSubAdminArea"></Label>
                 <Label HorizontalTextAlignment="Center" x:Name="lblSublocality"></Label>
                 <Label HorizontalTextAlignment="Center" x:Name="lblPostalcode"></Label>
-
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

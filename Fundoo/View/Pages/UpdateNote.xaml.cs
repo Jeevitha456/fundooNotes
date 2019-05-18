@@ -229,7 +229,7 @@ namespace Fundoo.View.Pages
                     Key=this.value
                 };                             
                     firebaseHelper.UpdateNotes(notes, this.value, userid);
-                Assert.NotNull(notes);
+                //Assert.NotNull(notes);
                 //else
                 //{
 

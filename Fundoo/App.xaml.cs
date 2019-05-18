@@ -13,6 +13,10 @@ namespace Fundoo
     using Fundoo.Interface;
     using Fundoo.View;
     using Fundoo.View.HomePage;
+    using Microsoft.AppCenter;
+    using Microsoft.AppCenter.Analytics;
+    using Microsoft.AppCenter.Crashes;
+    using Microsoft.AppCenter.Push;
     using System;
     using Xamarin.Forms;
 
@@ -30,6 +34,7 @@ namespace Fundoo
             try
             {
                 this.InitializeComponent();
+
                 if (DependencyService.Get<IFirebaseAuthenticator>().IsUserLoggedIn())
                 {
                     this.MainPage = new Master();
@@ -53,6 +58,7 @@ namespace Fundoo
         /// </remarks>
         protected override void OnStart()
         {
+            AppCenter.Start("46d18bea-2814-4717-9cf3-00997eba7e3f", typeof(Push));
             // Handle when your app starts
         }
 

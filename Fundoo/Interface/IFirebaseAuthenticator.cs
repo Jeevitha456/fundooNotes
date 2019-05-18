@@ -31,7 +31,7 @@ namespace Fundoo.Interface
         Task<string> SignUpWithEmailPassword(string email, string password);
 
         /// <summary>
-        /// Resets the pass.
+        /// Resets the pass. 
         /// </summary>
         /// <param name="email">The email.</param>
         /// <returns>returns boolean</returns>

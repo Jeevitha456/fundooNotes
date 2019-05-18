@@ -47,7 +47,7 @@ namespace Fundoo.Droid.Android
             try
             {
                 //// Authenticates with firebase for sign up with email and password
-                var user = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
+                var user =await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
               //  var mkl=await FirebaseAuth.Instance.FetchProvidersForEmail()
                 //// gets the satatus
                 var token = this.Status();
