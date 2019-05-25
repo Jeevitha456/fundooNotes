@@ -4,8 +4,20 @@
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              x:Class="Fundoo.View.Pages.RemindersPage">
     <ContentPage.Content>
-        <StackLayout Padding="25" Spacing="15">
-
+        <StackLayout>
+            <Entry x:Name="_entry"
+               Placeholder="Enter event to be reminded of" />
+            <Label Text="Select the time below to be reminded at." />
+            <TimePicker x:Name="_timePicker"
+                    Time="11:00:00"
+                    Format="T"
+                    PropertyChanged="OnTimePickerPropertyChanged" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Enable timer:" />
+                <Switch x:Name="_switch"
+                    HorizontalOptions="EndAndExpand"
+                    Toggled="OnSwitchToggled" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

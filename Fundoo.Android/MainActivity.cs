@@ -47,11 +47,11 @@ namespace Fundoo.Droid
                 FirebaseApp.InitializeApp(Application.Context);
                 this.LoadApplication(new App());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
         }
 
         /// <summary>
